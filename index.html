@@ -262,21 +262,31 @@ input:focus { outline: none; border-color: #00b894; }
 /* ===== TIER PROMOTION POPUP ===== */
 .tier-popup-overlay {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7); display: none; z-index: 10000;
-  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.75); display: none; z-index: 10000;
+  align-items: center; justify-content: center; padding: 15px;
+  box-sizing: border-box;
 }
 .tier-popup-overlay.active { display: flex; animation: fadeIn 0.3s; }
 .tier-popup {
-  background: #fff; border-radius: 30px; padding: 40px; text-align: center;
-  max-width: 400px; box-shadow: 0 0 50px rgba(255,215,0,0.5);
-  animation: popIn 0.5s;
+  background: #ffffff; border-radius: 28px; padding: 28px 22px; text-align: center;
+  width: 90%; max-width: 420px; box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  animation: popIn 0.5s ease-out; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; box-sizing: border-box;
 }
-.tier-popup .big-trophy { font-size: 5em; margin-bottom: 10px; animation: bounce 1s infinite; }
-.tier-popup h2 { font-size: 1.8em; margin-bottom: 10px; }
-.tier-popup p { font-size: 1.2em; color: #666; margin-bottom: 20px; }
+.tier-popup .big-trophy {
+  font-size: 1rem;
+  margin: 10px auto 12px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.tier-popup h2 { font-size: 1.7em; margin: 8px 0; color: #0f172a; }
+.tier-popup p { font-size: 1.05em; color: #475569; margin: 8px 0 16px 0; line-height: 1.4; }
 .tier-popup .popup-tier-name {
-  display: inline-block; padding: 8px 25px; border-radius: 30px;
-  color: #fff; font-weight: bold; font-size: 1.3em; margin: 10px 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 24px; border-radius: 30px; color: #fff; font-weight: bold;
+  font-size: 1.25em; margin: 6px 0 12px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* ===== GIOCO 1: PIZZERIA ===== */
@@ -3069,8 +3079,8 @@ function renderColoredTrophySVG(tier, idx = 0) {
   const uniqueId = `cupGrad-${tier.name}-${idx}-${Math.floor(Math.random()*10000)}`;
   
   return `
-    <div class="custom-cup-wrapper" style="position:relative; width:75px; height:75px; margin:0 auto 8px auto; display:flex; align-items:center; justify-content:center;">
-      <svg viewBox="0 0 100 100" width="72" height="72" style="${glowStyle}">
+    <div class="custom-cup-wrapper" style="position:relative; width:80px; height:80px; margin:0 auto; display:flex; align-items:center; justify-content:center; box-sizing:border-box;">
+      <svg viewBox="0 0 100 100" width="76" height="76" style="${glowStyle}">
         <defs>
           <linearGradient id="${uniqueId}" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="${isNetherite ? '#fffbeb' : color}" />
@@ -3088,8 +3098,8 @@ function renderColoredTrophySVG(tier, idx = 0) {
         <path d="M 22 20 H 78 V 46 C 78 64, 62 72, 50 72 C 38 72, 22 64, 22 46 Z" fill="${color}" stroke="#0f172a" stroke-width="2.5"/>
         <path d="M 26 24 H 74 V 44 C 74 58, 60 66, 50 66 C 40 66, 26 58, 26 44 Z" fill="url(#${uniqueId})" opacity="0.8"/>
       </svg>
-      <!-- Material Icon badge inside trophy cup -->
-      <span style="position:absolute; top:17px; font-size:1.45em; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));">${icon}</span>
+      <!-- Material Icon badge centered inside trophy cup -->
+      <span style="position:absolute; top:28%; left:50%; transform:translate(-50%, -50%); font-size:1.5em; line-height:1; pointer-events:none; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));">${icon}</span>
     </div>
   `;
 }
