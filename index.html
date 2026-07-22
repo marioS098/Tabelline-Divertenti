@@ -1850,6 +1850,42 @@ input:focus { outline: none; border-color: #00b894; }
   color: #ffffff;
   font-size: 1.08em;
 }
+
+/* ===== MOBILE RESPONSIVE MEDIA QUERIES ===== */
+@media (max-width: 600px) {
+  .castle-scene {
+    height: 210px !important;
+    max-height: 38vh;
+  }
+  .fulmine-scene {
+    min-height: 190px !important;
+  }
+  .caramelle-scene {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .candy-stall-stand {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+  .razzo-question, #cd-question, #ca-question, #fr-question {
+    font-size: 1.8em !important;
+    margin: 8px 0 !important;
+  }
+  .alb-option-btn {
+    font-size: 1.3em !important;
+    padding: 8px 16px !important;
+    min-width: 62px !important;
+  }
+  .table-selector {
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+  .table-btn {
+    padding: 4px 8px !important;
+    font-size: 0.85em !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -2490,6 +2526,7 @@ input:focus { outline: none; border-color: #00b894; }
     <div style="text-align:center; margin-top:10px;">
       <button class="btn btn-primary" onclick="sndClick();startCastello()" id="cd-start-btn">▶ Gioca!</button>
     </div>
+    <div class="feedback" id="cd-feedback"></div>
   </div>
 </div>
 
@@ -3130,10 +3167,9 @@ function renderTrophyRoom() {
 function showTierPopup(tierIdx) {
   const tier = TIERS[tierIdx];
   const popup = document.getElementById('tier-popup-overlay');
-  document.getElementById('popup-trophy').textContent = tier.trophy || '⭐';
   document.getElementById('popup-title').textContent = '🎉 Livello Superato!';
   const nameEl = document.getElementById('popup-tier-name');
-  nameEl.textContent = `${tier.icon} ${tier.name}`;
+  nameEl.textContent = tier.name;
   nameEl.style.background = tier.color;
   nameEl.style.color = '#fff';
 
@@ -3143,7 +3179,7 @@ function showTierPopup(tierIdx) {
     const popupTrophy = document.getElementById('popup-trophy');
     popupTrophy.innerHTML = renderColoredTrophySVG(tier, 'pop');
   } else {
-    document.getElementById('popup-message').textContent = `🎉 Complimenti! Sei passato al livello ${tier.icon} ${tier.name}!`;
+    document.getElementById('popup-message').textContent = `🎉 Complimenti! Sei passato al livello ${tier.name}!`;
     document.getElementById('popup-trophy').innerHTML = renderColoredTrophySVG(tier, 'pop');
   }
   popup.classList.add('active');
