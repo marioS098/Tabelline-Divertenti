@@ -3015,7 +3015,7 @@ input:focus { outline: none; border-color: #00b894; }
 <div class="tier-popup-overlay" id="tier-popup-overlay">
   <div class="tier-popup" id="tier-popup">
     <div class="big-trophy" id="popup-trophy">🏆</div>
-    <h2 id="popup-title">Livello superato!</h2>
+    <h2 id="popup-title">Livello Raggiunto!</h2>
     <div class="popup-tier-name" id="popup-tier-name">Oro</div>
     <p id="popup-message">Sei passato al livello successivo! Continua così!</p>
     <button class="btn btn-primary" onclick="closeTierPopup()">🎉 Continua!</button>
@@ -3378,8 +3378,32 @@ if (!gameData) {
 function getCurrentDay() {
   const dk = getDayKey(new Date());
   if (!gameData.days[dk]) {
-    gameData.days[dk] = { points: 0, highestTier: 0, trophyAwarded: false };
+    gameData.days[dk] = { 
+      points: 0, 
+      highestTier: 0, 
+      trophyAwarded: false,
+      pizzeria: { level: 1, correctCount: 0 },
+      campanello: { level: 1, correctCount: 0 },
+      gatto: { level: 1, correctCount: 0 }
+    };
     saveData(gameData);
+  } else {
+    let modified = false;
+    if (!gameData.days[dk].pizzeria) {
+      gameData.days[dk].pizzeria = { level: 1, correctCount: 0 };
+      modified = true;
+    }
+    if (!gameData.days[dk].campanello) {
+      gameData.days[dk].campanello = { level: 1, correctCount: 0 };
+      modified = true;
+    }
+    if (!gameData.days[dk].gatto) {
+      gameData.days[dk].gatto = { level: 1, correctCount: 0 };
+      modified = true;
+    }
+    if (modified) {
+      saveData(gameData);
+    }
   }
   return dk;
 }
@@ -3661,7 +3685,7 @@ function renderTrophyRoom() {
 function showTierPopup(tierIdx) {
   const tier = TIERS[tierIdx];
   const popup = document.getElementById('tier-popup-overlay');
-  document.getElementById('popup-title').textContent = '🎉 Livello Superato!';
+  document.getElementById('popup-title').textContent = '🎉 Livello Raggiunto!';
   const nameEl = document.getElementById('popup-tier-name');
   nameEl.textContent = tier.name;
   nameEl.style.background = tier.color;
@@ -3828,14 +3852,20 @@ function showGame(id) {
 
   // 2. Inizializza ed avvia il gioco specifico (ora la classe "active" è presente!)
   if (id === 'pizzeria') {
-    pzLevel = 1; pzCorrectCount = 0;
+    const dk = getCurrentDay();
+    pzLevel = gameData.days[dk].pizzeria.level || 1;
+    pzCorrectCount = gameData.days[dk].pizzeria.correctCount || 0;
     updatePizzeriaLevelUI();
   } else if (id === 'campanello' && !campanelloWasActive) {
-    camLevel = 1; camCorrectCount = 0;
+    const dk = getCurrentDay();
+    camLevel = gameData.days[dk].campanello.level || 1;
+    camCorrectCount = gameData.days[dk].campanello.correctCount || 0;
     updateCampanelloLevelUI();
     startCampanello();
   } else if (id === 'gatto') {
-    gtLevel = 1; gtCorrectCount = 0;
+    const dk = getCurrentDay();
+    gtLevel = gameData.days[dk].gatto.level || 1;
+    gtCorrectCount = gameData.days[dk].gatto.correctCount || 0;
     updateGattoLevelUI();
     initGattoSelector();
     startGatto();
@@ -4060,8 +4090,11 @@ function checkPizzeria() {
     setTimeout(() => document.getElementById('pz-stars').innerHTML = '', 2000);
     confetti();
     pzCorrectCount++;
+    const dk = getCurrentDay();
+    gameData.days[dk].pizzeria.correctCount = pzCorrectCount;
     if (pzCorrectCount % 10 === 0 && pzLevel < 10) {
       pzLevel++;
+      gameData.days[dk].pizzeria.level = pzLevel;
       const rank = getPizzeriaRank(pzLevel);
       updatePizzeriaLevelUI();
       fb.textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
@@ -4069,6 +4102,7 @@ function checkPizzeria() {
     } else {
       updatePizzeriaLevelUI();
     }
+    saveData(gameData);
   } else {
     fb.textContent = `❌ Quasi! La risposta era ${pzAnswer}. Riprova al prossimo tiro! (-5 punti)`;
     fb.className = 'feedback wrong';
@@ -4352,8 +4386,9 @@ function updateCampanelloLevelUI() {
 campanelloTimer = null;
 let camTimeLeft = 10, camCurrentAnswer = 0, camLock = false, camStreak = 0, campanelloTierPopupPending = false, camCurrentFactorA = 1, campanelloWasActive = false, camLevel = 1, camCorrectCount = 0;
 function startCampanello() {
-  camLevel = 1;
-  camCorrectCount = 0;
+  const dk = getCurrentDay();
+  camLevel = gameData.days[dk].campanello.level || 1;
+  camCorrectCount = gameData.days[dk].campanello.correctCount || 0;
   updateCampanelloLevelUI();
   document.getElementById('cam-start-btn').style.display = 'none';
   nextCampanelloQuestion();
@@ -4440,8 +4475,11 @@ function answerCampanello(btn, val) {
     setTimeout(() => bell.remove(), 700);
     if (camStreak % 5 === 0) confetti();
     camCorrectCount++;
+    const dk = getCurrentDay();
+    gameData.days[dk].campanello.correctCount = camCorrectCount;
     if (camCorrectCount % 10 === 0 && camLevel < 10) {
       camLevel++;
+      gameData.days[dk].campanello.level = camLevel;
       const rank = getCampanelloRank(camLevel);
       updateCampanelloLevelUI();
       document.getElementById('cam-feedback').textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
@@ -4449,6 +4487,7 @@ function answerCampanello(btn, val) {
     } else {
       updateCampanelloLevelUI();
     }
+    saveData(gameData);
     // Only auto-advance if no tier popup is pending
     if (!campanelloTierPopupPending) {
       setTimeout(() => nextCampanelloQuestion(), 1200);
@@ -4595,8 +4634,9 @@ function initGattoSelector() {
 }
 function startGatto() {
   gtCaught = 0;
-  gtLevel = 1;
-  gtCorrectCount = 0;
+  const dk = getCurrentDay();
+  gtLevel = gameData.days[dk].gatto.level || 1;
+  gtCorrectCount = gameData.days[dk].gatto.correctCount || 0;
   updateGattoLevelUI();
   document.getElementById('gt-counter').textContent = 'Pesci catturati: 0';
   document.getElementById('gt-start-btn').textContent = '🔄 Ricomincia';
@@ -4659,8 +4699,11 @@ function catchFish(btn, val, answer) {
     setTimeout(() => ripple.remove(), 800);
     if (gtCaught % 5 === 0) confetti();
     gtCorrectCount++;
+    const dk = getCurrentDay();
+    gameData.days[dk].gatto.correctCount = gtCorrectCount;
     if (gtCorrectCount % 10 === 0 && gtLevel < 10) {
       gtLevel++;
+      gameData.days[dk].gatto.level = gtLevel;
       const rank = getGattoRank(gtLevel);
       updateGattoLevelUI();
       document.getElementById('gt-feedback').textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
@@ -4668,6 +4711,7 @@ function catchFish(btn, val, answer) {
     } else {
       updateGattoLevelUI();
     }
+    saveData(gameData);
     setTimeout(() => nextGattoQuestion(), 1800);
   } else {
     btn.classList.add('wrong');
