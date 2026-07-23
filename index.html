@@ -4233,16 +4233,18 @@ function flipMemoryCard(card) {
     }
   } else {
     memLock = true;
+    const cardA = memSelected;
+    const cardB = card;
+    memSelected = null;
     setTimeout(() => {
-      memSelected.classList.add('wrong-pair');
-      card.classList.add('wrong-pair');
+      if (cardA) cardA.classList.add('wrong-pair');
+      if (cardB) cardB.classList.add('wrong-pair');
       setTimeout(() => {
-        memSelected.classList.remove('wrong-pair');
-        card.classList.remove('wrong-pair');
+        if (cardA) cardA.classList.remove('wrong-pair');
+        if (cardB) cardB.classList.remove('wrong-pair');
       }, 500);
-      memSelected.classList.remove('flipped');
-      card.classList.remove('flipped');
-      memSelected = null;
+      if (cardA) cardA.classList.remove('flipped');
+      if (cardB) cardB.classList.remove('flipped');
       memLock = false;
     }, 1000);
   }
