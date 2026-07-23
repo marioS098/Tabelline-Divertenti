@@ -5,30 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tabelline Divertenti! 🎮</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800;900&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh; color: #333;
+  font-family: 'Fredoka', 'Outfit', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #312e81 0%, #4c1d95 35%, #581c87 70%, #831843 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #1e293b;
+  overflow-x: hidden;
+  position: relative;
 }
-#app { max-width: 900px; margin: 0 auto; padding: 15px; }
+#app { max-width: 960px; margin: 0 auto; padding: 20px 15px; position: relative; }
+
+/* ===== BACKGROUND FLOATING DECORATIONS ===== */
+.bg-decorations {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.decor {
+  position: absolute;
+  font-size: 2.2em;
+  opacity: 0.22;
+  animation: floatDecor 8s ease-in-out infinite alternate;
+  user-select: none;
+}
+.decor-1 { top: 2%; left: 3%; animation-duration: 6s; }
+.decor-2 { top: 6%; right: 4%; animation-duration: 9s; }
+.decor-3 { top: 35%; left: 2%; animation-duration: 11s; }
+.decor-4 { top: 60%; right: 3%; animation-duration: 7s; }
+.decor-5 { top: 82%; left: 4%; animation-duration: 10s; }
+@keyframes floatDecor {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  100% { transform: translateY(-22px) rotate(14deg) scale(1.12); }
+}
 
 /* ===== MENU PRINCIPALE ===== */
-#menu { text-align: center; padding: 15px 0; }
+#menu { position: relative; z-index: 1; text-align: center; padding: 15px 0 30px 0; }
 #menu h1 {
-  font-size: 2.5em; color: #fff; text-shadow: 3px 3px 0 #4a148c;
-  margin-bottom: 5px; animation: bounce 2s infinite;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.9em;
+  font-weight: 700;
+  color: #ffffff;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  animation: floatTitle 3s ease-in-out infinite alternate;
 }
-#menu > p { color: #e0d4ff; font-size: 1.1em; margin-bottom: 15px; }
+#menu h1 .gradient-text {
+  background: linear-gradient(180deg, #ffffff 0%, #ffedd5 50%, #fde68a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes floatTitle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+#menu > p {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #e0e7ff;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  padding: 8px 24px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 24px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
 
 /* ===== BANNER SETTIMANALE / GIORNALIERO ===== */
 .weekly-banner {
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 22px 20px;
-  margin-bottom: 22px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border: 3px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 26px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
+  border: 3px solid rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
 }
@@ -37,14 +96,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 28px;
+  padding: 10px 30px;
   border-radius: 30px;
-  font-size: 1.45em;
-  font-weight: 800;
+  font-size: 1.5em;
+  font-weight: 700;
   color: #ffffff;
-  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  margin: 0 auto 16px auto;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  margin: 0 auto 18px auto;
   transition: all 0.5s ease;
 }
 .tier-badge .trophy-icon { font-size: 1.3em; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
@@ -57,18 +116,18 @@ body {
   0%,100% { box-shadow: 0 0 20px rgba(139,47,194,0.5); }
   50% { box-shadow: 0 0 35px rgba(196,77,255,0.7); }
 }
-.tier-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-.tier-points { font-size: 2em; font-weight: 900; color: #0f172a; }
+.tier-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.tier-points { font-size: 2.2em; font-weight: 800; color: #0f172a; font-family: 'Outfit', sans-serif; }
 .tier-label { font-size: 0.95em; color: #64748b; font-weight: 600; }
 .progress-bar-container {
-  background: #f1f5f9;
+  background: #e2e8f0;
   border: 2.5px solid #cbd5e1;
   border-radius: 25px;
-  height: 36px;
+  height: 38px;
   overflow: hidden;
-  margin-top: 14px;
+  margin-top: 16px;
   position: relative;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
 }
 .progress-bar-fill {
   height: 100%;
@@ -79,20 +138,20 @@ body {
   justify-content: flex-end;
   padding-right: 16px;
   color: #ffffff;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.05em;
   text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.7);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 .tier-markers {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  font-size: 0.75em;
+  margin-top: 12px;
+  font-size: 0.78em;
   color: #64748b;
   overflow-x: auto;
   padding-bottom: 6px;
-  gap: 4px;
+  gap: 6px;
 }
 .tier-marker {
   text-align: center;
@@ -108,26 +167,26 @@ body {
   line-height: 1.15;
 }
 .tier-marker-icon {
-  font-size: 1.25em;
+  font-size: 1.3em;
   line-height: 1;
   margin-bottom: 2px;
 }
 .tier-marker-name {
   font-size: 0.82em;
 }
-.tier-marker.active { font-weight: 800; opacity: 1; transform: scale(1.08); }
+.tier-marker.active { font-weight: 800; opacity: 1; transform: scale(1.1); }
 .motivational-msg {
   text-align: center;
   margin-top: 16px;
   font-size: 1.15em;
-  font-weight: 700;
+  font-weight: 600;
   color: #1e293b;
   background: #f8fafc;
-  border-radius: 16px;
-  padding: 10px 18px;
+  border-radius: 18px;
+  padding: 12px 20px;
   border: 2px solid #e2e8f0;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  min-height: 42px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,54 +199,200 @@ body {
 
 /* ===== TROPHY ROOM ===== */
 .trophy-room-btn {
-  background: linear-gradient(135deg, #ffd700, #ff9a00); color: #fff; border: none;
-  padding: 12px 30px; border-radius: 30px; font-size: 1.1em; font-weight: bold;
-  cursor: pointer; font-family: inherit; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 14px 34px;
+  border-radius: 30px;
+  font-size: 1.15em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.35);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
-.trophy-room-btn:hover { transform: scale(1.05); }
+.trophy-room-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.5);
+}
 .trophy-room {
-  background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px;
-  padding: 25px; margin-bottom: 20px; display: none;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(16px);
+  border-radius: 26px;
+  padding: 26px;
+  margin-bottom: 24px;
+  display: none;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 .trophy-room.active { display: block; animation: fadeIn 0.5s; }
-.trophy-room h2 { color: #ffd700; text-align: center; font-size: 1.8em; margin-bottom: 5px; }
-.trophy-room > p { color: #888; text-align: center; margin-bottom: 20px; font-size: 0.95em; }
+.trophy-room h2 { color: #ffd700; text-align: center; font-size: 1.9em; margin-bottom: 6px; font-family: 'Fredoka', sans-serif; }
+.trophy-room > p { color: #cbd5e1; text-align: center; margin-bottom: 22px; font-size: 0.95em; }
 .trophies-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px; max-width: 700px; margin: 0 auto;
+  gap: 16px; max-width: 720px; margin: 0 auto;
 }
 .trophy-display {
-  background: rgba(255,255,255,0.08); border-radius: 15px; padding: 15px 10px;
+  background: rgba(255,255,255,0.08); border-radius: 18px; padding: 16px 12px;
   text-align: center; border: 2px solid transparent; transition: transform 0.3s;
 }
-.trophy-display:hover { transform: scale(1.05); }
-.trophy-display .cup { font-size: 3em; margin-bottom: 5px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
-.trophy-display .cup-label { font-size: 0.85em; color: #ccc; margin-top: 4px; }
-.trophy-display .cup-date { font-size: 0.75em; color: #666; margin-top: 2px; }
-.trophy-display .cup-points { font-size: 0.8em; color: #aaa; }
-.no-trophies { color: #555; text-align: center; padding: 30px; font-size: 1.1em; }
+.trophy-display:hover { transform: scale(1.06); }
+.trophy-display .cup { font-size: 3em; margin-bottom: 6px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); }
+.trophy-display .cup-label { font-size: 0.88em; color: #e2e8f0; margin-top: 4px; font-weight: 700; }
+.trophy-display .cup-date { font-size: 0.75em; color: #94a3b8; margin-top: 2px; }
+.trophy-display .cup-points { font-size: 0.82em; color: #cbd5e1; font-weight: 600; }
+.no-trophies { color: #94a3b8; text-align: center; padding: 30px; font-size: 1.1em; }
 
 /* ===== GRIGLIA GIOCHI ===== */
 .games-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 18px; max-width: 800px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 .game-card {
-  background: #fff; border-radius: 20px; padding: 25px 15px; cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  text-align: center; border: 4px solid transparent;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-radius: 26px;
+  padding: 24px 18px 18px 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 3.5px solid #e2e8f0;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.game-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-.game-card .icon { font-size: 3em; display: block; margin-bottom: 10px; }
-.game-card h3 { font-size: 1.3em; margin-bottom: 8px; color: #4a148c; }
-.game-card p { font-size: 0.9em; color: #666; }
-.g1 { border-color: #ff6b6b; } .g2 { border-color: #4ecdc4; } .g3 { border-color: #ffd93d; }
-.g4 { border-color: #6c5ce7; } .g5 { border-color: #fd79a8; } .g6 { border-color: #00b894; }
-.g7 { border-color: #a55eea; } .g8 { border-color: #ff9f43; } .g9 { border-color: #1dd1a1; } .g10 { border-color: #10b981; } .g11 { border-color: #15803d; }
-.g1 .icon { color: #ff6b6b; } .g2 .icon { color: #4ecdc4; } .g3 .icon { color: #e0a800; }
-.g4 .icon { color: #6c5ce7; } .g5 .icon { color: #fd79a8; } .g6 .icon { color: #00b894; }
-.g7 .icon { color: #a55eea; } .g8 .icon { color: #ff9f43; } .g9 .icon { color: #1dd1a1; } .g10 .icon { color: #10b981; } .g11 .icon { color: #15803d; }
+.game-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.28);
+}
+.game-card .icon-badge {
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2em;
+  margin-bottom: 14px;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), 0 8px 18px rgba(0,0,0,0.1);
+  user-select: none;
+}
+.game-card:hover .icon-badge {
+  transform: scale(1.15) rotate(6deg);
+}
+.game-card h3 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.28em;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #0f172a;
+  text-align: center;
+  line-height: 1.25;
+}
+.game-card p {
+  font-size: 0.9em;
+  color: #475569;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  text-align: center;
+  flex-grow: 1;
+  font-weight: 400;
+}
+.game-card .play-btn-tag.game-level-badge-pill {
+  background: rgba(255,255,255,0.25);
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+/* PIZZERIA LEVEL PROGRESS BADGE */
+.pz-level-progress-container {
+  position: relative;
+  background: rgba(15, 23, 42, 0.45);
+  border: 2.5px solid #ffffff;
+  border-radius: 20px;
+  padding: 6px 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  min-width: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.pz-level-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  transition: width 0.4s ease-out;
+  border-radius: 16px;
+  z-index: 1;
+}
+.pz-level-badge-text {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+.game-card .play-btn-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.game-card:hover .play-btn-tag {
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
+}
+
+/* Card Specific Themes (g1 to g15) */
+.g1 { border-color: #ff6b6b; } .g1 .icon-badge { background: linear-gradient(135deg, #ffe3e3, #ffc9c9); } .g1 .play-btn-tag { background: linear-gradient(135deg, #ff6b6b, #ee5253); box-shadow: 0 4px 12px rgba(255,107,107,0.4); }
+.g2 { border-color: #00d2d3; } .g2 .icon-badge { background: linear-gradient(135deg, #c8f7f5, #a0f0ed); } .g2 .play-btn-tag { background: linear-gradient(135deg, #00d2d3, #01a3a4); box-shadow: 0 4px 12px rgba(0,210,211,0.4); }
+.g3 { border-color: #f59e0b; } .g3 .icon-badge { background: linear-gradient(135deg, #fef3c7, #fde68a); } .g3 .play-btn-tag { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
+.g4 { border-color: #8b5cf6; } .g4 .icon-badge { background: linear-gradient(135deg, #ede9fe, #ddd6fe); } .g4 .play-btn-tag { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 4px 12px rgba(139,92,246,0.4); }
+.g5 { border-color: #ec4899; } .g5 .icon-badge { background: linear-gradient(135deg, #fce7f3, #fbcfe8); } .g5 .play-btn-tag { background: linear-gradient(135deg, #ec4899, #db2777); box-shadow: 0 4px 12px rgba(236,72,153,0.4); }
+.g6 { border-color: #10b981; } .g6 .icon-badge { background: linear-gradient(135deg, #d1fae5, #a7f3d0); } .g6 .play-btn-tag { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16,185,129,0.4); }
+.g7 { border-color: #a855f7; } .g7 .icon-badge { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); } .g7 .play-btn-tag { background: linear-gradient(135deg, #a855f7, #9333ea); box-shadow: 0 4px 12px rgba(168,85,247,0.4); }
+.g8 { border-color: #f97316; } .g8 .icon-badge { background: linear-gradient(135deg, #ffedd5, #fed7aa); } .g8 .play-btn-tag { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 4px 12px rgba(249,115,22,0.4); }
+.g9 { border-color: #14b8a6; } .g9 .icon-badge { background: linear-gradient(135deg, #ccfbf1, #99f6e4); } .g9 .play-btn-tag { background: linear-gradient(135deg, #14b8a6, #0d9488); box-shadow: 0 4px 12px rgba(20,184,166,0.4); }
+.g10 { border-color: #22c55e; } .g10 .icon-badge { background: linear-gradient(135deg, #dcfce7, #bbf7d0); } .g10 .play-btn-tag { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 12px rgba(34,197,94,0.4); }
+.g11 { border-color: #16a34a; } .g11 .icon-badge { background: linear-gradient(135deg, #dcfce7, #86efac); } .g11 .play-btn-tag { background: linear-gradient(135deg, #16a34a, #15803d); box-shadow: 0 4px 12px rgba(22,163,74,0.4); }
+.g12 { border-color: #f43f5e; } .g12 .icon-badge { background: linear-gradient(135deg, #ffe4e6, #fecdd3); } .g12 .play-btn-tag { background: linear-gradient(135deg, #f43f5e, #e11d48); box-shadow: 0 4px 12px rgba(244,63,94,0.4); }
+.g13 { border-color: #eab308; } .g13 .icon-badge { background: linear-gradient(135deg, #fef9c3, #fef08a); } .g13 .play-btn-tag { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 4px 12px rgba(234,179,8,0.4); }
+.g14 { border-color: #fbbf24; } .g14 .icon-badge { background: linear-gradient(135deg, #fef3c7, #fde68a); } .g14 .play-btn-tag { background: linear-gradient(135deg, #fbbf24, #b45309); box-shadow: 0 4px 12px rgba(251,191,36,0.4); }
+.g15 { border-color: #6366f1; } .g15 .icon-badge { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); } .g15 .play-btn-tag { background: linear-gradient(135deg, #6366f1, #4f46e5); box-shadow: 0 4px 12px rgba(99,102,241,0.4); }
 
 /* ===== PAGINA GIOCO ===== */
 .game-page { display: none; background: #fff; border-radius: 20px; padding: 20px; min-height: 70vh; }
@@ -212,10 +417,10 @@ body {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(15, 23, 42, 0.85);
   color: #fff;
-  padding: 6px 12px;
-  border-radius: 12px;
+  padding: 6px 14px;
+  border-radius: 16px;
   font-weight: bold;
   font-size: 0.9em;
   z-index: 15;
@@ -225,7 +430,22 @@ body {
   text-align: center;
   gap: 4px;
   pointer-events: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.game-level-badge-pill {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.92em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  border: 1.5px solid rgba(255,255,255,0.2);
 }
 .weekly-mini { font-size: 0.8em; color: #6c5ce7; text-align: center; margin-top: 5px; font-weight: bold; }
 
@@ -290,17 +510,39 @@ input:focus { outline: none; border-color: #00b894; }
 }
 
 /* ===== GIOCO 1: PIZZERIA ===== */
-#pizzeria-area { text-align: center; }
-.dice-container { display: flex; justify-content: center; gap: 40px; margin: 20px 0; }
-.dice-box { text-align: center; }
-.dice-label { font-size: 1.1em; color: #666; margin-bottom: 8px; }
-.dice {
-  width: 80px; height: 80px; background: #fff; border: 3px solid #333;
-  border-radius: 15px; display: flex; align-items: center; justify-content: center;
-  font-size: 2.5em; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: transform 0.5s; cursor: pointer;
+#pizzeria-area { text-align: center; width: 100%; position: relative; }
+.dice-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 22px auto;
+  width: 100%;
+  text-align: center;
 }
-.dice.rolling { animation: rollDice 0.6s; }
+.dice-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.dice-label {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.dice {
+  width: 85px; height: 85px; background: #ffffff; border: 3.5px solid #1e293b;
+  border-radius: 20px; display: flex; align-items: center; justify-content: center;
+  font-size: 2.6em; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer;
+  margin: 0 auto;
+}
+.dice:hover { transform: scale(1.08) rotate(3deg); }
+.dice.rolling { animation: rollDice 0.6s ease-in-out; }
 .pizzas-visual { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
 .pizza {
   width: 60px; height: 60px; background: #ffd700; border: 3px solid #8b6914;
@@ -340,9 +582,51 @@ input:focus { outline: none; border-color: #00b894; }
 }
 .tombola-cell.marked { background: #00b894; color: #fff; border-color: #00b894; }
 .tombola-cell.win { background: gold; color: #333; animation: bounce 0.5s; }
-.tombola-caller { text-align: center; background: #6c5ce7; color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 15px; }
-.tombola-call { font-size: 2em; font-weight: bold; margin: 10px 0; min-height: 50px; }
-.tombola-numbers { font-size: 0.85em; color: #ddd; }
+.tombola-caller {
+  text-align: center;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+  border-radius: 26px;
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.25);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+.tombola-call { font-size: 2.2em; font-weight: bold; margin: 12px 0; min-height: 50px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.tombola-numbers { font-size: 0.9em; color: #e0e7ff; font-weight: 600; }
+
+#tb-draw-btn {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #ffffff;
+  border: 3.5px solid #ffffff;
+  padding: 14px 38px;
+  border-radius: 35px;
+  font-size: 1.35em;
+  font-weight: 800;
+  font-family: 'Fredoka', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: drawBtnPulse 2s ease-in-out infinite alternate;
+}
+#tb-draw-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 14px 32px rgba(245, 158, 11, 0.7);
+  background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 50%, #f59e0b 100%);
+}
+#tb-draw-btn:active {
+  transform: translateY(2px) scale(0.98);
+}
+@keyframes drawBtnPulse {
+  0% { transform: scale(1); box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5); }
+  100% { transform: scale(1.05); box-shadow: 0 12px 28px rgba(251, 191, 36, 0.8); }
+}
 
 /* ===== GIOCO 4: CAMPANELLO ===== */
 #campanello-area { text-align: center; }
@@ -385,21 +669,79 @@ input:focus { outline: none; border-color: #00b894; }
 /* ===== GIOCO 6: GATTO ===== */
 #gatto-area { text-align: center; position: relative; overflow: hidden; }
 .gatto-scene {
-  background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 50%, #4682b4 50%, #2c5f8f 100%);
-  border-radius: 15px; padding: 20px; min-height: 300px; position: relative; overflow: visible;
+  background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 45%, #3b82f6 45%, #1d4ed8 100%);
+  border-radius: 20px; padding: 20px; min-height: 320px; position: relative; overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
 }
-.gatto-emoji { font-size: 3.5em; position: absolute; bottom: 10px; left: 20px; transition: left 0.5s; }
-.gatto-question { font-size: 2em; font-weight: bold; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 10px 0; }
-.gatto-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 15px; position: relative; }
+.gatto-emoji { font-size: 3.5em; position: absolute; bottom: 10px; left: 20px; transition: left 0.5s; z-index: 6; }
+.gatto-question { font-size: 2em; font-weight: bold; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin: 10px 0; position: relative; z-index: 6; }
+.gatto-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 15px; position: relative; z-index: 6; }
 .gatto-fish-option {
-  background: rgba(255,255,255,0.9); border: 3px solid #00b894; border-radius: 12px;
+  background: rgba(255,255,255,0.95); border: 3px solid #00b894; border-radius: 14px;
   padding: 10px 20px; font-size: 1.3em; font-weight: bold; cursor: pointer;
-  font-family: inherit; transition: all 0.3s;
+  font-family: inherit; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .gatto-fish-option:hover { transform: scale(1.1); background: #00b894; color: #fff; }
 .gatto-fish-option.correct { background: #00b894; color: #fff; border-color: #00b894; }
 .gatto-fish-option.wrong { background: #ff6b6b; color: #fff; border-color: #ff6b6b; }
-.gatto-counter { font-size: 1.3em; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.gatto-counter { font-size: 1.3em; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); position: relative; z-index: 6; }
+
+/* SWIMMING FISH IN GATTO PESCATORE */
+@keyframes swimLeftToRightGatto {
+  0% {
+    left: -45px;
+    transform: translateY(0) scaleX(-1);
+  }
+  50% {
+    transform: translateY(-12px) scaleX(-1);
+  }
+  100% {
+    left: 105%;
+    transform: translateY(0) scaleX(-1);
+  }
+}
+@keyframes swimRightToLeftGatto {
+  0% {
+    right: -45px;
+    transform: translateY(0) scaleX(1);
+  }
+  50% {
+    transform: translateY(12px) scaleX(1);
+  }
+  100% {
+    right: 105%;
+    transform: translateY(0) scaleX(1);
+  }
+}
+.gatto-sea-fish {
+  position: absolute;
+  left: -60px;
+  font-size: 1.8em;
+  z-index: 2;
+  opacity: 0.85;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.sea-fish-1 {
+  bottom: 25px;
+  animation: swimLeftToRightGatto 14s linear infinite;
+  animation-delay: 0s;
+}
+.sea-fish-2 {
+  bottom: 65px;
+  animation: swimRightToLeftGatto 16s linear infinite;
+  animation-delay: -5s;
+}
+.sea-fish-3 {
+  bottom: 110px;
+  animation: swimLeftToRightGatto 18s linear infinite;
+  animation-delay: -10s;
+}
+.sea-fish-4 {
+  bottom: 40px;
+  animation: swimRightToLeftGatto 20s linear infinite;
+  animation-delay: -14s;
+}
 
 /* ===== SELETTORE TABELLINA ===== */
 .table-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 20px; }
@@ -619,18 +961,31 @@ input:focus { outline: none; border-color: #00b894; }
 }
 .fuel-label {
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.88em;
   margin-bottom: 8px;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  line-height: 1.15;
+}
+.fuel-label .fuel-icon {
+  font-size: 1.5em;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(250, 204, 21, 0.8));
 }
 .fuel-bar {
-  width: 30px;
+  width: 32px;
   height: 150px;
   background: #2a2c4e;
-  border: 2px solid #6c5ce7;
-  border-radius: 15px;
+  border: 2.5px solid #6c5ce7;
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
 }
 .fuel-bar-fill {
   width: 100%;
@@ -645,6 +1000,7 @@ input:focus { outline: none; border-color: #00b894; }
   color: #fff;
   font-size: 0.75em;
   font-weight: bold;
+  overflow: hidden;
 }
 .rocket-container {
   position: relative;
@@ -865,18 +1221,42 @@ input:focus { outline: none; border-color: #00b894; }
   position: absolute;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 62px;
   background: linear-gradient(to bottom, #10b981, #059669);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  box-sizing: border-box;
   color: white;
   font-weight: bold;
   font-size: 1.1em;
   z-index: 5;
 }
-.frog-bank.bottom { bottom: 0; border-top: 3px solid #34d399; justify-content: flex-start; padding-left: 20px; }
-.frog-bank.top { top: 0; border-bottom: 3px solid #34d399; justify-content: flex-start; padding-left: 20px; }
+.frog-bank.bottom { bottom: 0; border-top: 3.5px solid #34d399; }
+.frog-bank.top { top: 0; border-bottom: 3.5px solid #34d399; }
+
+.bank-decorations {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+.bank-plant {
+  font-size: 1.6em;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  animation: plantSway 3s ease-in-out infinite alternate;
+}
+.bank-plant.p1 { animation-delay: 0s; font-size: 1.8em; }
+.bank-plant.p2 { animation-delay: 0.6s; font-size: 1.4em; }
+.bank-plant.p3 { animation-delay: 1.2s; font-size: 1.5em; }
+.bank-plant.p4 { animation-delay: 1.8s; font-size: 1.4em; }
+.bank-plant.p5 { animation-delay: 2.4s; font-size: 1.8em; }
+
+@keyframes plantSway {
+  0% { transform: rotate(-3deg) translateY(0); }
+  100% { transform: rotate(4deg) translateY(-2px); }
+}
 
 .frog-character {
   position: absolute;
@@ -1893,10 +2273,18 @@ input:focus { outline: none; border-color: #00b894; }
 
 <!-- MENU PRINCIPALE -->
 <div id="menu">
-  <h1>🎮 Tabelline Divertenti! 🎮</h1>
+  <div class="bg-decorations" aria-hidden="true">
+    <span class="decor decor-1">⭐</span>
+    <span class="decor decor-2">✨</span>
+    <span class="decor decor-3">🎨</span>
+    <span class="decor decor-4">🚀</span>
+    <span class="decor decor-5">🎈</span>
+  </div>
+
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
 
-  <!-- BANNER SETTIMANALE -->
+  <!-- BANNER SETTIMANALE / GIORNALIERO -->
   <div class="weekly-banner">
     <div class="tier-badge" id="tier-badge">
       <span class="trophy-icon" id="tier-icon">🥉</span>
@@ -1908,7 +2296,7 @@ input:focus { outline: none; border-color: #00b894; }
         <span class="tier-label">punti oggi</span>
       </div>
       <div style="text-align:right;">
-        <div style="font-size:1.2em;">🏆 <span id="trophy-count">0</span></div>
+        <div style="font-size:1.2em; font-weight:700; color:#0f172a;">🏆 <span id="trophy-count">0</span></div>
         <div class="tier-label">coppe vinte</div>
       </div>
     </div>
@@ -1930,64 +2318,94 @@ input:focus { outline: none; border-color: #00b894; }
   <!-- GRIGLIA GIOCHI -->
   <div class="games-grid">
     <div class="game-card g1" onclick="sndClick();showGame('pizzeria')">
-      <span class="icon">🍕</span><h3>Pizzeria dei Dadi</h3>
+      <div class="icon-badge">🍕</div>
+      <h3>Pizzeria dei Dadi</h3>
       <p>Tira i dadi e calcola quante olive servire!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g2" onclick="sndClick();showGame('memory')">
-      <span class="icon">🃏</span><h3>Memory delle Tabelline</h3>
+      <div class="icon-badge">🃏</div>
+      <h3>Memory Tabelline</h3>
       <p>Abbina le operazioni ai risultati giusti!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g3" onclick="sndClick();showGame('tombola')">
-      <span class="icon">🎯</span><h3>Tombola delle Tabelline</h3>
+      <div class="icon-badge">🎯</div>
+      <h3>Tombola Tabelline</h3>
       <p>Segna i numeri giusti e fai tombola!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g4" onclick="sndClick();showGame('campanello')">
-      <span class="icon">🔔</span><h3>Campanello Veloce</h3>
-      <p>Rispond veloce prima del tempo!</p>
+      <div class="icon-badge">🔔</div>
+      <h3>Campanello Veloce</h3>
+      <p>Rispondi veloce prima che scada il tempo!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g5" onclick="sndClick();showGame('canzoni')">
-      <span class="icon">🎵</span><h3>Canzoni delle Tabelline</h3>
-      <p>Canta e impara con la musica!</p>
+      <div class="icon-badge">🎵</div>
+      <h3>Canzoni Tabelline</h3>
+      <p>Canta e impara con le canzoni musicali!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g6" onclick="sndClick();showGame('gatto')">
-      <span class="icon">🐱</span><h3>Gatto Pescatore</h3>
-      <p>Aiuta il gatto a pescare le risposte giuste!</p>
+      <div class="icon-badge">🐱</div>
+      <h3>Gatto Pescatore</h3>
+      <p>Aiuta il gatto a pescare i pesci corretti!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g7" onclick="sndClick();showGame('razzo')">
-      <span class="icon">🚀</span><h3>Razzo Spaziale</h3>
-      <p>Rifornisci il razzo per farlo decollare nello spazio!</p>
+      <div class="icon-badge">🚀</div>
+      <h3>Razzo Spaziale</h3>
+      <p>Rifornisci il razzo per decollare tra i pianeti!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g8" onclick="sndClick();showGame('palloncini')">
-      <span class="icon">🎈</span><h3>Palloncini Volanti</h3>
+      <div class="icon-badge">🎈</div>
+      <h3>Palloncini Volanti</h3>
       <p>Scoppia i palloncini con la risposta giusta!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g9" onclick="sndClick();showGame('rana')">
-      <span class="icon">🐸</span><h3>Salto della Rana</h3>
-      <p>Aiuta la rana ad attraversare il fiume saltando sulle foglie!</p>
+      <div class="icon-badge">🐸</div>
+      <h3>Salto della Rana</h3>
+      <p>Attraversa il fiume saltando sulle ninfee!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g10" onclick="sndClick();showGame('tartarughe')">
-      <span class="icon">🐢</span><h3>Corsa delle Tartarughe</h3>
-      <p>Gareggia con la tua tartaruga e vinci la corsa rispondendo esatto!</p>
+      <div class="icon-badge">🐢</div>
+      <h3>Corsa Tartarughe</h3>
+      <p>Gareggia e vinci la corsa rispondendo esatto!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g11" onclick="sndClick();showGame('albero')">
-      <span class="icon">🌳</span><h3>Albero della Crescita</h3>
-      <p>Fai crescere l'albero fino ai frutti e accogli l'uccellino!</p>
+      <div class="icon-badge">🌳</div>
+      <h3>Albero della Crescita</h3>
+      <p>Fai crescere l'albero fino ai frutti colorati!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g12" onclick="sndClick();showGame('dipingi')">
-      <span class="icon">🎨</span><h3>Dipingi il Quadro</h3>
-      <p>Rispondi alle tabelline per colorare il quadro ed animarlo!</p>
+      <div class="icon-badge">🎨</div>
+      <h3>Dipingi il Quadro</h3>
+      <p>Rispondi alle tabelline per colorare il quadro!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g13" onclick="sndClick();showGame('caramelle')">
-      <span class="icon">🍬</span><h3>Macchina delle Caramelle</h3>
-      <p>Gira gli ingranaggi e riempi il vaso di deliziose caramelle!</p>
+      <div class="icon-badge">🍬</div>
+      <h3>Macchina Caramelle</h3>
+      <p>Gira gli ingranaggi e riempi il vaso dolcioso!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g14" onclick="sndClick();showGame('fulmine')">
-      <span class="icon">⚡</span><h3>Fulmine Rapido</h3>
-      <p>Velocità pura! Rispondi prima che la saetta svanisca!</p>
+      <div class="icon-badge">⚡</div>
+      <h3>Fulmine Rapido</h3>
+      <p>Rispondi super veloce prima della saetta!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g15" onclick="sndClick();showGame('castello')">
-      <span class="icon">🏰</span><h3>Castello da Difendere</h3>
-      <p>Proteggi la fortezza! Ogni 10 risposte aggiungi torri e bandiere!</p>
+      <div class="icon-badge">🏰</div>
+      <h3>Castello Fortezza</h3>
+      <p>Proteggi la fortezza e costruisci nuove torri!</p>
+      <div class="play-btn-tag">Gioca ▶</div>
     </div>
   </div>
 </div>
@@ -1997,19 +2415,25 @@ input:focus { outline: none; border-color: #00b894; }
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🍕 Pizzeria dei Dadi</h2>
-    <div>
-      <div class="score-box">⭐ <span id="pz-score">0</span></div>
-      <div class="weekly-mini" id="pz-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="pz-level-progress-container">
+        <div class="pz-level-progress-fill" id="pz-level-fill" style="width: 0%;"></div>
+        <div class="pz-level-badge-text" id="pz-level">👶 Aiuto Pizzaiolo</div>
+      </div>
+      <div>
+        <div class="score-box">⭐ <span id="pz-score">0</span></div>
+        <div class="weekly-mini" id="pz-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
-  <div id="pizzeria-area" style="position: relative; padding-top: 20px;">
-    <div class="game-level-badge">📈 Lvl <span id="pz-level">1</span></div>
-    <p style="font-size:1.2em; margin-bottom:15px;">Tira i dadi per scoprire quante pizze preparare e quante olive mettere su ciascuna!</p>
+  <div id="pizzeria-area" style="text-align: center; padding-top: 10px;">
+    <div id="pz-level-desc" style="background: rgba(254, 243, 199, 0.95); border: 2.5px solid #f59e0b; color: #78350f; padding: 10px 18px; border-radius: 18px; margin: 0 auto 16px auto; max-width: 540px; font-weight: 600; font-size: 0.98em; text-align: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);">Impara a mettere la farina, a pulire il banco, a guardare gli altri.</div>
+    <p style="font-size:1.15em; font-weight: 600; color: #475569; margin-bottom:18px; text-align: center;">Tira i dadi per scoprire quante pizze preparare e quante olive mettere su ciascuna!</p>
     <div class="dice-container">
       <div class="dice-box"><div class="dice-label">🍕 Numero di pizze</div><div class="dice" id="dice1" onclick="sndDice();rollDice()">?</div></div>
       <div class="dice-box"><div class="dice-label">🫒 Olive per pizza</div><div class="dice" id="dice2" onclick="sndDice();rollDice()">?</div></div>
     </div>
-    <button class="btn btn-primary" onclick="sndDice();rollDice()" id="pz-roll-btn">🎲 Tira i dadi!</button>
+    <button class="btn btn-primary" onclick="sndDice();rollDice()" id="pz-roll-btn" style="margin: 20px auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">🎲 Tira i dadi!</button>
     <div class="pizzeria-question" id="pz-question"></div>
     <div class="pizzas-visual" id="pz-visual"></div>
     <div class="pizzeria-answer-area" id="pz-answer-area" style="display:none;">
@@ -2050,7 +2474,7 @@ input:focus { outline: none; border-color: #00b894; }
   </div>
   <p style="text-align:center; margin-bottom:15px;">Ascolta l'operazione e segna il risultato sulla tua cartella!</p>
   <div class="tombola-caller">
-    <button class="btn btn-primary" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 Estrai!</button>
+    <button class="btn" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 ESTRAI! ▶</button>
     <div class="tombola-call" id="tb-call">Premi "Estrai" per iniziare!</div>
     <div class="tombola-numbers" id="tb-history"></div>
   </div>
@@ -2063,14 +2487,20 @@ input:focus { outline: none; border-color: #00b894; }
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🔔 Campanello Veloce</h2>
-    <div>
-      <div class="score-box">⭐ <span id="cam-score">0</span></div>
-      <div class="weekly-mini" id="cam-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="pz-level-progress-container">
+        <div class="pz-level-progress-fill" id="cam-level-fill" style="width: 0%;"></div>
+        <div class="pz-level-badge-text" id="cam-level">🟤 Apprendista del Campanello</div>
+      </div>
+      <div>
+        <div class="score-box">⭐ <span id="cam-score">0</span></div>
+        <div class="weekly-mini" id="cam-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
-  <div id="campanello-area" style="position: relative; padding-top: 20px;">
-    <div class="game-level-badge">📈 Lvl <span id="cam-level">1</span></div>
-    <p style="margin-bottom:15px;">Rispond prima che il tempo finisca! Più sei veloce, più punti guadagni!</p>
+  <div id="campanello-area" style="text-align: center; padding-top: 10px;">
+    <div id="cam-level-desc" style="background: rgba(254, 243, 199, 0.95); border: 2.5px solid #f59e0b; color: #78350f; padding: 10px 18px; border-radius: 18px; margin: 0 auto 16px auto; max-width: 540px; font-weight: 600; font-size: 0.98em; text-align: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);">Impara a premere il campanello senza sbagliare.</div>
+    <p style="margin-bottom:15px; font-size:1.15em; font-weight:600; color:#475569; text-align:center;">Rispondi prima che il tempo finisca! Più sei veloce, più punti guadagni!</p>
     <div class="campanello-timer" id="cam-timer">⏱️ 10</div>
     <div class="cam-timer-bar" style="background:#e0e0e0;"><div class="cam-timer-bar-fill" id="cam-timer-bar" style="width:100%;background:#00b894;"></div></div>
     <div class="campanello-question" id="cam-question">Premi "Inizia"!</div>
@@ -2100,16 +2530,27 @@ input:focus { outline: none; border-color: #00b894; }
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🐱 Gatto Pescatore</h2>
-    <div>
-      <div class="score-box">🐟 <span id="gt-score">0</span></div>
-      <div class="weekly-mini" id="gt-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="pz-level-progress-container">
+        <div class="pz-level-progress-fill" id="gt-level-fill" style="width: 0%;"></div>
+        <div class="pz-level-badge-text" id="gt-level">🐾 Gattino Curioso</div>
+      </div>
+      <div>
+        <div class="score-box">🐟 <span id="gt-score">0</span></div>
+        <div class="weekly-mini" id="gt-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
-  <p style="text-align:center; margin-bottom:15px;">Aiuta il gatto a pescare il pesce con la risposta giusta!</p>
-  <div class="table-selector" id="gt-selector"></div>
   <div id="gatto-area">
+    <div id="gt-level-desc" style="background: rgba(254, 243, 199, 0.95); border: 2.5px solid #f59e0b; color: #78350f; padding: 10px 18px; border-radius: 18px; margin: 0 auto 16px auto; max-width: 540px; font-weight: 600; font-size: 0.98em; text-align: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15);">Guarda l’acqua, prova a capire come funziona la pesca.</div>
+    <p style="text-align:center; margin-bottom:15px;">Aiuta il gatto a pescare il pesce con la risposta giusta!</p>
+    <div class="table-selector" id="gt-selector"></div>
     <div class="gatto-scene" id="gt-scene">
-      <div class="game-level-badge">📈 Lvl <span id="gt-level">1</span></div>
+      <!-- Swimming Fish Background in Sea Water -->
+      <div class="gatto-sea-fish sea-fish-1">🐟</div>
+      <div class="gatto-sea-fish sea-fish-2">🐠</div>
+      <div class="gatto-sea-fish sea-fish-3">🐡</div>
+      <div class="gatto-sea-fish sea-fish-4">🦑</div>
       <span class="gatto-emoji" id="gt-cat">🐱</span>
       <div class="gatto-question" id="gt-question">Scegli una tabellina e premi "Gioca"!</div>
       <div class="gatto-options" id="gt-options"></div>
@@ -2139,8 +2580,11 @@ input:focus { outline: none; border-color: #00b894; }
       </div>
       <!-- Left side: Rocket fuel gauge -->
       <div class="fuel-gauge-container">
-        <div class="fuel-label">⚡ Carburante</div>
-        <div class="fuel-bar"><div class="fuel-bar-fill" id="rz-fuel-fill" style="height:0%;">0%</div></div>
+        <div class="fuel-label">
+          <span class="fuel-icon">⚡</span>
+          <span>Carburante</span>
+        </div>
+        <div class="fuel-bar"><div class="fuel-bar-fill" id="rz-fuel-fill" style="height:0%;"></div></div>
       </div>
       <!-- Center/Right side: The Rocket -->
       <div class="rocket-container">
@@ -2164,9 +2608,12 @@ input:focus { outline: none; border-color: #00b894; }
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🎈 Palloncini Volanti</h2>
-    <div>
-      <div class="score-box">🎈 <span id="pl-score">0</span></div>
-      <div class="weekly-mini" id="pl-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="game-level-badge-pill">📈 Lvl <span id="pl-level">1</span></div>
+      <div>
+        <div class="score-box">🎈 <span id="pl-score">0</span></div>
+        <div class="weekly-mini" id="pl-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
   <p style="text-align:center; margin-bottom:15px;">Scegli una tabellina e scoppia il palloncino con il risultato corretto!</p>
@@ -2174,7 +2621,6 @@ input:focus { outline: none; border-color: #00b894; }
   <div id="palloncini-area">
     <div class="balloon-question" id="pl-question">Scegli una tabellina e premi "Gioca"!</div>
     <div class="balloon-game-area" id="pl-game-area" style="position: relative;">
-      <div class="game-level-badge">📈 Lvl <span id="pl-level">1</span></div>
       <div class="sky-sun">☀️</div>
       <div class="sky-cloud cloud-1">☁️</div>
       <div class="sky-cloud cloud-2">☁️</div>
@@ -2187,14 +2633,17 @@ input:focus { outline: none; border-color: #00b894; }
   </div>
 </div>
 
-<!-- GIOCO 8: RANA -->
+<!-- GIOCO 9: RANA -->
 <div class="game-page" id="game-rana">
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🐸 Salto della Rana</h2>
-    <div>
-      <div class="score-box">🐸 <span id="rn-score">0</span></div>
-      <div class="weekly-mini" id="rn-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="game-level-badge-pill">📈 Lvl <span id="rn-level">1</span></div>
+      <div>
+        <div class="score-box">🐸 <span id="rn-score">0</span></div>
+        <div class="weekly-mini" id="rn-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
   <p style="text-align:center; margin-bottom:15px;">Guida la rana sulla foglia corretta per farla arrivare all'altra sponda!</p>
@@ -2203,9 +2652,26 @@ input:focus { outline: none; border-color: #00b894; }
     <div class="frog-progress-dots" id="rn-dots"></div>
     <div class="frog-question" id="rn-question">Scegli una tabellina e premi "Gioca"!</div>
     <div class="frog-game-area" id="rn-game-area">
-      <div class="frog-bank top">Sponda d'Arrivo 🏁</div>
-      <div class="game-level-badge" style="z-index: 6;">📈 Lvl <span id="rn-level">1</span></div>
-      <div class="frog-bank bottom">Sponda di Partenza 🌱</div>
+      <div class="frog-bank top">
+        <span>Sponda d'Arrivo 🏁</span>
+        <div class="bank-decorations">
+          <span class="bank-plant p1">🌴</span>
+          <span class="bank-plant p2">🪷</span>
+          <span class="bank-plant p3">🌿</span>
+          <span class="bank-plant p4">☘️</span>
+          <span class="bank-plant p5">🌴</span>
+        </div>
+      </div>
+      <div class="frog-bank bottom">
+        <span>Sponda di Partenza 🌱</span>
+        <div class="bank-decorations">
+          <span class="bank-plant p1">🌴</span>
+          <span class="bank-plant p2">🪴</span>
+          <span class="bank-plant p3">🌾</span>
+          <span class="bank-plant p4">🍀</span>
+          <span class="bank-plant p5">🌴</span>
+        </div>
+      </div>
       <div class="river-fish fish-1">🐟</div>
       <div class="river-fish fish-2">🐠</div>
       <div class="river-fish fish-3">🐡</div>
@@ -2349,9 +2815,12 @@ input:focus { outline: none; border-color: #00b894; }
   <div class="game-header">
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🎨 Dipingi il Quadro</h2>
-    <div>
-      <div class="score-box">🎨 <span id="dp-score">0</span></div>
-      <div class="weekly-mini" id="dp-weekly">Oggi: 0</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="game-level-badge-pill">📈 Lvl <span id="dp-level">1</span></div>
+      <div>
+        <div class="score-box">🎨 <span id="dp-score">0</span></div>
+        <div class="weekly-mini" id="dp-weekly">Oggi: 0</div>
+      </div>
     </div>
   </div>
   <p style="text-align:center; margin-bottom:12px;">Scegli un quadro e rispondi correttamente per pennellare i colori e farlo animare!</p>
@@ -2366,7 +2835,6 @@ input:focus { outline: none; border-color: #00b894; }
 
   <div id="dipingi-area">
     <div class="dipingi-canvas-area" id="dp-canvas-area">
-      <div class="game-level-badge" style="top: 12px; right: 15px;">📈 Lvl <span id="dp-level">1</span></div>
       <div style="position: absolute; top: 12px; left: 15px; background: rgba(0,0,0,0.6); color: #fff; padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 0.9em; z-index: 15;">
         🎨 Zona: <span id="dp-zone-label" style="color: #ec4899;">1/8</span>
       </div>
@@ -2555,6 +3023,18 @@ input:focus { outline: none; border-color: #00b894; }
 </div>
 
 <script>
+window.addEventListener('error', function(e) {
+  var div = document.createElement('div');
+  div.style.cssText = 'position:fixed;top:0;left:0;width:100%;background:red;color:white;padding:15px;z-index:999999;font-family:monospace;font-size:14px;word-break:break-all;text-align:left;box-shadow:0 4px 10px rgba(0,0,0,0.5);';
+  div.innerHTML = '<b>JS ERROR:</b> ' + e.message + ' <br>File: ' + e.filename + ' <br>Line: ' + e.lineno + ' Col: ' + e.colno;
+  document.body.appendChild(div);
+});
+window.addEventListener('unhandledrejection', function(e) {
+  var div = document.createElement('div');
+  div.style.cssText = 'position:fixed;top:0;left:0;width:100%;background:orange;color:black;padding:15px;z-index:999999;font-family:monospace;font-size:14px;word-break:break-all;text-align:left;box-shadow:0 4px 10px rgba(0,0,0,0.5);';
+  div.innerHTML = '<b>UNHANDLED REJECTION:</b> ' + e.reason;
+  document.body.appendChild(div);
+});
 
 // ============================================================
 // SOUND ENGINE - Effetti sonori con Web Audio API
@@ -2924,6 +3404,13 @@ function addDailyPoints(pts) {
     const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
     if (isCamActive) campanelloTierPopupPending = true;
     if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
+    
+    const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
+    if (isPlActive) {
+      pallonciniTierPopupPending = true;
+      if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
+      plLock = true;
+    }
     setTimeout(() => showTierPopup(newTier), 800);
   } else if (newTier > (gameData.days[dk].highestTier || 0)) {
     gameData.days[dk].highestTier = newTier;
@@ -2954,6 +3441,13 @@ function addDailyPoints(pts) {
           const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
           if (isCamActive) campanelloTierPopupPending = true;
           if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
+          
+          const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
+          if (isPlActive) {
+            pallonciniTierPopupPending = true;
+            if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
+            plLock = true;
+          }
           setTimeout(() => showNetheriteMilestonePopup(milestonesPassed), 800);
         }
       }
@@ -3136,7 +3630,7 @@ function renderColoredTrophySVG(tier, idx = 0) {
         <path d="M 26 24 H 74 V 44 C 74 58, 60 66, 50 66 C 40 66, 26 58, 26 44 Z" fill="url(#${uniqueId})" opacity="0.8"/>
       </svg>
       <!-- Material Icon badge centered inside trophy cup -->
-      <span style="position:absolute; top:28%; left:50%; transform:translate(-50%, -50%); font-size:1.5em; line-height:1; pointer-events:none; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));">${icon}</span>
+      <span style="position:absolute; top:42%; left:50%; transform:translate(-50%, -50%); font-size:1.4em; line-height:1; pointer-events:none; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));">${icon}</span>
     </div>
   `;
 }
@@ -3211,7 +3705,6 @@ function closeTierPopup() {
   const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
   if (campanelloTierPopupPending && isCamActive) {
     campanelloTierPopupPending = false;
-    // Resume campanello with countdown, same as returning from menu
     document.getElementById('cam-feedback').textContent = '⏳ Riprendi in 3...';
     document.getElementById('cam-feedback').className = 'feedback correct';
     let countdown = 3;
@@ -3228,6 +3721,27 @@ function closeTierPopup() {
     }, 500);
   } else {
     campanelloTierPopupPending = false;
+  }
+
+  const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
+  if (pallonciniTierPopupPending && isPlActive) {
+    pallonciniTierPopupPending = false;
+    document.getElementById('pl-feedback').textContent = '⏳ Riprendi in 3...';
+    document.getElementById('pl-feedback').className = 'feedback correct';
+    let countdown = 3;
+    const cdInt = setInterval(() => {
+      countdown--;
+      if (countdown > 0) {
+        document.getElementById('pl-feedback').textContent = `⏳ Riprendi in ${countdown}...`;
+      } else {
+        clearInterval(cdInt);
+        document.getElementById('pl-feedback').textContent = '';
+        document.getElementById('pl-feedback').className = 'feedback';
+        nextPallonciniQuestion();
+      }
+    }, 500);
+  } else {
+    pallonciniTierPopupPending = false;
   }
 }
 
@@ -3262,6 +3776,7 @@ function stopActiveGameProcesses() {
     clearInterval(plBalloonsInterval);
     plBalloonsInterval = null;
   }
+  pallonciniTierPopupPending = false;
   if (frTimerInterval) {
     clearInterval(frTimerInterval);
     frTimerInterval = null;
@@ -3288,32 +3803,61 @@ function showGame(id) {
   stopActiveGameProcesses();
   campanelloTierPopupPending = false;
 
-  // Reset session-based levels when entering a game from the menu
+  // 1. Attiva la schermata del gioco e nascondi il menu
+  const menuEl = document.getElementById('menu');
+  if (menuEl) menuEl.style.display = 'none';
+
+  document.querySelectorAll('.game-page').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  const targetPage = document.getElementById('game-' + id);
+  if (targetPage) {
+    targetPage.style.display = 'block';
+    targetPage.classList.add('active');
+  }
+
+  if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+    if (document.body) document.body.scrollTop = 0;
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (targetPage && targetPage.scrollIntoView) {
+      targetPage.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  }
+
+  // 2. Inizializza ed avvia il gioco specifico (ora la classe "active" è presente!)
   if (id === 'pizzeria') {
     pzLevel = 1; pzCorrectCount = 0;
-    const el = document.getElementById('pz-level');
-    if (el) el.textContent = '1';
+    updatePizzeriaLevelUI();
   } else if (id === 'campanello' && !campanelloWasActive) {
     camLevel = 1; camCorrectCount = 0;
-    const el = document.getElementById('cam-level');
-    if (el) el.textContent = '1';
+    updateCampanelloLevelUI();
+    startCampanello();
   } else if (id === 'gatto') {
     gtLevel = 1; gtCorrectCount = 0;
-    const el = document.getElementById('gt-level');
-    if (el) el.textContent = '1';
+    updateGattoLevelUI();
+    initGattoSelector();
+    startGatto();
   } else if (id === 'razzo') {
     rzLevel = 1; rzCorrectCount = 0; rzDestIndex = 0;
     updateRazzoDestination();
     const el = document.getElementById('rz-level');
     if (el) el.textContent = '1';
+    initRazzoSelector();
+    startRazzo();
   } else if (id === 'palloncini') {
     plLevel = 1; plCorrectCount = 0;
     const el = document.getElementById('pl-level');
     if (el) el.textContent = '1';
+    initPallonciniSelector();
+    startPalloncini();
   } else if (id === 'rana') {
     rnLevel = 1; rnCorrectCount = 0;
     const el = document.getElementById('rn-level');
     if (el) el.textContent = '1';
+    initRanaSelector();
+    startRana();
   } else if (id === 'tartarughe') {
     trLevel = 1; trCorrectCount = 0;
     trPositions = { rosso: 0, verde: 0, blu: 0, giallo: 0 };
@@ -3321,6 +3865,8 @@ function showGame(id) {
     updateTurtleTrackTheme();
     const el = document.getElementById('tr-level');
     if (el) el.textContent = getTurtleRank();
+    initTartarugheSelector();
+    startTartarughe();
   } else if (id === 'albero') {
     albGrowth = 0;
     albCultivatedCount = getCultivatedCountToday();
@@ -3328,12 +3874,15 @@ function showGame(id) {
     if (el) el.textContent = albCultivatedCount;
     renderForestUI();
     updateTreeVisual(null);
+    initAlberoSelector();
+    startAlbero();
   } else if (id === 'dipingi') {
     dpLevel = 1; dpCorrectCount = 0;
     const el = document.getElementById('dp-level');
     if (el) el.textContent = '1';
     initDipingiSelector();
     renderPaintingSVG();
+    startDipingi();
   } else if (id === 'caramelle') {
     caCandyCount = 0;
     caJarsFilledCount = (gameData.gameScores && gameData.gameScores.caJarsFilled) ? gameData.gameScores.caJarsFilled : 0;
@@ -3342,29 +3891,29 @@ function showGame(id) {
     initCaramelleSelector();
     renderCandyGlobeUI();
     renderCandyStallUI();
+    startCaramelle();
   } else if (id === 'fulmine') {
     frStreak = 0;
     frTimeLimit = 3.0;
     initFulmineSelector();
+    startFulmine();
   } else if (id === 'castello') {
     cdLives = 3;
     cdLevel = 1;
     cdCorrectCount = 0;
     initCastelloSelector();
     renderCastleSVG();
+    startCastello();
   }
 
-  document.querySelectorAll('.game-page').forEach(p => p.classList.remove('active'));
-  const targetPage = document.getElementById('game-' + id);
-  if (targetPage) {
-    targetPage.classList.add('active');
-    setTimeout(() => {
-      targetPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-  }
-
+  // 3. Trigger post-attivazione (Tombola e Memory)
   if (id === 'tombola') {
     initTombola();
+  }
+  if (id === 'memory') {
+    memTable = 13;
+    initMemorySelector();
+    startMemory();
   }
   if (id === 'campanello' && campanelloWasActive) {
     campanelloWasActive = false;
@@ -3393,13 +3942,61 @@ function backToMenu() {
   } else {
     campanelloWasActive = false;
   }
-  stopActiveGameProcesses();
-  document.querySelectorAll('.game-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.game-page').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  const menuEl = document.getElementById('menu');
+  if (menuEl) menuEl.style.display = 'block';
   updateWeeklyDisplay();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+    if (document.body) document.body.scrollTop = 0;
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (menuEl && menuEl.scrollIntoView) {
+      menuEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  }
 }
 
 // ===== GIOCO 1: PIZZERIA =====
+const PIZZERIA_RANKS = [
+  { level: 1,  icon: '👶',   name: 'Aiuto Pizzaiolo',         desc: 'Impara a mettere la farina, a pulire il banco, a guardare gli altri.' },
+  { level: 2,  icon: '🥣',   name: 'Impastatore',             desc: 'Sa preparare l’impasto base e controllare la lievitazione.' },
+  { level: 3,  icon: '🍅',   name: 'Conditore',               desc: 'Aggiunge pomodoro, mozzarella e ingredienti semplici.' },
+  { level: 4,  icon: '🔥',   name: 'Addetto al Forno',        desc: 'Sa usare la pala, girare la pizza e controllare la cottura.' },
+  { level: 5,  icon: '🍕',   name: 'Pizzaiolo Junior',         desc: 'Fa le prime pizze complete, ancora con supervisione.' },
+  { level: 6,  icon: '🍕🍕', name: 'Pizzaiolo',                desc: 'Lavora da solo, prepara pizze buone e veloci.' },
+  { level: 7,  icon: '⭐',   name: 'Pizzaiolo Esperto',        desc: 'Sa fare impasti speciali, pizze gourmet e gestire il forno perfettamente.' },
+  { level: 8,  icon: '👨‍🍳', name: 'Pizzaiolo Professionista', desc: 'Coordina la cucina, crea nuove ricette, è veloce e preciso.' },
+  { level: 9,  icon: '🏆',   name: 'Maestro Pizzaiolo',       desc: 'Livello altissimo: insegna agli altri, crea pizze perfette.' },
+  { level: 10, icon: '🔥👑', name: 'Pizzaiolo Leggendario',    desc: 'Il massimo: velocità, precisione, creatività. La pizza perfetta ogni volta.' }
+];
+
+function getPizzeriaRank(level) {
+  const lvl = Math.min(Math.max(1, level), PIZZERIA_RANKS.length);
+  return PIZZERIA_RANKS[lvl - 1];
+}
+
+function updatePizzeriaLevelUI() {
+  const rank = getPizzeriaRank(pzLevel);
+  const el = document.getElementById('pz-level');
+  if (el) el.textContent = `${rank.icon} ${rank.name}`;
+  const descEl = document.getElementById('pz-level-desc');
+  if (descEl) descEl.textContent = rank.desc;
+  
+  const fillEl = document.getElementById('pz-level-fill');
+  if (fillEl) {
+    if (pzLevel >= 10) {
+      fillEl.style.width = '100%';
+    } else {
+      const step = pzCorrectCount % 10;
+      const pct = (step / 10) * 100;
+      fillEl.style.width = pct + '%';
+    }
+  }
+}
+
 let pzAnswer = 0, pzRolled = false, pzDice1 = 1, pzLevel = 1, pzCorrectCount = 0;
 function rollDice() {
   if (pzRolled) return;
@@ -3463,11 +4060,14 @@ function checkPizzeria() {
     setTimeout(() => document.getElementById('pz-stars').innerHTML = '', 2000);
     confetti();
     pzCorrectCount++;
-    if (pzCorrectCount % 10 === 0) {
+    if (pzCorrectCount % 10 === 0 && pzLevel < 10) {
       pzLevel++;
-      document.getElementById('pz-level').textContent = pzLevel;
-      fb.textContent += ` 🌟 SALITO AL LIVELLO ${pzLevel}! 🌟`;
+      const rank = getPizzeriaRank(pzLevel);
+      updatePizzeriaLevelUI();
+      fb.textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
       sndWin();
+    } else {
+      updatePizzeriaLevelUI();
     }
   } else {
     fb.textContent = `❌ Quasi! La risposta era ${pzAnswer}. Riprova al prossimo tiro! (-5 punti)`;
@@ -3480,21 +4080,40 @@ function checkPizzeria() {
   document.getElementById('pz-answer-area').style.display = 'none';
 }
 
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const isPzActive = document.getElementById('game-pizzeria') && document.getElementById('game-pizzeria').classList.contains('active');
+      if (isPzActive) {
+        const answerArea = document.getElementById('pz-answer-area');
+        const isAnswerAreaVisible = answerArea && answerArea.style.display !== 'none';
+        if (!isAnswerAreaVisible && !pzRolled) {
+          e.preventDefault();
+          sndDice();
+          rollDice();
+        }
+      }
+    }
+  });
+}
+
 // ===== GIOCO 2: MEMORY =====
-let memTries = 0, memFound = 0, memSelected = null, memLock = false, memTable = 2;
+let memTries = 0, memFound = 0, memSelected = null, memLock = false, memTable = 13;
 function initMemorySelector() {
   const sel = document.getElementById('mem-selector');
+  if (!sel) return;
   sel.innerHTML = '';
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 13; i++) {
     const btn = document.createElement('button');
     btn.className = 'table-btn' + (i === memTable ? ' selected' : '');
-    btn.textContent = i;
+    btn.textContent = i === 13 ? 'Tutte' : i;
     btn.onclick = () => { sndClick(); memTable = i; initMemorySelector(); startMemory(); };
     sel.appendChild(btn);
   }
 }
 function startMemory() {
   const grid = document.getElementById('memory-grid');
+  if (!grid) return;
   grid.innerHTML = '';
   memTries = 0; memFound = 0; memSelected = null; memLock = false;
   document.getElementById('mem-tries').textContent = '0';
@@ -3502,15 +4121,31 @@ function startMemory() {
   document.getElementById('mem-feedback').textContent = '';
   document.getElementById('mem-feedback').className = 'feedback';
   const pairs = [];
-  for (let i = 2; i <= 11; i++) {
-    pairs.push({ text: `${memTable}×${i}`, id: i, isResult: false });
-    pairs.push({ text: `${memTable*i}`, id: i, isResult: true });
+  if (memTable === 13) {
+    const used = new Set();
+    let pairId = 1;
+    while (pairs.length < 20) {
+      const a = Math.floor(Math.random() * 12) + 1;
+      const b = Math.floor(Math.random() * 12) + 1;
+      const key = `${a}x${b}`;
+      if (!used.has(key)) {
+        used.add(key);
+        pairs.push({ text: `${a}×${b}`, id: pairId, isResult: false });
+        pairs.push({ text: `${a*b}`, id: pairId, isResult: true });
+        pairId++;
+      }
+    }
+  } else {
+    for (let i = 2; i <= 11; i++) {
+      pairs.push({ text: `${memTable}×${i}`, id: i, isResult: false });
+      pairs.push({ text: `${memTable*i}`, id: i, isResult: true });
+    }
   }
   pairs.sort(() => Math.random() - 0.5);
   pairs.forEach(p => {
     const card = document.createElement('div');
     card.className = 'memory-card';
-    card.dataset.id = p.id;
+    card.setAttribute('data-id', p.id);
     card.innerHTML = `<div class="memory-card-inner"><div class="memory-front">?</div><div class="memory-back ${p.isResult ? 'result' : ''}">${p.text}</div></div>`;
     card.onclick = () => flipMemoryCard(card);
     grid.appendChild(card);
@@ -3523,7 +4158,7 @@ function flipMemoryCard(card) {
   if (!memSelected) { memSelected = card; return; }
   memTries++;
   document.getElementById('mem-tries').textContent = memTries;
-  if (memSelected.dataset.id === card.dataset.id) {
+  if (memSelected.getAttribute('data-id') === card.getAttribute('data-id')) {
     memSelected.classList.add('matched');
     card.classList.add('matched');
     sndMatch();
@@ -3677,12 +4312,49 @@ function checkTombolaWin() {
 }
 
 // ===== GIOCO 4: CAMPANELLO =====
+const CAMPANELLO_RANKS = [
+  { level: 1,  icon: '🟤',   name: 'Apprendista del Campanello', desc: 'Impara a premere il campanello senza sbagliare.' },
+  { level: 2,  icon: '🟡',   name: 'Suonatore Principiante',    desc: 'Inizia a fare suoni semplici e lenti.' },
+  { level: 3,  icon: '🔵',   name: 'Suonatore Rapido',         desc: 'Sa premere il campanello con buona velocità.' },
+  { level: 4,  icon: '🟣',   name: 'Suonatore Preciso',        desc: 'Non sbaglia mai il tempo, colpi perfetti.' },
+  { level: 5,  icon: '🟢',   name: 'Campanaro Junior',         desc: 'Inizia a fare sequenze più lunghe e ritmate.' },
+  { level: 6,  icon: '🔥',   name: 'Campanaro Professionista', desc: 'Velocità alta, ritmo costante, zero errori.' },
+  { level: 7,  icon: '⭐',   name: 'Campanaro Esperto',        desc: 'Sequenze complesse, velocità molto elevata.' },
+  { level: 8,  icon: '👑',   name: 'Maestro Campanaro',        desc: 'Livello top: velocità + precisione + ritmo.' },
+  { level: 9,  icon: '⚡',   name: 'Campanaro Fulmine',        desc: 'Colpi rapidissimi, quasi impossibile da battere.' },
+  { level: 10, icon: '🛎️',  name: 'Campanaro Leggendario',    desc: 'Il massimo: re del campanello, velocità suprema.' }
+];
+
+function getCampanelloRank(level) {
+  const lvl = Math.min(Math.max(1, level), CAMPANELLO_RANKS.length);
+  return CAMPANELLO_RANKS[lvl - 1];
+}
+
+function updateCampanelloLevelUI() {
+  const rank = getCampanelloRank(camLevel);
+  const el = document.getElementById('cam-level');
+  if (el) el.textContent = `${rank.icon} ${rank.name}`;
+  const descEl = document.getElementById('cam-level-desc');
+  if (descEl) descEl.textContent = rank.desc;
+  
+  const fillEl = document.getElementById('cam-level-fill');
+  if (fillEl) {
+    if (camLevel >= 10) {
+      fillEl.style.width = '100%';
+    } else {
+      const step = camCorrectCount % 10;
+      const pct = (step / 10) * 100;
+      fillEl.style.width = pct + '%';
+    }
+  }
+}
+
 campanelloTimer = null;
 let camTimeLeft = 10, camCurrentAnswer = 0, camLock = false, camStreak = 0, campanelloTierPopupPending = false, camCurrentFactorA = 1, campanelloWasActive = false, camLevel = 1, camCorrectCount = 0;
 function startCampanello() {
   camLevel = 1;
   camCorrectCount = 0;
-  document.getElementById('cam-level').textContent = '1';
+  updateCampanelloLevelUI();
   document.getElementById('cam-start-btn').style.display = 'none';
   nextCampanelloQuestion();
 }
@@ -3768,11 +4440,14 @@ function answerCampanello(btn, val) {
     setTimeout(() => bell.remove(), 700);
     if (camStreak % 5 === 0) confetti();
     camCorrectCount++;
-    if (camCorrectCount % 10 === 0) {
+    if (camCorrectCount % 10 === 0 && camLevel < 10) {
       camLevel++;
-      document.getElementById('cam-level').textContent = camLevel;
-      document.getElementById('cam-feedback').textContent += ` 🌟 SALITO AL LIVELLO ${camLevel}! 🌟`;
+      const rank = getCampanelloRank(camLevel);
+      updateCampanelloLevelUI();
+      document.getElementById('cam-feedback').textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
       sndWin();
+    } else {
+      updateCampanelloLevelUI();
     }
     // Only auto-advance if no tier popup is pending
     if (!campanelloTierPopupPending) {
@@ -3869,6 +4544,43 @@ function checkYTPlayer() {
 }
 
 // ===== GIOCO 6: GATTO =====
+const GATTO_RANKS = [
+  { level: 1,  icon: '🐾',  name: 'Gattino Curioso',            desc: 'Guarda l’acqua, prova a capire come funziona la pesca.' },
+  { level: 2,  icon: '🎣',  name: 'Gatto Principiante',         desc: 'Fa i primi tentativi, prende pesci piccoli.' },
+  { level: 3,  icon: '🐟',  name: 'Gatto Pescatore',            desc: 'Inizia a pescare con più sicurezza.' },
+  { level: 4,  icon: '🐠',  name: 'Gatto Acquatico',            desc: 'Sa muoversi velocemente, prende pesci medi.' },
+  { level: 5,  icon: '🐡',  name: 'Gatto Esperto di Pesca',     desc: 'Riconosce i pesci, evita quelli “veloci” o difficili.' },
+  { level: 6,  icon: '🦑',  name: 'Gatto del Mare',             desc: 'Pescate più complesse, pesci rari.' },
+  { level: 7,  icon: '🐬',  name: 'Gatto Delfino',              desc: 'Velocità e precisione molto alte.' },
+  { level: 8,  icon: '🦈',  name: 'Gatto Squalo',               desc: 'Pescate rapidissime, pesci grandi e difficili.' },
+  { level: 9,  icon: '👑',  name: 'Gatto Re dei Mari',          desc: 'Livello altissimo: domina ogni tipo di pesca.' },
+  { level: 10, icon: '🌊',  name: 'Gatto Leggendario del Mare', desc: 'Il massimo: leggenda dei mari, pesca perfetta ogni volta.' }
+];
+
+function getGattoRank(level) {
+  const lvl = Math.min(Math.max(1, level), GATTO_RANKS.length);
+  return GATTO_RANKS[lvl - 1];
+}
+
+function updateGattoLevelUI() {
+  const rank = getGattoRank(gtLevel);
+  const el = document.getElementById('gt-level');
+  if (el) el.textContent = `${rank.icon} ${rank.name}`;
+  const descEl = document.getElementById('gt-level-desc');
+  if (descEl) descEl.textContent = rank.desc;
+  
+  const fillEl = document.getElementById('gt-level-fill');
+  if (fillEl) {
+    if (gtLevel >= 10) {
+      fillEl.style.width = '100%';
+    } else {
+      const step = gtCorrectCount % 10;
+      const pct = (step / 10) * 100;
+      fillEl.style.width = pct + '%';
+    }
+  }
+}
+
 let gtTable = 13, gtLock = false, gtCaught = 0, gtLastB = 0, gtLevel = 1, gtCorrectCount = 0, gtFactorA = 2;
 function initGattoSelector() {
   const sel = document.getElementById('gt-selector');
@@ -3885,7 +4597,7 @@ function startGatto() {
   gtCaught = 0;
   gtLevel = 1;
   gtCorrectCount = 0;
-  document.getElementById('gt-level').textContent = '1';
+  updateGattoLevelUI();
   document.getElementById('gt-counter').textContent = 'Pesci catturati: 0';
   document.getElementById('gt-start-btn').textContent = '🔄 Ricomincia';
   nextGattoQuestion();
@@ -3947,11 +4659,14 @@ function catchFish(btn, val, answer) {
     setTimeout(() => ripple.remove(), 800);
     if (gtCaught % 5 === 0) confetti();
     gtCorrectCount++;
-    if (gtCorrectCount % 10 === 0) {
+    if (gtCorrectCount % 10 === 0 && gtLevel < 10) {
       gtLevel++;
-      document.getElementById('gt-level').textContent = gtLevel;
-      document.getElementById('gt-feedback').textContent += ` 🌟 SALITO AL LIVELLO ${gtLevel}! 🌟`;
+      const rank = getGattoRank(gtLevel);
+      updateGattoLevelUI();
+      document.getElementById('gt-feedback').textContent += ` 🌟 PROMOSSO: ${rank.icon} ${rank.name}! 🌟`;
       sndWin();
+    } else {
+      updateGattoLevelUI();
     }
     setTimeout(() => nextGattoQuestion(), 1800);
   } else {
@@ -4036,8 +4751,10 @@ function startRazzo() {
 
 function updateFuelDisplay() {
   const fill = document.getElementById('rz-fuel-fill');
-  fill.style.height = rzFuel + '%';
-  fill.textContent = rzFuel + '%';
+  if (fill) {
+    fill.style.height = rzFuel + '%';
+    fill.textContent = rzFuel > 0 ? rzFuel + '%' : '';
+  }
 }
 
 function nextRazzoQuestion() {
@@ -4161,7 +4878,7 @@ function launchCheck(btn, val) {
 // GIOCO 7: PALLONCINI VOLANTI - LOGICA JAVASCRIPT
 // ============================================================
 plBalloonsInterval = null;
-let plTable = 13, plLock = false, plAnswer = 0, plActiveBalloons = [], plFactorA = 2, plLastA = 0, plLastB = 0, plLevel = 1, plCorrectCount = 0;
+let plTable = 13, plLock = false, plAnswer = 0, plActiveBalloons = [], plFactorA = 2, plLastA = 0, plLastB = 0, plLevel = 1, plCorrectCount = 0, pallonciniTierPopupPending = false;
 
 function initPallonciniSelector() {
   const sel = document.getElementById('pl-selector');
@@ -4309,8 +5026,12 @@ function clickBalloon(bObj) {
       document.getElementById('pl-level').textContent = plLevel;
       document.getElementById('pl-feedback').textContent += ` 🌟 SALITO AL LIVELLO ${plLevel}! 🌟`;
       sndWin();
+      plLock = true;
+      if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
+      setTimeout(() => nextPallonciniQuestion(), 2500);
+    } else {
+      setTimeout(() => nextPallonciniQuestion(), 1500);
     }
-    setTimeout(() => nextPallonciniQuestion(), 1500);
   } else {
     bObj.element.classList.add('popped');
     sndMiss();
@@ -4322,9 +5043,9 @@ function clickBalloon(bObj) {
         b.element.style.opacity = '0.4';
       }
     });
-    document.getElementById('pl-feedback').textContent = `❌ Sbagliato! Era ${plAnswer} (-1 punto)`;
+    document.getElementById('pl-feedback').textContent = `❌ Sbagliato! Era ${plAnswer} (-2 punti)`;
     document.getElementById('pl-feedback').className = 'feedback wrong';
-    addWeeklyPoints(-1);
+    addWeeklyPoints(-2);
     setTimeout(() => nextPallonciniQuestion(), 2200);
   }
 }
@@ -4397,7 +5118,9 @@ function nextRanaQuestion() {
 
 function spawnLilyPads() {
   const area = document.getElementById('rn-game-area');
-  area.querySelectorAll('.lily-pad:not(.current-pad)').forEach(p => p.remove());
+  if (area && area.querySelectorAll) {
+    area.querySelectorAll('.lily-pad:not(.current-pad)').forEach(p => { if (p && typeof p.remove === 'function') p.remove(); });
+  }
   
   const oldCurrent = area.querySelector('.current-pad');
   if (oldCurrent) {
