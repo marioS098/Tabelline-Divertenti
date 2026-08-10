@@ -2283,6 +2283,28 @@ input:focus { outline: none; border-color: #00b894; }
     font-size: 0.85em !important;
   }
 }
+
+.app-version-badge {
+  font-size: 0.45em;
+  vertical-align: middle;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  box-shadow: 0 3px 8px rgba(59, 130, 246, 0.4);
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-left: 6px;
+}
+.footer-version-tag {
+  color: #60a5fa;
+  font-weight: 700;
+  background: rgba(59, 130, 246, 0.15);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
 </style>
 </head>
 <body>
@@ -2298,7 +2320,7 @@ input:focus { outline: none; border-color: #00b894; }
     <span class="decor decor-5">🎈</span>
   </div>
 
-  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> 🎮</h1>
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.5.0</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
 
   <!-- BANNER SETTIMANALE / GIORNALIERO -->
@@ -3030,14 +3052,10 @@ input:focus { outline: none; border-color: #00b894; }
   </div>
 </div>
 
-<!-- FOOTER FIRMA E CONTATORE VISITE -->
+<!-- FOOTER FIRMA E VERSIONE -->
 <footer class="app-footer">
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 <b>Mario Torres</b>. Tutti i diritti riservati.</p>
-    <div class="footer-visitors-box">
-      <span class="footer-visitor">📅 Visite oggi: <b id="today-visit-count">1</b></span>
-      <span class="footer-visitor">👁️ Visite totali: <b id="total-visit-count">1</b></span>
-    </div>
+    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.5.0</span>. Tutti i diritti riservati.</p>
   </div>
 </footer>
 
@@ -7159,29 +7177,8 @@ function checkCastelloAnswer(btn, val) {
   }
 }
 
-function initDeviceVisitCounter() {
-  const dk = getDayKey(new Date());
-  let totalVisits = parseInt(localStorage.getItem('tabelline_visits_total') || '0', 10);
-  let todayVisits = parseInt(localStorage.getItem('tabelline_visits_' + dk) || '0', 10);
-
-  if (!sessionStorage.getItem('tabelline_session_active')) {
-    totalVisits++;
-    todayVisits++;
-    localStorage.setItem('tabelline_visits_total', totalVisits.toString());
-    localStorage.setItem('tabelline_visits_' + dk, todayVisits.toString());
-    sessionStorage.setItem('tabelline_session_active', 'true');
-  }
-
-  const todayEl = document.getElementById('today-visit-count');
-  if (todayEl) todayEl.textContent = todayVisits > 0 ? todayVisits : 1;
-
-  const totalEl = document.getElementById('total-visit-count');
-  if (totalEl) totalEl.textContent = totalVisits > 0 ? totalVisits : 1;
-}
-
 // ===== INIZIALIZZAZIONE =====
 checkWeekRollover();
-initDeviceVisitCounter();
 initMemorySelector();
 initTombola();
 initCanzoni();
