@@ -275,6 +275,23 @@ body {
   transform: translateY(-10px) scale(1.03);
   box-shadow: 0 24px 48px rgba(0,0,0,0.28);
 }
+.game-card-score-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(254, 243, 199, 0.95);
+  color: #b45309;
+  border: 1.5px solid #f59e0b;
+  font-weight: 800;
+  font-size: 0.82em;
+  padding: 3px 9px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  z-index: 5;
+}
 .game-card .icon-badge {
   width: 78px;
   height: 78px;
@@ -2318,90 +2335,105 @@ input:focus { outline: none; border-color: #00b894; }
   <!-- GRIGLIA GIOCHI -->
   <div class="games-grid">
     <div class="game-card g1" onclick="sndClick();showGame('pizzeria')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-pizzeria">0</span> pt</div>
       <div class="icon-badge">🍕</div>
       <h3>Pizzeria dei Dadi</h3>
       <p>Tira i dadi e calcola quante olive servire!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g2" onclick="sndClick();showGame('memory')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-memory">0</span> pt</div>
       <div class="icon-badge">🃏</div>
       <h3>Memory Tabelline</h3>
       <p>Abbina le operazioni ai risultati giusti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g3" onclick="sndClick();showGame('tombola')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-tombola">0</span> pt</div>
       <div class="icon-badge">🎯</div>
       <h3>Tombola Tabelline</h3>
       <p>Segna i numeri giusti e fai tombola!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g4" onclick="sndClick();showGame('campanello')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-campanello">0</span> pt</div>
       <div class="icon-badge">🔔</div>
       <h3>Campanello Veloce</h3>
       <p>Rispondi veloce prima che scada il tempo!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g5" onclick="sndClick();showGame('canzoni')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-canzoni">0</span> pt</div>
       <div class="icon-badge">🎵</div>
       <h3>Canzoni Tabelline</h3>
       <p>Canta e impara con le canzoni musicali!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g6" onclick="sndClick();showGame('gatto')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-gatto">0</span> pt</div>
       <div class="icon-badge">🐱</div>
       <h3>Gatto Pescatore</h3>
       <p>Aiuta il gatto a pescare i pesci corretti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g7" onclick="sndClick();showGame('razzo')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-razzo">0</span> pt</div>
       <div class="icon-badge">🚀</div>
       <h3>Razzo Spaziale</h3>
       <p>Rifornisci il razzo per decollare tra i pianeti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g8" onclick="sndClick();showGame('palloncini')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-palloncini">0</span> pt</div>
       <div class="icon-badge">🎈</div>
       <h3>Palloncini Volanti</h3>
       <p>Scoppia i palloncini con la risposta giusta!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g9" onclick="sndClick();showGame('rana')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-rana">0</span> pt</div>
       <div class="icon-badge">🐸</div>
       <h3>Salto della Rana</h3>
       <p>Attraversa il fiume saltando sulle ninfee!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g10" onclick="sndClick();showGame('tartarughe')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-tartarughe">0</span> pt</div>
       <div class="icon-badge">🐢</div>
       <h3>Corsa Tartarughe</h3>
       <p>Gareggia e vinci la corsa rispondendo esatto!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g11" onclick="sndClick();showGame('albero')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-albero">0</span> pt</div>
       <div class="icon-badge">🌳</div>
       <h3>Albero della Crescita</h3>
       <p>Fai crescere l'albero fino ai frutti colorati!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g12" onclick="sndClick();showGame('dipingi')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-dipingi">0</span> pt</div>
       <div class="icon-badge">🎨</div>
       <h3>Dipingi il Quadro</h3>
       <p>Rispondi alle tabelline per colorare il quadro!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g13" onclick="sndClick();showGame('caramelle')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-caramelle">0</span> pt</div>
       <div class="icon-badge">🍬</div>
       <h3>Macchina Caramelle</h3>
       <p>Gira gli ingranaggi e riempi il vaso dolcioso!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g14" onclick="sndClick();showGame('fulmine')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-fulmine">0</span> pt</div>
       <div class="icon-badge">⚡</div>
       <h3>Fulmine Rapido</h3>
       <p>Rispondi super veloce prima della saetta!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g15" onclick="sndClick();showGame('castello')">
+      <div class="game-card-score-badge">⭐ <span id="card-score-castello">0</span> pt</div>
       <div class="icon-badge">🏰</div>
       <h3>Castello Fortezza</h3>
       <p>Proteggi la fortezza e costruisci nuove torri!</p>
@@ -3601,8 +3633,38 @@ function updateDailyDisplay() {
 
   document.getElementById('trophy-count').textContent = gameData.trophies.length;
   updateDailyMiniScores(points);
+  updateAllGameScoresUI();
 }
 const updateWeeklyDisplay = updateDailyDisplay;
+
+function updateAllGameScoresUI() {
+  if (!gameData || !gameData.gameScores) return;
+  const games = [
+    { id: 'pz', key: 'pizzeria' },
+    { id: 'mem', key: 'memory' },
+    { id: 'tb', key: 'tombola' },
+    { id: 'cam', key: 'campanello' },
+    { id: 'can', key: 'canzoni' },
+    { id: 'gt', key: 'gatto' },
+    { id: 'rz', key: 'razzo' },
+    { id: 'pl', key: 'palloncini' },
+    { id: 'rn', key: 'rana' },
+    { id: 'tr', key: 'tartarughe' },
+    { id: 'alb', key: 'albero' },
+    { id: 'dp', key: 'dipingi' },
+    { id: 'ca', key: 'caramelle' },
+    { id: 'fr', key: 'fulmine' },
+    { id: 'cd', key: 'castello' }
+  ];
+
+  games.forEach(g => {
+    const val = gameData.gameScores[g.key] || 0;
+    const headerEl = document.getElementById(g.id + '-score');
+    if (headerEl) headerEl.textContent = val;
+    const cardEl = document.getElementById('card-score-' + g.key);
+    if (cardEl) cardEl.textContent = val;
+  });
+}
 
 function updateDailyMiniScores(points) {
   const dk = getCurrentDay();
@@ -4107,7 +4169,9 @@ function checkPizzeria() {
     fb.textContent = `❌ Quasi! La risposta era ${pzAnswer}. Riprova al prossimo tiro! (-5 punti)`;
     fb.className = 'feedback wrong';
     sndWrong();
-    addWeeklyPoints(-5);
+    gameData.gameScores.pizzeria = Math.max(0, (gameData.gameScores.pizzeria || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
   }
   pzRolled = false;
   document.getElementById('pz-roll-btn').disabled = false;
@@ -4247,6 +4311,9 @@ function flipMemoryCard(card) {
       if (cardB) cardB.classList.remove('flipped');
       memLock = false;
     }, 1000);
+    gameData.gameScores.memory = Math.max(0, (gameData.gameScores.memory || 0) - 2);
+    addDailyPoints(-2);
+    updateAllGameScoresUI();
   }
 }
 
@@ -4314,7 +4381,9 @@ function markTombola(cell, num) {
     document.getElementById('tb-feedback').textContent = '❌ Non è il numero giusto! (-5 punti)';
     document.getElementById('tb-feedback').className = 'feedback wrong';
     sndWrong();
-    addWeeklyPoints(-5);
+    gameData.gameScores.tombola = Math.max(0, (gameData.gameScores.tombola || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
   }
 }
 function checkTombolaWin() {
@@ -4500,7 +4569,9 @@ function answerCampanello(btn, val) {
     document.getElementById('cam-feedback').textContent = `❌ Sbagliato! Era ${camCurrentAnswer} (-1 punto)`;
     document.getElementById('cam-feedback').className = 'feedback wrong';
     sndWrong();
-    addWeeklyPoints(-1);
+    gameData.gameScores.campanello = Math.max(0, (gameData.gameScores.campanello || 0) - 1);
+    addDailyPoints(-1);
+    updateAllGameScoresUI();
     camStreak = 0;
     document.getElementById('cam-streak').textContent = '0';
     document.getElementById('cam-start-btn').style.display = 'inline-block';
@@ -4725,7 +4796,9 @@ function catchFish(btn, val, answer) {
     document.getElementById('gt-feedback').textContent = `❌ La risposta era ${answer}! (-5 punti)`;
     document.getElementById('gt-feedback').className = 'feedback wrong';
     sndMiss();
-    addWeeklyPoints(-5);
+    gameData.gameScores.gatto = Math.max(0, (gameData.gameScores.gatto || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
     const cat2 = document.getElementById('gt-cat');
     cat2.classList.add('sad');
     cat2.textContent = '😿';
@@ -4912,7 +4985,9 @@ function launchCheck(btn, val) {
     updateFuelDisplay();
     rzDestIndex = 0;
     updateRazzoDestination();
-    addWeeklyPoints(-5);
+    gameData.gameScores.razzo = Math.max(0, (gameData.gameScores.razzo || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
     
     setTimeout(() => {
       nextRazzoQuestion();
@@ -5091,7 +5166,9 @@ function clickBalloon(bObj) {
     });
     document.getElementById('pl-feedback').textContent = `❌ Sbagliato! Era ${plAnswer} (-2 punti)`;
     document.getElementById('pl-feedback').className = 'feedback wrong';
-    addWeeklyPoints(-2);
+    gameData.gameScores.palloncini = Math.max(0, (gameData.gameScores.palloncini || 0) - 2);
+    addDailyPoints(-2);
+    updateAllGameScoresUI();
     setTimeout(() => nextPallonciniQuestion(), 2200);
   }
 }
@@ -5279,8 +5356,9 @@ function jumpFrogToPad(padEl, value, positionIndex) {
       
       document.getElementById('rn-feedback').textContent = `❌ Sgocciolo! La risposta era ${rnAnswer} (-5 punti)`;
       document.getElementById('rn-feedback').className = 'feedback wrong';
-      
-      addWeeklyPoints(-5);
+      gameData.gameScores.rana = Math.max(0, (gameData.gameScores.rana || 0) - 5);
+      addDailyPoints(-5);
+      updateAllGameScoresUI();
       rnStep = 0;
       updateRanaProgress();
       
@@ -5530,7 +5608,9 @@ function checkTartarugheAnswer(btn, val) {
 
     document.getElementById('tr-feedback').textContent = `❌ Risposta errata! Le tartarughe avversarie scattano in avanti! (-5 punti)`;
     document.getElementById('tr-feedback').className = 'feedback wrong';
-    addWeeklyPoints(-5);
+    gameData.gameScores.tartarughe = Math.max(0, (gameData.gameScores.tartarughe || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
 
     // CPU turtles advance randomly (10% or 20%) on wrong answer
     colors.forEach(c => {
@@ -5939,7 +6019,9 @@ function checkAlberoAnswer(btn, val) {
 
     document.getElementById('alb-feedback').textContent = `❌ Risposta errata! È caduta una foglia! (-5 punti)`;
     document.getElementById('alb-feedback').className = 'feedback wrong';
-    addWeeklyPoints(-5);
+    gameData.gameScores.albero = Math.max(0, (gameData.gameScores.albero || 0) - 5);
+    addDailyPoints(-5);
+    updateAllGameScoresUI();
 
     setTimeout(() => nextAlberoQuestion(), 2000);
   }
@@ -6295,8 +6377,11 @@ function checkDipingiAnswer(btn, val) {
       if (parseInt(b.textContent) === dpAnswer) b.classList.add('correct');
     });
 
-    document.getElementById('dp-feedback').textContent = `🌫️ Ops! Una macchia grigia! La risposta corretta era ${dpAnswer}`;
+    document.getElementById('dp-feedback').textContent = `🌫️ Ops! Una macchia grigia! La risposta corretta era ${dpAnswer} (-3 punti)`;
     document.getElementById('dp-feedback').className = 'feedback wrong';
+    gameData.gameScores.dipingi = Math.max(0, (gameData.gameScores.dipingi || 0) - 3);
+    addDailyPoints(-3);
+    updateAllGameScoresUI();
     setTimeout(() => nextDipingiQuestion(), 2000);
   }
 }
@@ -6502,8 +6587,11 @@ function checkCaramelleAnswer(btn, val) {
       if (parseInt(b.textContent) === caAnswer) b.classList.add('correct');
     });
 
-    document.getElementById('ca-feedback').textContent = `⚙️ Gli ingranaggi si bloccano! La risposta era ${caAnswer}`;
+    document.getElementById('ca-feedback').textContent = `⚙️ Gli ingranaggi si bloccano! La risposta era ${caAnswer} (-3 punti)`;
     document.getElementById('ca-feedback').className = 'feedback wrong';
+    gameData.gameScores.caramelle = Math.max(0, (gameData.gameScores.caramelle || 0) - 3);
+    addDailyPoints(-3);
+    updateAllGameScoresUI();
     setTimeout(() => nextCaramelleQuestion(), 2000);
   }
 }
@@ -6718,8 +6806,11 @@ function checkFulmineAnswer(btn, val) {
       if (parseInt(b.textContent) === frAnswer) b.classList.add('correct');
     });
 
-    document.getElementById('fr-feedback').textContent = `❌ ERRORE! La saetta ti ha colpita! La risposta corretta era ${frAnswer}`;
+    document.getElementById('fr-feedback').textContent = `❌ ERRORE! La saetta ti ha colpita! La risposta corretta era ${frAnswer} (-3 punti)`;
     document.getElementById('fr-feedback').className = 'feedback wrong';
+    gameData.gameScores.fulmine = Math.max(0, (gameData.gameScores.fulmine || 0) - 3);
+    addDailyPoints(-3);
+    updateAllGameScoresUI();
     setTimeout(() => nextFulmineQuestion(), 1800);
   }
 }
@@ -7058,8 +7149,11 @@ function checkCastelloAnswer(btn, val) {
         nextCastelloQuestion();
       }, 2500);
     } else {
-      document.getElementById('cd-feedback').textContent = `🪨 UN SASSO HA COLPITO IL MURO! Rimangono ${cdLives} vite! Risposta: ${cdAnswer}`;
+      document.getElementById('cd-feedback').textContent = `🪨 UN SASSO HA COLPITO IL MURO! Rimangono ${cdLives} vite! Risposta: ${cdAnswer} (-3 punti)`;
       document.getElementById('cd-feedback').className = 'feedback wrong';
+      gameData.gameScores.castello = Math.max(0, (gameData.gameScores.castello || 0) - 3);
+      addDailyPoints(-3);
+      updateAllGameScoresUI();
       setTimeout(() => nextCastelloQuestion(), 1800);
     }
   }
@@ -7102,30 +7196,7 @@ initCaramelleSelector();
 initFulmineSelector();
 initCastelloSelector();
 updateWeeklyDisplay();
-document.getElementById('pz-score').textContent = gameData.gameScores.pizzeria;
-document.getElementById('mem-score').textContent = gameData.gameScores.memory;
-document.getElementById('tb-score').textContent = gameData.gameScores.tombola;
-document.getElementById('cam-score').textContent = gameData.gameScores.campanello;
-document.getElementById('gt-score').textContent = gameData.gameScores.gatto;
-document.getElementById('rz-score').textContent = gameData.gameScores.razzo;
-document.getElementById('pl-score').textContent = gameData.gameScores.palloncini;
-document.getElementById('rn-score').textContent = gameData.gameScores.rana;
-document.getElementById('tr-score').textContent = gameData.gameScores.tartarughe;
-if (document.getElementById('alb-score')) {
-  document.getElementById('alb-score').textContent = gameData.gameScores.albero || 0;
-}
-if (document.getElementById('dp-score')) {
-  document.getElementById('dp-score').textContent = gameData.gameScores.dipingi || 0;
-}
-if (document.getElementById('ca-score')) {
-  document.getElementById('ca-score').textContent = gameData.gameScores.caramelle || 0;
-}
-if (document.getElementById('fr-score')) {
-  document.getElementById('fr-score').textContent = gameData.gameScores.fulmine || 0;
-}
-if (document.getElementById('cd-score')) {
-  document.getElementById('cd-score').textContent = gameData.gameScores.castello || 0;
-}
+updateAllGameScoresUI();
 </script>
 </body>
 </html>
