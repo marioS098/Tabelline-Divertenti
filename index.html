@@ -11,11 +11,11 @@
 body {
   font-family: 'Fredoka', 'Outfit', system-ui, -apple-system, sans-serif;
   background: linear-gradient(135deg, #312e81 0%, #4c1d95 35%, #581c87 70%, #831843 100%);
-  background-attachment: fixed;
   min-height: 100vh;
   color: #1e293b;
   overflow-x: hidden;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 #app { max-width: 960px; margin: 0 auto; padding: 20px 15px; position: relative; }
 
@@ -69,8 +69,7 @@ body {
   font-size: 1.15em;
   font-weight: 600;
   color: #e0e7ff;
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
   padding: 8px 24px;
   border-radius: 30px;
   display: inline-block;
@@ -81,8 +80,7 @@ body {
 
 /* ===== BANNER SETTIMANALE / GIORNALIERO ===== */
 .weekly-banner {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+  background: #ffffff;
   border-radius: 28px;
   padding: 24px;
   margin-bottom: 26px;
@@ -220,8 +218,7 @@ body {
   box-shadow: 0 12px 28px rgba(245, 158, 11, 0.5);
 }
 .trophy-room {
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(16px);
+  background: #1a1a2e;
   border-radius: 26px;
   padding: 26px;
   margin-bottom: 24px;
@@ -256,8 +253,7 @@ body {
   margin: 0 auto;
 }
 .game-card {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
   border-radius: 26px;
   padding: 24px 18px 18px 18px;
   cursor: pointer;
@@ -2385,11 +2381,10 @@ input:focus { outline: none; border-color: #00b894; }
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g5" onclick="sndClick();showGame('canzoni')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-canzoni">0</span> pt</div>
       <div class="icon-badge">🎵</div>
       <h3>Canzoni Tabelline</h3>
       <p>Canta e impara con le canzoni musicali!</p>
-      <div class="play-btn-tag">Gioca ▶</div>
+      <div class="play-btn-tag">Ascolta ▶</div>
     </div>
     <div class="game-card g6" onclick="sndClick();showGame('gatto')">
       <div class="game-card-score-badge">⭐ <span id="card-score-gatto">0</span> pt</div>
@@ -3377,19 +3372,20 @@ function getDayKey(date) {
   return `${year}-${month}-${day}`;
 }
 
-function getDayLabel(dayKey) {
+function formatExactDate(dayKey) {
   if (!dayKey) return '';
-  const todayKey = getDayKey(new Date());
-  if (dayKey === todayKey) return 'Oggi';
-  
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  if (dayKey === getDayKey(yesterday)) return 'Ieri';
-
-  const [y, m, d] = dayKey.split('-').map(Number);
-  const date = new Date(y, m - 1, d);
+  const parts = dayKey.split('-');
+  if (parts.length < 3) return dayKey;
+  const y = parseInt(parts[0], 10);
+  const m = parseInt(parts[1], 10) - 1;
+  const d = parseInt(parts[2], 10);
+  const date = new Date(y, m, d);
   const opts = { day: 'numeric', month: 'short', year: 'numeric' };
   return date.toLocaleDateString('it-IT', opts);
+}
+
+function getDayLabel(dayKey) {
+  return formatExactDate(dayKey);
 }
 
 // Alias per compatibilità
@@ -3411,6 +3407,13 @@ if (!gameData) {
   }
   if (!gameData.gameScores) {
     gameData.gameScores = {};
+  }
+  if (gameData.trophies) {
+    gameData.trophies.forEach(t => {
+      if (t.day) {
+        t.dayLabel = formatExactDate(t.day) + (t.special ? ' (Netherite⚡)' : '');
+      }
+    });
   }
   const defaultScores = { pizzeria: 0, memory: 0, tombola: 0, campanello: 0, gatto: 0, razzo: 0, palloncini: 0, rana: 0, tartarughe: 0, albero: 0, albCultivated: 0, dipingi: 0, caramelle: 0, fulmine: 0, castello: 0 };
   let modified = false;
@@ -3662,7 +3665,6 @@ function updateAllGameScoresUI() {
     { id: 'mem', key: 'memory' },
     { id: 'tb', key: 'tombola' },
     { id: 'cam', key: 'campanello' },
-    { id: 'can', key: 'canzoni' },
     { id: 'gt', key: 'gatto' },
     { id: 'rz', key: 'razzo' },
     { id: 'pl', key: 'palloncini' },
@@ -3751,13 +3753,18 @@ function renderTrophyRoom() {
     const tier = TIERS.find(x => x.name === tierName) || TIERS[t.tier] || TIERS[0];
     const isNetherite = tier.name === 'Netherite' || tierName === 'Netherite' || t.special;
     const specialStyle = isNetherite ? 'background: linear-gradient(135deg, rgba(139,47,194,0.22), rgba(196,77,255,0.12)); border: 3px solid #9333ea; box-shadow: 0 0 20px rgba(147,51,234,0.5); animation: netheritePulse 2s infinite;' : `border-color:${tier.color};`;
-    const label = t.dayLabel || t.weekLabel || '';
+    
+    let label = t.day ? formatExactDate(t.day) : (t.dayLabel || t.weekLabel || '');
+    if (label.includes('Ieri') || label.includes('Oggi')) {
+      label = t.day ? formatExactDate(t.day) : label;
+    }
+
     const cupHTML = renderColoredTrophySVG(tier, idx);
     return `<div class="trophy-display" style="${specialStyle}">
       ${cupHTML}
       <div class="cup-label" style="color:${isNetherite ? '#c084fc' : tier.color}; font-weight:800;">${tier.icon} ${t.tierName}${t.special ? ' ⚡' : ''}</div>
       <div class="cup-points">${t.points} punti</div>
-      <div class="cup-date">${label}</div>
+      <div class="cup-date">📅 ${label}</div>
     </div>`;
   }).join('');
 }
