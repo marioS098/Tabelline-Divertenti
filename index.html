@@ -608,6 +608,15 @@ input:focus { outline: none; border-color: #00b894; }
 .tombola-call { font-size: 2.2em; font-weight: bold; margin: 12px 0; min-height: 50px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .tombola-numbers { font-size: 0.9em; color: #e0e7ff; font-weight: 600; }
 
+.tombola-controls-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
 #tb-draw-btn {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
   color: #ffffff;
@@ -624,7 +633,6 @@ input:focus { outline: none; border-color: #00b894; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 12px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   animation: drawBtnPulse 2s ease-in-out infinite alternate;
 }
@@ -639,6 +647,40 @@ input:focus { outline: none; border-color: #00b894; }
 @keyframes drawBtnPulse {
   0% { transform: scale(1); box-shadow: 0 8px 22px rgba(245, 158, 11, 0.5); }
   100% { transform: scale(1.05); box-shadow: 0 12px 28px rgba(251, 191, 36, 0.8); }
+}
+
+#tb-restart-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #4338ca 100%);
+  color: #ffffff;
+  border: 3.5px solid #ffffff;
+  padding: 14px 28px;
+  border-radius: 35px;
+  font-size: 1.2em;
+  font-weight: 800;
+  font-family: 'Fredoka', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+#tb-restart-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.6);
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #4f46e5 100%);
+}
+#tb-restart-btn:active {
+  transform: translateY(2px) scale(0.98);
+}
+#tb-restart-btn.pulse-highlight {
+  animation: restartBtnPulse 1.5s ease-in-out infinite alternate;
+}
+@keyframes restartBtnPulse {
+  0% { transform: scale(1); box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5); }
+  100% { transform: scale(1.1); box-shadow: 0 14px 32px rgba(129, 140, 248, 0.9); }
 }
 
 /* ===== GIOCO 4: CAMPANELLO ===== */
@@ -2523,7 +2565,10 @@ input:focus { outline: none; border-color: #00b894; }
   </div>
   <p style="text-align:center; margin-bottom:15px;">Ascolta l'operazione e segna il risultato sulla tua cartella!</p>
   <div class="tombola-caller">
-    <button class="btn" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 ESTRAI! ▶</button>
+    <div class="tombola-controls-btns">
+      <button class="btn" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 ESTRAI! ▶</button>
+      <button class="btn" onclick="sndClick();initTombola()" id="tb-restart-btn">🔄 Nuova Partita</button>
+    </div>
     <div class="tombola-call" id="tb-call">Premi "Estrai" per iniziare!</div>
     <div class="tombola-numbers" id="tb-history"></div>
   </div>
@@ -4353,6 +4398,10 @@ function initTombola() {
   document.getElementById('tb-history').textContent = '';
   document.getElementById('tb-feedback').textContent = '';
   document.getElementById('tb-feedback').className = 'feedback';
+
+  const restartBtn = document.getElementById('tb-restart-btn');
+  if (restartBtn) restartBtn.classList.remove('pulse-highlight');
+
   // Pick 3 random distinct tables between 1 and 12
   const allTables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   allTables.sort(() => Math.random() - 0.5);
@@ -4382,7 +4431,14 @@ function drawNumber() {
   const ops = [];
   tbCards.forEach(c => { for (let i = 1; i <= 12; i++) ops.push({ table: c.table, multiplier: i, result: c.table*i }); });
   const available = ops.filter(o => !tbCalled.some(c => c.table === o.table && c.multiplier === o.multiplier));
-  if (available.length === 0) { document.getElementById('tb-call').textContent = '🎉 Tutte estratte!'; return; }
+  if (available.length === 0) {
+    document.getElementById('tb-call').textContent = '🎉 Tutte le operazioni estratte!';
+    document.getElementById('tb-feedback').textContent = 'Premi "Nuova Partita" per rimescolare le cartelle e giocare ancora!';
+    document.getElementById('tb-feedback').className = 'feedback correct';
+    const restartBtn = document.getElementById('tb-restart-btn');
+    if (restartBtn) restartBtn.classList.add('pulse-highlight');
+    return;
+  }
   tbCurrentOp = available[Math.floor(Math.random() * available.length)];
   tbCalled.push(tbCurrentOp);
   document.getElementById('tb-call').innerHTML = `${tbCurrentOp.table} × <span class='drawn-num'>${tbCurrentOp.multiplier}</span> = <b>?</b>`;
@@ -4440,6 +4496,18 @@ function checkTombolaWin() {
       confetti();
     }
   });
+
+  if (tbCards.length > 0 && tbCards.every(c => c.won)) {
+    setTimeout(() => {
+      document.getElementById('tb-call').textContent = '🎉 SUPER TOMBOLA! Cartelle completate! 🏆';
+      document.getElementById('tb-feedback').textContent = '👑 Fantastico! Hai completato tutte le cartelle! Clicca su "Nuova Partita" per giocare ancora!';
+      document.getElementById('tb-feedback').className = 'feedback correct';
+      const restartBtn = document.getElementById('tb-restart-btn');
+      if (restartBtn) restartBtn.classList.add('pulse-highlight');
+      sndFanfare();
+      confetti();
+    }, 600);
+  }
 }
 
 // ===== GIOCO 4: CAMPANELLO =====
