@@ -233,6 +233,44 @@ body {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 16px; max-width: 720px; margin: 0 auto;
 }
+
+.trophy-display {
+  position: relative;
+}
+.trophy-qty-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-size: 0.85em;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+  border: 1.5px solid #ffffff;
+  z-index: 2;
+}
+.trophy-display.is-netherite .trophy-qty-badge {
+  background: linear-gradient(135deg, #9333ea, #7c3aed);
+}
+.trophy-count-tag {
+  background: rgba(245, 158, 11, 0.2);
+  color: #d97706;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.85em;
+  font-weight: 800;
+  margin-left: 5px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  display: inline-block;
+}
+.trophy-display.is-netherite .trophy-count-tag {
+  background: rgba(147, 51, 234, 0.25);
+  color: #c084fc;
+  border-color: rgba(147, 51, 234, 0.4);
+}
+
 .trophy-display {
   background: rgba(255,255,255,0.08); border-radius: 18px; padding: 16px 12px;
   text-align: center; border: 2px solid transparent; transition: transform 0.3s;
@@ -273,20 +311,21 @@ body {
 }
 .game-card-score-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   background: rgba(254, 243, 199, 0.95);
   color: #b45309;
   border: 1.5px solid #f59e0b;
   font-weight: 800;
-  font-size: 0.82em;
-  padding: 3px 9px;
+  font-size: 0.78em;
+  padding: 3px 8px;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   gap: 3px;
   z-index: 5;
+  white-space: nowrap;
 }
 .game-card .icon-badge {
   width: 78px;
@@ -2358,7 +2397,7 @@ input:focus { outline: none; border-color: #00b894; }
     <span class="decor decor-5">🎈</span>
   </div>
 
-  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.5.3</span> 🎮</h1>
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.6.0</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
 
   <!-- BANNER SETTIMANALE / GIORNALIERO -->
@@ -2395,28 +2434,28 @@ input:focus { outline: none; border-color: #00b894; }
   <!-- GRIGLIA GIOCHI -->
   <div class="games-grid">
     <div class="game-card g1" onclick="sndClick();showGame('pizzeria')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-pizzeria">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-pizzeria">0</span> pt</div>
       <div class="icon-badge">🍕</div>
       <h3>Pizzeria dei Dadi</h3>
       <p>Tira i dadi e calcola quante olive servire!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g2" onclick="sndClick();showGame('memory')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-memory">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-memory">0</span> pt</div>
       <div class="icon-badge">🃏</div>
       <h3>Memory Tabelline</h3>
       <p>Abbina le operazioni ai risultati giusti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g3" onclick="sndClick();showGame('tombola')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-tombola">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-tombola">0</span> pt</div>
       <div class="icon-badge">🎯</div>
       <h3>Tombola Tabelline</h3>
       <p>Segna i numeri giusti e fai tombola!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g4" onclick="sndClick();showGame('campanello')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-campanello">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-campanello">0</span> pt</div>
       <div class="icon-badge">🔔</div>
       <h3>Campanello Veloce</h3>
       <p>Rispondi veloce prima che scada il tempo!</p>
@@ -2429,70 +2468,70 @@ input:focus { outline: none; border-color: #00b894; }
       <div class="play-btn-tag">Ascolta ▶</div>
     </div>
     <div class="game-card g6" onclick="sndClick();showGame('gatto')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-gatto">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-gatto">0</span> pt</div>
       <div class="icon-badge">🐱</div>
       <h3>Gatto Pescatore</h3>
       <p>Aiuta il gatto a pescare i pesci corretti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g7" onclick="sndClick();showGame('razzo')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-razzo">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-razzo">0</span> pt</div>
       <div class="icon-badge">🚀</div>
       <h3>Razzo Spaziale</h3>
       <p>Rifornisci il razzo per decollare tra i pianeti!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g8" onclick="sndClick();showGame('palloncini')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-palloncini">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-palloncini">0</span> pt</div>
       <div class="icon-badge">🎈</div>
       <h3>Palloncini Volanti</h3>
       <p>Scoppia i palloncini con la risposta giusta!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g9" onclick="sndClick();showGame('rana')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-rana">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-rana">0</span> pt</div>
       <div class="icon-badge">🐸</div>
       <h3>Salto della Rana</h3>
       <p>Attraversa il fiume saltando sulle ninfee!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g10" onclick="sndClick();showGame('tartarughe')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-tartarughe">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-tartarughe">0</span> pt</div>
       <div class="icon-badge">🐢</div>
       <h3>Corsa Tartarughe</h3>
       <p>Gareggia e vinci la corsa rispondendo esatto!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g11" onclick="sndClick();showGame('albero')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-albero">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-albero">0</span> pt</div>
       <div class="icon-badge">🌳</div>
       <h3>Albero della Crescita</h3>
       <p>Fai crescere l'albero fino ai frutti colorati!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g12" onclick="sndClick();showGame('dipingi')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-dipingi">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-dipingi">0</span> pt</div>
       <div class="icon-badge">🎨</div>
       <h3>Dipingi il Quadro</h3>
       <p>Rispondi alle tabelline per colorare il quadro!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g13" onclick="sndClick();showGame('caramelle')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-caramelle">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-caramelle">0</span> pt</div>
       <div class="icon-badge">🍬</div>
       <h3>Macchina Caramelle</h3>
       <p>Gira gli ingranaggi e riempi il vaso dolcioso!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g14" onclick="sndClick();showGame('fulmine')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-fulmine">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-fulmine">0</span> pt</div>
       <div class="icon-badge">⚡</div>
       <h3>Fulmine Rapido</h3>
       <p>Rispondi super veloce prima della saetta!</p>
       <div class="play-btn-tag">Gioca ▶</div>
     </div>
     <div class="game-card g15" onclick="sndClick();showGame('castello')">
-      <div class="game-card-score-badge">⭐ <span id="card-score-castello">0</span> pt</div>
+      <div class="game-card-score-badge">⭐ Record: <span id="card-score-castello">0</span> pt</div>
       <div class="icon-badge">🏰</div>
       <h3>Castello Fortezza</h3>
       <p>Proteggi la fortezza e costruisci nuove torri!</p>
@@ -2512,7 +2551,7 @@ input:focus { outline: none; border-color: #00b894; }
         <div class="pz-level-badge-text" id="pz-level">👶 Aiuto Pizzaiolo</div>
       </div>
       <div>
-        <div class="score-box">⭐ <span id="pz-score">0</span></div>
+        <div class="score-box" title="Record Punti Stella">⭐ Record: <span id="pz-score">0</span></div>
         <div class="weekly-mini" id="pz-weekly">Oggi: 0</div>
       </div>
     </div>
@@ -2542,7 +2581,7 @@ input:focus { outline: none; border-color: #00b894; }
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🃏 Memory delle Tabelline</h2>
     <div>
-      <div class="score-box">⭐ <span id="mem-score">0</span></div>
+      <div class="score-box" title="Record Punti Stella">⭐ Record: <span id="mem-score">0</span></div>
       <div class="weekly-mini" id="mem-weekly">Oggi: 0</div>
     </div>
   </div>
@@ -2559,7 +2598,7 @@ input:focus { outline: none; border-color: #00b894; }
     <button class="btn-back" onclick="backToMenu()">⬅ Menu</button>
     <h2>🎯 Tombola delle Tabelline</h2>
     <div>
-      <div class="score-box">⭐ <span id="tb-score">0</span></div>
+      <div class="score-box" title="Record Punti Stella">⭐ Record: <span id="tb-score">0</span></div>
       <div class="weekly-mini" id="tb-weekly">Oggi: 0</div>
     </div>
   </div>
@@ -2587,7 +2626,7 @@ input:focus { outline: none; border-color: #00b894; }
         <div class="pz-level-badge-text" id="cam-level">🟤 Apprendista del Campanello</div>
       </div>
       <div>
-        <div class="score-box">⭐ <span id="cam-score">0</span></div>
+        <div class="score-box" title="Record Punti Stella">⭐ Record: <span id="cam-score">0</span></div>
         <div class="weekly-mini" id="cam-weekly">Oggi: 0</div>
       </div>
     </div>
@@ -2630,7 +2669,7 @@ input:focus { outline: none; border-color: #00b894; }
         <div class="pz-level-badge-text" id="gt-level">🐾 Gattino Curioso</div>
       </div>
       <div>
-        <div class="score-box">🐟 <span id="gt-score">0</span></div>
+        <div class="score-box" title="Record Punti Stella">⭐ Record: <span id="gt-score">0</span></div>
         <div class="weekly-mini" id="gt-weekly">Oggi: 0</div>
       </div>
     </div>
@@ -3096,7 +3135,7 @@ input:focus { outline: none; border-color: #00b894; }
 <!-- FOOTER FIRMA E VERSIONE -->
 <footer class="app-footer">
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.5.2</span>. Tutti i diritti riservati.</p>
+    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.6.0</span>. Tutti i diritti riservati.</p>
   </div>
 </footer>
 
@@ -3524,17 +3563,8 @@ function addDailyPoints(pts) {
   if (newTier > oldTier) {
     gameData.days[dk].highestTier = Math.max(gameData.days[dk].highestTier || 0, newTier);
     saveData(gameData);
-    const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
-    if (isCamActive) campanelloTierPopupPending = true;
-    if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
-    
-    const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
-    if (isPlActive) {
-      pallonciniTierPopupPending = true;
-      if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
-      plLock = true;
-    }
-    setTimeout(() => showTierPopup(newTier), 800);
+    pauseActiveGameForTierPopup();
+    setTimeout(() => showTierPopup(newTier), 500);
   } else if (newTier > (gameData.days[dk].highestTier || 0)) {
     gameData.days[dk].highestTier = newTier;
   }
@@ -3561,17 +3591,8 @@ function addDailyPoints(pts) {
         gameData.days[dk].netheriteMilestones = milestonesPassed;
         saveData(gameData);
         if (milestonesAwarded > 0) {
-          const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
-          if (isCamActive) campanelloTierPopupPending = true;
-          if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
-          
-          const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
-          if (isPlActive) {
-            pallonciniTierPopupPending = true;
-            if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
-            plLock = true;
-          }
-          setTimeout(() => showNetheriteMilestonePopup(milestonesPassed), 800);
+          pauseActiveGameForTierPopup();
+          setTimeout(() => showNetheriteMilestonePopup(milestonesPassed), 500);
         }
       }
     }
@@ -3793,24 +3814,58 @@ function renderTrophyRoom() {
     grid.innerHTML = '<div class="no-trophies">🏆 Non hai ancora vinto coppe!<br>Gioca oggi per vincere la tua prima coppa!<br>Le coppe vengono assegnate ogni giorno a mezzanotte.</div>';
     return;
   }
-  const sorted = [...gameData.trophies].sort((a, b) => (b.day || b.week || '').localeCompare(a.day || a.week || ''));
-  grid.innerHTML = sorted.map((t, idx) => {
+  
+  // Raggruppa le coppe per tipologia (es. Diamante x2, x3, ecc.)
+  const groups = {};
+  gameData.trophies.forEach(t => {
     const tierName = t.tierName || (TIERS[t.tier] ? TIERS[t.tier].name : 'Legno');
-    const tier = TIERS.find(x => x.name === tierName) || TIERS[t.tier] || TIERS[0];
-    const isNetherite = tier.name === 'Netherite' || tierName === 'Netherite' || t.special;
+    if (!groups[tierName]) {
+      const tierObj = TIERS.find(x => x.name === tierName) || TIERS[t.tier] || TIERS[0];
+      groups[tierName] = {
+        tierName: tierName,
+        tier: tierObj,
+        count: 0,
+        special: !!t.special,
+        maxPoints: 0,
+        latestDate: t.day || t.week || '',
+        days: []
+      };
+    }
+    groups[tierName].count++;
+    if (t.special) groups[tierName].special = true;
+    const pts = t.points || 0;
+    if (pts > groups[tierName].maxPoints) groups[tierName].maxPoints = pts;
+    const d = t.day || t.week || '';
+    if (d && (!groups[tierName].latestDate || d > groups[tierName].latestDate)) {
+      groups[tierName].latestDate = d;
+    }
+    if (d) groups[tierName].days.push(d);
+  });
+
+  // Ordina per rango decrescente (Netherite -> Platino -> Smeraldo ... -> Legno)
+  const sortedTierNames = Object.keys(groups).sort((a, b) => {
+    const idxA = TIERS.findIndex(x => x.name === a);
+    const idxB = TIERS.findIndex(x => x.name === b);
+    return idxB - idxA;
+  });
+
+  grid.innerHTML = sortedTierNames.map((tierName, idx) => {
+    const g = groups[tierName];
+    const tier = g.tier;
+    const isNetherite = tier.name === 'Netherite' || tierName === 'Netherite' || g.special;
     const specialStyle = isNetherite ? 'background: linear-gradient(135deg, rgba(139,47,194,0.22), rgba(196,77,255,0.12)); border: 3px solid #9333ea; box-shadow: 0 0 20px rgba(147,51,234,0.5); animation: netheritePulse 2s infinite;' : `border-color:${tier.color};`;
     
-    let label = t.day ? formatExactDate(t.day) : (t.dayLabel || t.weekLabel || '');
-    if (label.includes('Ieri') || label.includes('Oggi')) {
-      label = t.day ? formatExactDate(t.day) : label;
-    }
-
+    let label = g.latestDate ? formatExactDate(g.latestDate) : 'Recente';
     const cupHTML = renderColoredTrophySVG(tier, idx);
-    return `<div class="trophy-display" style="${specialStyle}">
+    const qtyBadge = g.count > 1 ? `<div class="trophy-qty-badge">x${g.count}</div>` : '';
+    const qtyTag = g.count > 1 ? `<span class="trophy-count-tag">x${g.count}</span>` : '';
+
+    return `<div class="trophy-display ${isNetherite ? 'is-netherite' : ''}" style="${specialStyle}">
+      ${qtyBadge}
       ${cupHTML}
-      <div class="cup-label" style="color:${isNetherite ? '#c084fc' : tier.color}; font-weight:800;">${tier.icon} ${t.tierName}${t.special ? ' ⚡' : ''}</div>
-      <div class="cup-points">${t.points} punti</div>
-      <div class="cup-date">📅 ${label}</div>
+      <div class="cup-label" style="color:${isNetherite ? '#c084fc' : tier.color}; font-weight:800;">${tier.icon} ${g.tierName} ${qtyTag}${g.special ? ' ⚡' : ''}</div>
+      <div class="cup-points">${g.count > 1 ? `Collezione: <b>${g.count} coppe</b> • Max: ${g.maxPoints} pt` : `Punti: ${g.maxPoints}`}</div>
+      <div class="cup-date">📅 Ultima: ${label}</div>
     </div>`;
   }).join('');
 }
@@ -3857,48 +3912,106 @@ function showNetheriteMilestonePopup(milestoneNum) {
   confetti();
 }
 
+
+let tierPopupActiveGame = null;
+function pauseActiveGameForTierPopup() {
+  const activePage = document.querySelector('.game-page.active');
+  tierPopupActiveGame = activePage ? activePage.id.replace('game-', '') : null;
+  
+  // Stoppa tutti i timer attivi
+  if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
+  if (plBalloonsInterval) { clearInterval(plBalloonsInterval); plBalloonsInterval = null; }
+  if (fulmineTimerInterval) { clearInterval(fulmineTimerInterval); fulmineTimerInterval = null; }
+  if (frTimerInterval) { clearInterval(frTimerInterval); frTimerInterval = null; }
+  
+  // Blocca interazione
+  if (typeof camLock !== 'undefined') camLock = true;
+  if (typeof plLock !== 'undefined') plLock = true;
+  if (typeof frLock !== 'undefined') frLock = true;
+  if (typeof gtLock !== 'undefined') gtLock = true;
+  if (typeof rzLock !== 'undefined') rzLock = true;
+  if (typeof rnLock !== 'undefined') rnLock = true;
+  if (typeof trLock !== 'undefined') trLock = true;
+  if (typeof albLock !== 'undefined') albLock = true;
+  if (typeof dpLock !== 'undefined') dpLock = true;
+  if (typeof caLock !== 'undefined') caLock = true;
+  if (typeof cdLock !== 'undefined') cdLock = true;
+  if (typeof memLock !== 'undefined') memLock = true;
+}
+
 function closeTierPopup() {
   document.getElementById('tier-popup-overlay').classList.remove('active');
-  const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
-  if (campanelloTierPopupPending && isCamActive) {
-    campanelloTierPopupPending = false;
-    document.getElementById('cam-feedback').textContent = '⏳ Riprendi in 3...';
-    document.getElementById('cam-feedback').className = 'feedback correct';
-    let countdown = 3;
-    const cdInt = setInterval(() => {
-      countdown--;
-      if (countdown > 0) {
-        document.getElementById('cam-feedback').textContent = `⏳ Riprendi in ${countdown}...`;
-      } else {
-        clearInterval(cdInt);
-        document.getElementById('cam-feedback').textContent = '';
-        document.getElementById('cam-feedback').className = 'feedback';
-        nextCampanelloQuestion();
-      }
-    }, 500);
-  } else {
-    campanelloTierPopupPending = false;
-  }
+  const gId = tierPopupActiveGame;
+  tierPopupActiveGame = null;
 
-  const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
-  if (pallonciniTierPopupPending && isPlActive) {
-    pallonciniTierPopupPending = false;
-    document.getElementById('pl-feedback').textContent = '⏳ Riprendi in 3...';
-    document.getElementById('pl-feedback').className = 'feedback correct';
-    let countdown = 3;
-    const cdInt = setInterval(() => {
-      countdown--;
-      if (countdown > 0) {
-        document.getElementById('pl-feedback').textContent = `⏳ Riprendi in ${countdown}...`;
-      } else {
-        clearInterval(cdInt);
-        document.getElementById('pl-feedback').textContent = '';
-        document.getElementById('pl-feedback').className = 'feedback';
-        nextPallonciniQuestion();
-      }
-    }, 500);
-  } else {
-    pallonciniTierPopupPending = false;
+  if (gId === 'campanello') {
+    const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
+    if (isCamActive) {
+      const fb = document.getElementById('cam-feedback');
+      if (fb) { fb.textContent = '⏳ Riprendi in 3...'; fb.className = 'feedback correct'; }
+      let cd = 3;
+      const cdInt = setInterval(() => {
+        cd--;
+        if (cd > 0) {
+          if (fb) fb.textContent = `⏳ Riprendi in ${cd}...`;
+        } else {
+          clearInterval(cdInt);
+          if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+          camLock = false;
+          nextCampanelloQuestion();
+        }
+      }, 500);
+    }
+  } else if (gId === 'palloncini') {
+    const isPlActive = document.getElementById('game-palloncini') && document.getElementById('game-palloncini').classList.contains('active');
+    if (isPlActive) {
+      const fb = document.getElementById('pl-feedback');
+      if (fb) { fb.textContent = '⏳ Riprendi in 3...'; fb.className = 'feedback correct'; }
+      let cd = 3;
+      const cdInt = setInterval(() => {
+        cd--;
+        if (cd > 0) {
+          if (fb) fb.textContent = `⏳ Riprendi in ${cd}...`;
+        } else {
+          clearInterval(cdInt);
+          if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+          plLock = false;
+          nextPallonciniQuestion();
+        }
+      }, 500);
+    }
+  } else if (gId === 'fulmine') {
+    const isFrActive = document.getElementById('game-fulmine') && document.getElementById('game-fulmine').classList.contains('active');
+    if (isFrActive) {
+      const fb = document.getElementById('fr-feedback');
+      if (fb) { fb.textContent = '⏳ Riprendi in 3...'; fb.className = 'feedback correct'; }
+      let cd = 3;
+      const cdInt = setInterval(() => {
+        cd--;
+        if (cd > 0) {
+          if (fb) fb.textContent = `⏳ Riprendi in ${cd}...`;
+        } else {
+          clearInterval(cdInt);
+          if (fb) { fb.textContent = ''; fb.className = 'feedback'; }
+          frLock = false;
+          nextFulmineQuestion();
+        }
+      }, 500);
+    }
+  } else if (gId) {
+    // Sblocca e prosegui negli altri giochi
+    setTimeout(() => {
+      if (gId === 'gatto') { gtLock = false; nextGattoQuestion(); }
+      else if (gId === 'razzo') { rzLock = false; nextRazzoQuestion(); }
+      else if (gId === 'rana') { rnLock = false; nextRanaQuestion(); }
+      else if (gId === 'tartarughe') { trLock = false; nextTartarugheQuestion(); }
+      else if (gId === 'albero') { albLock = false; nextAlberoQuestion(); }
+      else if (gId === 'dipingi') { dpLock = false; nextDipingiQuestion(); }
+      else if (gId === 'caramelle') { caLock = false; nextCaramelleQuestion(); }
+      else if (gId === 'castello') { cdLock = false; nextCastelloQuestion(); }
+      else if (gId === 'memory') { memLock = false; }
+      else if (gId === 'pizzeria') { pzRolled = false; const rb = document.getElementById('pz-roll-btn'); if (rb) rb.disabled = false; }
+    }, 400);
   }
 }
 
@@ -4240,7 +4353,7 @@ function checkPizzeria() {
     fb.textContent = `❌ Quasi! La risposta era ${pzAnswer}. Riprova al prossimo tiro! (-5 punti)`;
     fb.className = 'feedback wrong';
     sndWrong();
-    gameData.gameScores.pizzeria = Math.max(0, (gameData.gameScores.pizzeria || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
   }
@@ -4341,7 +4454,7 @@ function flipMemoryCard(card) {
     });
     memFound++;
     document.getElementById('mem-found').textContent = memFound;
-    const memPts = Math.round(5 * getPointsMultiplier(memTable));
+    const memPts = Math.round(10 * getPointsMultiplier(memTable));
     gameData.gameScores.memory += memPts;
     document.getElementById('mem-score').textContent = gameData.gameScores.memory;
     addWeeklyPoints(memPts);
@@ -4355,7 +4468,7 @@ function flipMemoryCard(card) {
     }, 2000);
     if (memFound === 10) {
       setTimeout(() => {
-        const bonusRaw = Math.max(0, 30 - memTries) * 2;
+        const bonusRaw = Math.max(25, (40 - memTries) * 3);
         const bonus = Math.round(bonusRaw * getPointsMultiplier(memTable));
         gameData.gameScores.memory += bonus;
         document.getElementById('mem-score').textContent = gameData.gameScores.memory;
@@ -4382,7 +4495,7 @@ function flipMemoryCard(card) {
       if (cardB) cardB.classList.remove('flipped');
       memLock = false;
     }, 1000);
-    gameData.gameScores.memory = Math.max(0, (gameData.gameScores.memory || 0) - 2);
+    // Record mantenuto
     addDailyPoints(-2);
     updateAllGameScoresUI();
   }
@@ -4463,7 +4576,7 @@ function markTombola(cell, num) {
     document.getElementById('tb-feedback').textContent = '❌ Non è il numero giusto! (-5 punti)';
     document.getElementById('tb-feedback').className = 'feedback wrong';
     sndWrong();
-    gameData.gameScores.tombola = Math.max(0, (gameData.gameScores.tombola || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
   }
@@ -4663,7 +4776,7 @@ function answerCampanello(btn, val) {
     document.getElementById('cam-feedback').textContent = `❌ Sbagliato! Era ${camCurrentAnswer} (-1 punto)`;
     document.getElementById('cam-feedback').className = 'feedback wrong';
     sndWrong();
-    gameData.gameScores.campanello = Math.max(0, (gameData.gameScores.campanello || 0) - 1);
+    // Record mantenuto
     addDailyPoints(-1);
     updateAllGameScoresUI();
     camStreak = 0;
@@ -4890,7 +5003,7 @@ function catchFish(btn, val, answer) {
     document.getElementById('gt-feedback').textContent = `❌ La risposta era ${answer}! (-5 punti)`;
     document.getElementById('gt-feedback').className = 'feedback wrong';
     sndMiss();
-    gameData.gameScores.gatto = Math.max(0, (gameData.gameScores.gatto || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
     const cat2 = document.getElementById('gt-cat');
@@ -5079,7 +5192,7 @@ function launchCheck(btn, val) {
     updateFuelDisplay();
     rzDestIndex = 0;
     updateRazzoDestination();
-    gameData.gameScores.razzo = Math.max(0, (gameData.gameScores.razzo || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
     
@@ -5260,7 +5373,7 @@ function clickBalloon(bObj) {
     });
     document.getElementById('pl-feedback').textContent = `❌ Sbagliato! Era ${plAnswer} (-2 punti)`;
     document.getElementById('pl-feedback').className = 'feedback wrong';
-    gameData.gameScores.palloncini = Math.max(0, (gameData.gameScores.palloncini || 0) - 2);
+    // Record mantenuto
     addDailyPoints(-2);
     updateAllGameScoresUI();
     setTimeout(() => nextPallonciniQuestion(), 2200);
@@ -5450,7 +5563,7 @@ function jumpFrogToPad(padEl, value, positionIndex) {
       
       document.getElementById('rn-feedback').textContent = `❌ Sgocciolo! La risposta era ${rnAnswer} (-5 punti)`;
       document.getElementById('rn-feedback').className = 'feedback wrong';
-      gameData.gameScores.rana = Math.max(0, (gameData.gameScores.rana || 0) - 5);
+      // Record mantenuto
       addDailyPoints(-5);
       updateAllGameScoresUI();
       rnStep = 0;
@@ -5702,7 +5815,7 @@ function checkTartarugheAnswer(btn, val) {
 
     document.getElementById('tr-feedback').textContent = `❌ Risposta errata! Le tartarughe avversarie scattano in avanti! (-5 punti)`;
     document.getElementById('tr-feedback').className = 'feedback wrong';
-    gameData.gameScores.tartarughe = Math.max(0, (gameData.gameScores.tartarughe || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
 
@@ -6113,7 +6226,7 @@ function checkAlberoAnswer(btn, val) {
 
     document.getElementById('alb-feedback').textContent = `❌ Risposta errata! È caduta una foglia! (-5 punti)`;
     document.getElementById('alb-feedback').className = 'feedback wrong';
-    gameData.gameScores.albero = Math.max(0, (gameData.gameScores.albero || 0) - 5);
+    // Record mantenuto
     addDailyPoints(-5);
     updateAllGameScoresUI();
 
@@ -6473,7 +6586,7 @@ function checkDipingiAnswer(btn, val) {
 
     document.getElementById('dp-feedback').textContent = `🌫️ Ops! Una macchia grigia! La risposta corretta era ${dpAnswer} (-3 punti)`;
     document.getElementById('dp-feedback').className = 'feedback wrong';
-    gameData.gameScores.dipingi = Math.max(0, (gameData.gameScores.dipingi || 0) - 3);
+    // Record mantenuto
     addDailyPoints(-3);
     updateAllGameScoresUI();
     setTimeout(() => nextDipingiQuestion(), 2000);
@@ -6683,7 +6796,7 @@ function checkCaramelleAnswer(btn, val) {
 
     document.getElementById('ca-feedback').textContent = `⚙️ Gli ingranaggi si bloccano! La risposta era ${caAnswer} (-3 punti)`;
     document.getElementById('ca-feedback').className = 'feedback wrong';
-    gameData.gameScores.caramelle = Math.max(0, (gameData.gameScores.caramelle || 0) - 3);
+    // Record mantenuto
     addDailyPoints(-3);
     updateAllGameScoresUI();
     setTimeout(() => nextCaramelleQuestion(), 2000);
@@ -6902,7 +7015,7 @@ function checkFulmineAnswer(btn, val) {
 
     document.getElementById('fr-feedback').textContent = `❌ ERRORE! La saetta ti ha colpita! La risposta corretta era ${frAnswer} (-3 punti)`;
     document.getElementById('fr-feedback').className = 'feedback wrong';
-    gameData.gameScores.fulmine = Math.max(0, (gameData.gameScores.fulmine || 0) - 3);
+    // Record mantenuto
     addDailyPoints(-3);
     updateAllGameScoresUI();
     setTimeout(() => nextFulmineQuestion(), 1800);
@@ -7245,7 +7358,7 @@ function checkCastelloAnswer(btn, val) {
     } else {
       document.getElementById('cd-feedback').textContent = `🪨 UN SASSO HA COLPITO IL MURO! Rimangono ${cdLives} vite! Risposta: ${cdAnswer} (-3 punti)`;
       document.getElementById('cd-feedback').className = 'feedback wrong';
-      gameData.gameScores.castello = Math.max(0, (gameData.gameScores.castello || 0) - 3);
+      // Record mantenuto
       addDailyPoints(-3);
       updateAllGameScoresUI();
       setTimeout(() => nextCastelloQuestion(), 1800);
