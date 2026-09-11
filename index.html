@@ -597,7 +597,7 @@ input:focus { outline: none; border-color: #00b894; }
 /* ===== TIER PROMOTION POPUP ===== */
 .tier-popup-overlay {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.75); display: none; z-index: 10000;
+  background: rgba(0,0,0,0.75); display: none; z-index: 999999 !important;
   align-items: center; justify-content: center; padding: 15px;
   box-sizing: border-box;
 }
@@ -2445,6 +2445,300 @@ input:focus { outline: none; border-color: #00b894; }
   border-radius: 8px;
   border: 1px solid rgba(96, 165, 250, 0.3);
 }
+
+/* ===== TABELLINE GAMIFICATION (OPZIONI 1, 2, 3) ===== */
+.table-selector-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.table-selector-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.95em;
+  color: #475569;
+}
+.challenge-banner-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  color: #b45309;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88em;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  animation: challengePulse 2.2s infinite ease-in-out;
+}
+.random-table-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-weight: 700;
+  font-size: 0.88em;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.random-table-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 14px rgba(79, 70, 229, 0.45);
+}
+.random-table-btn:active {
+  transform: scale(0.95);
+}
+
+.table-btn {
+  position: relative;
+  width: 50px;
+  height: 52px;
+  border: 3px solid #6c5ce7;
+  background: #ffffff;
+  border-radius: 14px;
+  font-size: 1.15em;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #4a148c;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0 3px 0;
+  box-shadow: 0 3px 8px rgba(108, 92, 231, 0.15);
+}
+.table-btn .table-num {
+  line-height: 1;
+  font-size: 1.05em;
+}
+.table-btn .table-badge {
+  font-size: 0.55em;
+  line-height: 1;
+  margin-top: 2px;
+}
+.table-btn:hover {
+  background: #f3f0ff;
+  border-color: #4f46e5;
+  transform: translateY(-2px);
+}
+.table-btn.selected {
+  background: #6c5ce7 !important;
+  color: #ffffff !important;
+  border-color: #4338ca !important;
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(108, 92, 231, 0.4);
+}
+.table-btn.selected .table-badge {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+}
+
+/* Opzione 1: Bottone Sfida Illuminato dorato pulsante */
+@keyframes goldenGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6), 0 4px 12px rgba(245, 158, 11, 0.35);
+    border-color: #f59e0b;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.25), 0 6px 18px rgba(245, 158, 11, 0.5);
+    border-color: #d97706;
+    transform: scale(1.06);
+  }
+}
+.table-btn.is-challenge {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #f59e0b;
+  color: #92400e;
+  animation: goldenGlowPulse 2s infinite ease-in-out;
+}
+.table-btn.is-challenge::before {
+  content: '2x⭐';
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-size: 0.48em;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 6px;
+  border: 1.5px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  line-height: 1.2;
+}
+
+/* Opzione 2: Maestria (Stellina ⭐ e Coroncina 👑) */
+.table-btn.mastery-star {
+  border-color: #3b82f6;
+}
+.table-btn.mastery-crown {
+  border-color: #eab308;
+  background: linear-gradient(135deg, #ffffff, #fef9c3);
+}
+
+/* Modal Rullo Ruota a Sorpresa */
+.wheel-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 99999999 !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.wheel-modal-overlay.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
+.wheel-modal-card {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 30px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+  border: 4px solid #f59e0b;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.wheel-slot-box {
+  width: 120px;
+  height: 120px;
+  margin: 18px auto;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5em;
+  font-weight: 900;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
+  border: 4px solid #fbbf24;
+}
+.wheel-slot-box.rolling {
+  animation: rollDice 0.2s infinite;
+}
+
+/* Opzione 3: Banner Missione del Giorno nel Menu */
+.daily-mission-banner {
+  background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+  border: 2.5px solid #6366f1;
+  border-radius: 24px;
+  padding: 18px 24px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mission-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.mission-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mission-badge-icon {
+  font-size: 1.8em;
+  animation: bounce 2s infinite ease-in-out;
+}
+.mission-title {
+  font-size: 1.25em;
+  font-weight: 900;
+  color: #1e1b4b;
+}
+.mission-subtitle {
+  font-size: 0.9em;
+  color: #4338ca;
+  font-weight: 600;
+}
+.mission-progress-bar-bg {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  height: 22px;
+  border: 2px solid #c7d2fe;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+.mission-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #10b981);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.78em;
+  font-weight: 800;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 24px;
+}
+.mission-tables-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.mission-table-pill {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.85em;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s;
+}
+.mission-table-pill.conquered {
+  border-color: #10b981;
+  background: #ecfdf5;
+  color: #065f46;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+}
+.mission-table-pill.is-challenge-today {
+  border-color: #f59e0b;
+  background: #fef3c7;
+  color: #92400e;
+  animation: goldenGlowPulse 2.2s infinite ease-in-out;
+}
+@keyframes challengePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
 </style>
 </head>
 <body>
@@ -2460,7 +2754,7 @@ input:focus { outline: none; border-color: #00b894; }
     <span class="decor decor-5">🎈</span>
   </div>
 
-  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.6.1</span> 🎮</h1>
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.7.0</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
 
   <!-- PUNTEGGIO GLOBALE RECORD STELLE -->
@@ -2498,6 +2792,27 @@ input:focus { outline: none; border-color: #00b894; }
     </div>
     <div class="tier-markers" id="tier-markers"></div>
     <div class="motivational-msg" id="motivational-msg"></div>
+  </div>
+
+  
+  <!-- BANNER MISSIONE GIORNALIERA DELLE TABELLINE -->
+  <div class="daily-mission-banner" id="daily-mission-banner">
+    <div class="mission-header-row">
+      <div class="mission-title-group">
+        <span class="mission-badge-icon">🎯</span>
+        <div>
+          <div class="mission-title">Missione del Giorno: Sfida le Tabelline!</div>
+          <div class="mission-subtitle" id="mission-subtitle-text">Completa tutte le 12 tabelline per vincere la Super Corona!</div>
+        </div>
+      </div>
+      <div id="mission-challenge-badge" class="challenge-banner-pill">
+        🔥 Tabellina Sfida: <b id="mission-challenge-num">7</b> (2x Punti Stella ⭐)
+      </div>
+    </div>
+    <div class="mission-progress-bar-bg">
+      <div class="mission-progress-bar-fill" id="mission-progress-fill" style="width: 0%;">0 / 12</div>
+    </div>
+    <div class="mission-tables-pills" id="mission-tables-pills"></div>
   </div>
 
   <!-- TROPHY ROOM -->
@@ -3212,7 +3527,7 @@ input:focus { outline: none; border-color: #00b894; }
 <!-- FOOTER FIRMA E VERSIONE -->
 <footer class="app-footer">
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.6.1</span>. Tutti i diritti riservati.</p>
+    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.7.0</span>. Tutti i diritti riservati.</p>
   </div>
 </footer>
 
@@ -3227,6 +3542,24 @@ input:focus { outline: none; border-color: #00b894; }
     <p id="popup-message">Sei passato al livello successivo! Continua così!</p>
     <button class="btn btn-primary" onclick="closeTierPopup()">🎉 Continua!</button>
   </div>
+</div>
+
+<!-- MODAL TABELLINA A SORPRESA -->
+<div class="wheel-modal-overlay" id="wheel-modal-overlay" onclick="closeWheelModal(event)">
+  <div class="wheel-modal-card" onclick="event.stopPropagation()">
+    <h3 style="margin:0; font-size:1.5em; color:#1e1b4b;">🎲 Tabellina a Sorpresa!</h3>
+    <p style="margin:6px 0 14px 0; color:#64748b; font-size:0.95em;">Gira la ruota e affronta la sfida a sorpresa!</p>
+    <div class="wheel-slot-box" id="wheel-slot-box">?</div>
+    <div id="wheel-result-msg" style="font-weight:800; min-height:26px; color:#f59e0b; margin-bottom:14px; font-size:1.15em;"></div>
+    <button class="random-table-btn" id="wheel-action-btn" style="padding:12px 28px; font-size:1.1em; border-radius:999px; cursor:pointer;" onclick="confirmWheelSelection()">
+      🚀 Gioca Questa Tabellina!
+    </button>
+  </div>
+</div>
+
+
+
+
 </div>
 
 <script>
@@ -3799,6 +4132,8 @@ function updateDailyDisplay() {
   document.getElementById('trophy-count').textContent = gameData.trophies.length;
   updateDailyMiniScores(points);
   updateAllGameScoresUI();
+  updateDailyMissionBanner();
+  updateAllTableSelectorsUI();
 }
 const updateWeeklyDisplay = updateDailyDisplay;
 
@@ -4321,6 +4656,323 @@ function backToMenu() {
   }
 }
 
+
+// ============================================================
+// SISTEMA GAMIFICATION TABELLINE (OPZIONI 1, 2, 3)
+// ============================================================
+
+// Ottieni la Tabellina Sfida del Giorno (varia ogni giorno, prediligendo le tabelline più impegnative 3, 4, 6, 7, 8, 9, 12)
+function getDailyChallengeTable() {
+  const dk = getCurrentDay();
+  let hash = 0;
+  for (let i = 0; i < dk.length; i++) {
+    hash = (hash << 5) - hash + dk.charCodeAt(i);
+    hash |= 0;
+  }
+  // Cicla fra le tabelline sfidanti: [3, 4, 6, 7, 8, 9, 12, 6, 7, 8]
+  const challengePool = [6, 7, 8, 9, 12, 3, 4, 7, 8, 6, 9];
+  const idx = Math.abs(hash) % challengePool.length;
+  return challengePool[idx];
+}
+
+// Inizializza o recupera lo storico di risposte corrette per tabellina oggi
+function getTableMastery(tableNum) {
+  const dk = getCurrentDay();
+  if (!gameData.days[dk]) {
+    gameData.days[dk] = { points: 0, highestTier: 0, trophyAwarded: false };
+  }
+  if (!gameData.days[dk].tableCorrect) {
+    gameData.days[dk].tableCorrect = {};
+  }
+  return gameData.days[dk].tableCorrect[tableNum] || 0;
+}
+
+// Incrementa risposte corrette per la tabellina e restituisce se è scattato un nuovo badge
+function updateAllTableSelectorsUI() {
+  const challengeTable = getDailyChallengeTable();
+  const btns = document.querySelectorAll('.table-btn[data-table-num]');
+  btns.forEach(btn => {
+    const num = parseInt(btn.getAttribute('data-table-num'), 10);
+    if (!num || num < 1 || num > 12) return;
+    
+    const correct = getTableMastery(num);
+    btn.classList.remove('mastery-crown', 'mastery-star', 'is-challenge');
+    
+    let badgeIcon = '';
+    if (correct >= 24) {
+      badgeIcon = '👑';
+      btn.classList.add('mastery-crown');
+    } else if (correct >= 10) {
+      badgeIcon = '⭐';
+      btn.classList.add('mastery-star');
+    } else if (correct > 0) {
+      badgeIcon = '✓';
+    }
+    
+    if (num === challengeTable) {
+      btn.classList.add('is-challenge');
+    }
+    
+    let bSpan = btn.querySelector('.table-badge');
+    if (badgeIcon) {
+      if (!bSpan) {
+        bSpan = document.createElement('span');
+        bSpan.className = 'table-badge';
+        btn.appendChild(bSpan);
+      }
+      if (bSpan.textContent !== badgeIcon) {
+        bSpan.textContent = badgeIcon;
+        bSpan.style.animation = 'popIn 0.3s ease-out';
+      }
+    } else if (bSpan) {
+      bSpan.remove();
+    }
+  });
+}
+function recordTableAnswer(tableNum) {
+  if (!tableNum || tableNum < 1 || tableNum > 12) return;
+  const dk = getCurrentDay();
+  if (!gameData.days[dk]) {
+    gameData.days[dk] = { points: 0, highestTier: 0, trophyAwarded: false };
+  }
+  if (!gameData.days[dk].tableCorrect) {
+    gameData.days[dk].tableCorrect = {};
+  }
+  const oldVal = gameData.days[dk].tableCorrect[tableNum] || 0;
+  const newVal = oldVal + 1;
+  gameData.days[dk].tableCorrect[tableNum] = newVal;
+  saveData(gameData);
+  
+  updateDailyMissionBanner();
+  
+  if (oldVal < 10 && newVal >= 10) {
+    // Sblocco stella
+    return 'star';
+  } else if (oldVal < 24 && newVal >= 24) {
+    // Sblocco corona
+    return 'crown';
+  }
+  return null;
+}
+
+// Verifica se la tabellina specificata gode del bonus 2x
+function isChallengeTable(tableNum) {
+  return tableNum === getDailyChallengeTable();
+}
+
+// Calcolo moltiplicatore punti unificato
+function getPointsMultiplier(tableNum) {
+  let mult = EASY_TABLES.includes(tableNum) ? 0.5 : 1;
+  if (isChallengeTable(tableNum)) {
+    mult *= 2; // Raddoppio punti per la tabellina sfida illuminata!
+  }
+  return mult;
+}
+
+// Funzione generica unificata per renderizzare il selettore delle tabelline
+function renderUnifiedTableSelector(containerId, currentVal, onSelectFn, gameKey) {
+  const sel = document.getElementById(containerId);
+  if (!sel) return;
+  sel.innerHTML = '';
+  
+  const challengeTable = getDailyChallengeTable();
+  
+  // Wrapper principale
+  const wrap = document.createElement('div');
+  wrap.className = 'table-selector-wrap';
+  
+  // Barra superiore con info sfida e tasto sorpresa
+  const header = document.createElement('div');
+  header.className = 'table-selector-header';
+  
+  const challengeBadge = document.createElement('div');
+  challengeBadge.className = 'challenge-banner-pill';
+  challengeBadge.innerHTML = '🔥 Sfida del Giorno: <b>Tabellina del ' + challengeTable + '</b> (2x Punti ⭐)';
+  
+  const rndBtn = document.createElement('button');
+  rndBtn.className = 'random-table-btn';
+  rndBtn.type = 'button';
+  rndBtn.innerHTML = '🎲 A Sorpresa!';
+  rndBtn.onclick = () => openWheelModal(onSelectFn, gameKey);
+  
+  header.appendChild(challengeBadge);
+  header.appendChild(rndBtn);
+  wrap.appendChild(header);
+  
+  // Griglia pulsanti 1..13
+  const grid = document.createElement('div');
+  grid.className = 'table-selector';
+  grid.style.marginBottom = '0';
+  
+  for (let i = 1; i <= 13; i++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('data-table-num', i);
+    let btnClasses = 'table-btn';
+    if (i === currentVal) btnClasses += ' selected';
+    
+    let badgeIcon = '';
+    if (i <= 12) {
+      const correct = getTableMastery(i);
+      if (correct >= 24) {
+        badgeIcon = '👑';
+        btnClasses += ' mastery-crown';
+      } else if (correct >= 10) {
+        badgeIcon = '⭐';
+        btnClasses += ' mastery-star';
+      } else if (correct > 0) {
+        badgeIcon = '✓';
+      }
+      
+      if (i === challengeTable) {
+        btnClasses += ' is-challenge';
+      }
+    }
+    
+    btn.className = btnClasses;
+    
+    const numSpan = document.createElement('span');
+    numSpan.className = 'table-num';
+    numSpan.textContent = i === 13 ? 'Tutte' : i;
+    btn.appendChild(numSpan);
+    
+    if (badgeIcon) {
+      const bSpan = document.createElement('span');
+      bSpan.className = 'table-badge';
+      bSpan.textContent = badgeIcon;
+      btn.appendChild(bSpan);
+    }
+    
+    btn.onclick = () => {
+      sndClick();
+      onSelectFn(i);
+    };
+    
+    grid.appendChild(btn);
+  }
+  
+  wrap.appendChild(grid);
+  sel.appendChild(wrap);
+}
+
+// Gestione Modal Ruota a Sorpresa
+let wheelTargetCallback = null;
+let wheelTargetGameKey = '';
+let wheelSelectedNum = 7;
+
+function openWheelModal(callback, gameKey) {
+  sndDice();
+  wheelTargetCallback = callback;
+  wheelTargetGameKey = gameKey;
+  
+  const modal = document.getElementById('wheel-modal-overlay');
+  const slot = document.getElementById('wheel-slot-box');
+  const msg = document.getElementById('wheel-result-msg');
+  const actBtn = document.getElementById('wheel-action-btn');
+  
+  modal.classList.add('active');
+  slot.classList.add('rolling');
+  msg.textContent = 'Gira, gira, gira... 🎰';
+  actBtn.disabled = true;
+  actBtn.style.opacity = '0.5';
+  
+  // Effetto estrazione animata
+  let rollCount = 0;
+  const challenge = getDailyChallengeTable();
+  const rollInterval = setInterval(() => {
+    rollCount++;
+    const tempNum = Math.floor(Math.random() * 12) + 1;
+    slot.textContent = tempNum;
+    playTone(300 + rollCount * 25, 0.05, 'triangle', 0.08);
+    
+    if (rollCount >= 14) {
+      clearInterval(rollInterval);
+      slot.classList.remove('rolling');
+      
+      // Con 40% di probabilità assegna la tabellina sfida per stimolare il bonus
+      const chosen = Math.random() < 0.4 ? challenge : (Math.floor(Math.random() * 12) + 1);
+      wheelSelectedNum = chosen;
+      slot.textContent = chosen;
+      
+      sndWin();
+      confetti();
+      
+      if (chosen === challenge) {
+        msg.innerHTML = '🎉 SUPER FORTUNA! È la <b>Tabellina Sfida del ' + chosen + '</b>! (2x Punti ⭐)';
+      } else {
+        msg.innerHTML = '🎯 Ottima scelta: <b>Tabellina del ' + chosen + '</b>! Pronto a giocare?';
+      }
+      actBtn.disabled = false;
+      actBtn.style.opacity = '1';
+    }
+  }, 90);
+}
+
+function closeWheelModal(e) {
+  const modal = document.getElementById('wheel-modal-overlay');
+  if (modal) modal.classList.remove('active');
+}
+
+function confirmWheelSelection() {
+  closeWheelModal();
+  if (typeof wheelTargetCallback === 'function') {
+    wheelTargetCallback(wheelSelectedNum);
+  }
+}
+
+// Aggiorna il banner Missione del Giorno nel menu principale
+function updateDailyMissionBanner() {
+  const banner = document.getElementById('daily-mission-banner');
+  if (!banner) return;
+  
+  const challenge = getDailyChallengeTable();
+  const challengeEl = document.getElementById('mission-challenge-num');
+  if (challengeEl) challengeEl.textContent = challenge;
+  
+  let conqueredCount = 0;
+  const pillsContainer = document.getElementById('mission-tables-pills');
+  if (pillsContainer) pillsContainer.innerHTML = '';
+  
+  for (let i = 1; i <= 12; i++) {
+    const correct = getTableMastery(i);
+    const isConquered = correct >= 10;
+    if (isConquered) conqueredCount++;
+    
+    if (pillsContainer) {
+      const pill = document.createElement('div');
+      let pillClass = 'mission-table-pill';
+      if (isConquered) pillClass += ' conquered';
+      if (i === challenge) pillClass += ' is-challenge-today';
+      pill.className = pillClass;
+      
+      let icon = i;
+      if (correct >= 24) icon = i + '👑';
+      else if (correct >= 10) icon = i + '⭐';
+      
+      pill.innerHTML = icon;
+      pill.title = 'Tabellina del ' + i + ': ' + correct + ' risposte corrette';
+      pillsContainer.appendChild(pill);
+    }
+  }
+  
+  const pct = Math.round((conqueredCount / 12) * 100);
+  const fill = document.getElementById('mission-progress-fill');
+  if (fill) {
+    fill.style.width = Math.max(8, pct) + '%';
+    fill.textContent = conqueredCount + ' / 12 Conquistate (' + pct + '%)';
+  }
+  
+  const sub = document.getElementById('mission-subtitle-text');
+  if (sub) {
+    if (conqueredCount === 12) {
+      sub.innerHTML = '👑 <b style="color:#059669;">FANTASTICO! HAI CONQUISTATO TUTTE LE 12 TABELLINE OGGI!</b> 🏆';
+    } else {
+      sub.textContent = 'Hai completato ' + conqueredCount + ' tabelline su 12. Conquistale tutte con almeno 10 risposte corrette!';
+    }
+  }
+}
+
+
 // ===== GIOCO 1: PIZZERIA =====
 const PIZZERIA_RANKS = [
   { level: 1,  icon: '👶',   name: 'Aiuto Pizzaiolo',         desc: 'Impara a mettere la farina, a pulire il banco, a guardare gli altri.' },
@@ -4410,7 +5062,7 @@ function checkPizzeria() {
   const fb = document.getElementById('pz-feedback');
   if (val === pzAnswer) {
     const pzPts = Math.round(10 * getPointsMultiplier(pzDice1));
-    fb.textContent = `🎉 Bravissimo! +${pzPts} punti!`;
+    fb.textContent = `🎉 Bravissimo! +${pzPts} punti!` + (isChallengeTable(pzDice1) ? ' (⭐ DOPPIO BONUS SFIDA!)' : '');
     fb.className = 'feedback correct';
     sndCorrect();
     document.getElementById('pz-visual').classList.add('celebrate');
@@ -4421,7 +5073,7 @@ function checkPizzeria() {
     document.getElementById('pz-stars').innerHTML = '⭐⭐⭐';
     setTimeout(() => document.getElementById('pz-stars').innerHTML = '', 2000);
     confetti();
-    pzCorrectCount++;
+    recordTableAnswer(pzDice1); pzCorrectCount++;
     const dk = getCurrentDay();
     gameData.days[dk].pizzeria.correctCount = pzCorrectCount;
     if (pzCorrectCount % 10 === 0 && pzLevel < 10) {
@@ -4468,16 +5120,11 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 // ===== GIOCO 2: MEMORY =====
 let memTries = 0, memFound = 0, memSelected = null, memLock = false, memTable = 13;
 function initMemorySelector() {
-  const sel = document.getElementById('mem-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === memTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); memTable = i; initMemorySelector(); startMemory(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('mem-selector', memTable, (i) => {
+    memTable = i;
+    initMemorySelector();
+    startMemory();
+  }, 'memory');
 }
 function startMemory() {
   const grid = document.getElementById('memory-grid');
@@ -4538,7 +5185,7 @@ function flipMemoryCard(card) {
       c.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), 400);
     });
-    memFound++;
+    recordTableAnswer(memTable); memFound++;
     document.getElementById('mem-found').textContent = memFound;
     const memPts = Math.round(10 * getPointsMultiplier(memTable));
     gameData.gameScores.memory += memPts;
@@ -4657,7 +5304,7 @@ function markTombola(cell, num) {
     document.getElementById('tb-feedback').textContent = `✅ ${tbCurrentOp.table}×${tbCurrentOp.multiplier} = ${tbCurrentOp.result}! +${tbPts} punti!`;
     document.getElementById('tb-feedback').className = 'feedback correct';
     sndCorrect();
-    checkTombolaWin();
+    recordTableAnswer(tbCurrentOp.table); checkTombolaWin();
   } else {
     document.getElementById('tb-feedback').textContent = '❌ Non è il numero giusto! (-5 punti)';
     document.getElementById('tb-feedback').className = 'feedback wrong';
@@ -4826,9 +5473,9 @@ function answerCampanello(btn, val) {
     gameData.gameScores.campanello += pts;
     document.getElementById('cam-score').textContent = gameData.gameScores.campanello;
     addWeeklyPoints(pts);
-    camStreak++;
+    recordTableAnswer(camCurrentFactorA); camStreak++;
     document.getElementById('cam-streak').textContent = camStreak;
-    document.getElementById('cam-feedback').textContent = `🎉 Corretto! +${pts} punti!`;
+    document.getElementById('cam-feedback').textContent = `🎉 Corretto! +${pts} punti!` + (isChallengeTable(camCurrentFactorA) ? ' (⭐ DOPPIO BONUS SFIDA!)' : '');
     document.getElementById('cam-feedback').className = 'feedback correct';
     sndCorrect();
     const bell = document.createElement('span');
@@ -4988,15 +5635,11 @@ function updateGattoLevelUI() {
 
 let gtTable = 13, gtLock = false, gtCaught = 0, gtLastB = 0, gtLevel = 1, gtCorrectCount = 0, gtFactorA = 2;
 function initGattoSelector() {
-  const sel = document.getElementById('gt-selector');
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === gtTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); gtTable = i; initGattoSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('gt-selector', gtTable, (i) => {
+    gtTable = i;
+    initGattoSelector();
+    nextGattoQuestion();
+  }, 'gatto');
 }
 function startGatto() {
   gtCaught = 0;
@@ -5050,7 +5693,7 @@ function catchFish(btn, val, answer) {
     document.getElementById('gt-score').textContent = gameData.gameScores.gatto;
     addWeeklyPoints(gtPts);
     document.getElementById('gt-counter').textContent = `Pesci catturati: ${gtCaught}`;
-    document.getElementById('gt-feedback').textContent = `🎉 Bel colpo! +${gtPts}!`;
+    document.getElementById('gt-feedback').textContent = `🎉 Bel colpo! +${gtPts}!` + (isChallengeTable(gtFactorA) ? ' (⭐ DOPPIO BONUS SFIDA!)' : '');
     document.getElementById('gt-feedback').className = 'feedback correct';
     sndCatch();
     const cat = document.getElementById('gt-cat');
@@ -5064,7 +5707,7 @@ function catchFish(btn, val, answer) {
     scene.appendChild(ripple);
     setTimeout(() => ripple.remove(), 800);
     if (gtCaught % 5 === 0) confetti();
-    gtCorrectCount++;
+    recordTableAnswer(gtFactorA); gtCorrectCount++;
     const dk = getCurrentDay();
     gameData.days[dk].gatto.correctCount = gtCorrectCount;
     if (gtCorrectCount % 10 === 0 && gtLevel < 10) {
@@ -5136,15 +5779,11 @@ function updateRazzoDestination() {
 }
 
 function initRazzoSelector() {
-  const sel = document.getElementById('rz-selector');
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === rzTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); rzTable = i; initRazzoSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('rz-selector', rzTable, (i) => {
+    rzTable = i;
+    initRazzoSelector();
+    nextRazzoQuestion();
+  }, 'razzo');
 }
 
 function startRazzo() {
@@ -5223,7 +5862,7 @@ function launchCheck(btn, val) {
     
     document.getElementById('rz-feedback').textContent = `🎉 Carburante aggiunto! +${pts} punti!`;
     document.getElementById('rz-feedback').className = 'feedback correct';
-    rzCorrectCount++;
+    recordTableAnswer(rzFactorA); rzCorrectCount++;
     if (rzCorrectCount % 10 === 0) {
       rzLevel++;
       sndWin();
@@ -5295,15 +5934,11 @@ plBalloonsInterval = null;
 let plTable = 13, plLock = false, plAnswer = 0, plActiveBalloons = [], plFactorA = 2, plLastA = 0, plLastB = 0, plLevel = 1, plCorrectCount = 0, pallonciniTierPopupPending = false;
 
 function initPallonciniSelector() {
-  const sel = document.getElementById('pl-selector');
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === plTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); plTable = i; initPallonciniSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('pl-selector', plTable, (i) => {
+    plTable = i;
+    initPallonciniSelector();
+    nextPallonciniQuestion();
+  }, 'palloncini');
 }
 
 function startPalloncini() {
@@ -5434,7 +6069,7 @@ function clickBalloon(bObj) {
     document.getElementById('pl-feedback').textContent = `🎉 Eccellente! +${pts} punti!`;
     document.getElementById('pl-feedback').className = 'feedback correct';
     confetti();
-    plCorrectCount++;
+    recordTableAnswer(plFactorA); plCorrectCount++;
     if (plCorrectCount % 10 === 0) {
       plLevel++;
       document.getElementById('pl-level').textContent = plLevel;
@@ -5472,15 +6107,11 @@ function clickBalloon(bObj) {
 let rnTable = 13, rnLock = false, rnAnswer = 0, rnStep = 0, rnMaxSteps = 4, rnFactorA = 2, rnLastA = 0, rnLastB = 0, rnLevel = 1, rnCorrectCount = 0;
 
 function initRanaSelector() {
-  const sel = document.getElementById('rn-selector');
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === rnTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); rnTable = i; initRanaSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('rn-selector', rnTable, (i) => {
+    rnTable = i;
+    initRanaSelector();
+    nextRanaQuestion();
+  }, 'rana');
 }
 
 function startRana() {
@@ -5610,7 +6241,7 @@ function jumpFrogToPad(padEl, value, positionIndex) {
       document.getElementById('rn-feedback').className = 'feedback correct';
       frog.textContent = '🐸';
       sndCorrect();
-      rnCorrectCount++;
+      recordTableAnswer(rnFactorA); rnCorrectCount++;
       if (rnCorrectCount % 10 === 0) {
         rnLevel++;
         document.getElementById('rn-level').textContent = rnLevel;
@@ -5707,16 +6338,11 @@ function updateTurtleTrackTheme() {
 }
 
 function initTartarugheSelector() {
-  const sel = document.getElementById('tr-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === trTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); trTable = i; initTartarugheSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('tr-selector', trTable, (i) => {
+    trTable = i;
+    initTartarugheSelector();
+    nextTartarugheQuestion();
+  }, 'tartarughe');
 }
 
 const TURTLE_THEME_COLORS = {
@@ -5853,7 +6479,7 @@ function checkTartarugheAnswer(btn, val) {
 
     updateTurtlePositionsUI();
 
-    trCorrectCount++;
+    recordTableAnswer(trFactorA); trCorrectCount++;
 
     if (trPositions[trPlayerColor] >= 100) {
       const oldRank = getTurtleRank();
@@ -5966,16 +6592,11 @@ function getCultivatedCountToday() {
 }
 
 function initAlberoSelector() {
-  const sel = document.getElementById('alb-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === albTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); albTable = i; initAlberoSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('alb-selector', albTable, (i) => {
+    albTable = i;
+    initAlberoSelector();
+    nextAlberoQuestion();
+  }, 'albero');
 }
 
 function renderForestUI() {
@@ -6248,7 +6869,7 @@ function checkAlberoAnswer(btn, val) {
     addWeeklyPoints(pts);
 
     albGrowth = Math.min(10, albGrowth + 1);
-    albCorrectCount++;
+    recordTableAnswer(albFactorA); albCorrectCount++;
     updateTreeVisual(true);
 
     if (albGrowth === 10) {
@@ -6372,16 +6993,11 @@ function dpSelectPainting(type) {
 }
 
 function initDipingiSelector() {
-  const sel = document.getElementById('dp-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === dpTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); dpTable = i; initDipingiSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('dp-selector', dpTable, (i) => {
+    dpTable = i;
+    initDipingiSelector();
+    nextDipingiQuestion();
+  }, 'dipingi');
 }
 
 function startDipingi() {
@@ -6629,7 +7245,7 @@ function checkDipingiAnswer(btn, val) {
     if (nextUnpaintedIndex !== -1) {
       dpPartsColored[nextUnpaintedIndex] = true;
     }
-    dpCorrectCount++;
+    recordTableAnswer(dpFactorA); dpCorrectCount++;
     renderPaintingSVG();
 
     const isFullyPainted = dpPartsColored.every(b => b);
@@ -6687,16 +7303,11 @@ const CA_CANDY_TYPES = ['🍬', '🍭', '🍫', '🍩', '🧁', '🍬', '🍭', 
 let caCandiesInGlobe = [];
 
 function initCaramelleSelector() {
-  const sel = document.getElementById('ca-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === caTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); caTable = i; initCaramelleSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('ca-selector', caTable, (i) => {
+    caTable = i;
+    initCaramelleSelector();
+    nextCaramelleQuestion();
+  }, 'caramelle');
 }
 
 function renderCandyStallUI() {
@@ -6897,16 +7508,11 @@ fulmineTimerInterval = null;
 let frTable = 13, frStreak = 0, frTimeLimit = 3.0, frTimeRemaining = 3.0, frLock = false, frFactorA = 2, frAnswer = 0, frLastA = 0, frLastB = 0;
 
 function initFulmineSelector() {
-  const sel = document.getElementById('fr-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === frTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); frTable = i; initFulmineSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('fr-selector', frTable, (i) => {
+    frTable = i;
+    initFulmineSelector();
+    nextFulmineQuestion();
+  }, 'fulmine');
 }
 
 function startFulmine() {
@@ -7061,7 +7667,7 @@ function checkFulmineAnswer(btn, val) {
     sndThunder();
     spawnLightningBolt();
 
-    frStreak++;
+    recordTableAnswer(frFactorA); frStreak++;
     const pts = Math.round(12 * getPointsMultiplier(frFactorA));
     gameData.gameScores.fulmine = (gameData.gameScores.fulmine || 0) + pts;
     document.getElementById('fr-score').textContent = gameData.gameScores.fulmine;
@@ -7114,16 +7720,11 @@ function checkFulmineAnswer(btn, val) {
 let cdTable = 13, cdLives = 3, cdLevel = 1, cdEnemiesTotal = 5, cdEnemiesLeft = 5, cdCorrectCount = 0, cdLock = false, cdFactorA = 2, cdAnswer = 0, cdLastA = 0, cdLastB = 0;
 
 function initCastelloSelector() {
-  const sel = document.getElementById('cd-selector');
-  if (!sel) return;
-  sel.innerHTML = '';
-  for (let i = 1; i <= 13; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'table-btn' + (i === cdTable ? ' selected' : '');
-    btn.textContent = i === 13 ? 'Tutte' : i;
-    btn.onclick = () => { sndClick(); cdTable = i; initCastelloSelector(); };
-    sel.appendChild(btn);
-  }
+  renderUnifiedTableSelector('cd-selector', cdTable, (i) => {
+    cdTable = i;
+    initCastelloSelector();
+    nextCastelloQuestion();
+  }, 'castello');
 }
 
 function startCastello() {
@@ -7367,7 +7968,7 @@ function checkCastelloAnswer(btn, val) {
     document.getElementById('cd-score').textContent = gameData.gameScores.castello;
     addWeeklyPoints(pts);
 
-    cdCorrectCount++;
+    recordTableAnswer(cdFactorA); cdCorrectCount++;
     let repairedWall = false;
 
     if (cdEnemiesLeft > 0) {
@@ -7469,6 +8070,7 @@ initFulmineSelector();
 initCastelloSelector();
 updateWeeklyDisplay();
 updateAllGameScoresUI();
+updateDailyMissionBanner();
 </script>
 </body>
 </html>
