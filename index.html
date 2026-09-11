@@ -81,36 +81,71 @@ body {
 /* ===== BANNER SETTIMANALE / GIORNALIERO ===== */
 
 /* ===== GLOBAL STAR RECORD BANNER ===== */
+/* ===== GLOBAL SCORE & CROWNS BOX ===== */
 .global-record-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 0 auto 20px auto;
-  max-width: 520px;
+  max-width: 600px;
+  padding: 0 10px;
 }
-.global-record-pill {
-  background: linear-gradient(135deg, rgba(254, 243, 199, 0.96) 0%, rgba(253, 230, 138, 0.96) 100%);
+.global-record-box {
+  background: linear-gradient(135deg, rgba(255, 251, 235, 0.98) 0%, rgba(254, 243, 199, 0.98) 50%, rgba(253, 230, 138, 0.98) 100%);
   border: 2.5px solid #f59e0b;
-  border-radius: 35px;
-  padding: 8px 24px;
+  border-radius: 28px;
+  padding: 8px 22px 11px 22px;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+}
+.global-record-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.32);
+}
+.global-record-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.global-record-title {
+  font-size: 0.82em;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 900;
+  color: #78350f;
+  background: rgba(245, 158, 11, 0.18);
+  padding: 3px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 119, 6, 0.25);
+}
+.global-record-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.global-stat-subpill {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  gap: 10px;
 }
-.global-record-pill:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.35);
+.global-stat-divider {
+  width: 2px;
+  height: 38px;
+  background: linear-gradient(to bottom, transparent, rgba(217, 119, 6, 0.35), transparent);
 }
-.global-record-pill .star-icon {
-  font-size: 2em;
-  line-height: 1;
-  filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6));
-  animation: starPulse 2.5s infinite ease-in-out;
-}
-@keyframes starPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15) rotate(8deg); }
+@media (max-width: 480px) {
+  .global-stat-divider {
+    display: none;
+  }
 }
 .global-record-details {
   display: flex;
@@ -119,7 +154,7 @@ body {
   line-height: 1.15;
 }
 .global-record-label {
-  font-size: 0.8em;
+  font-size: 0.78em;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font-weight: 800;
@@ -132,14 +167,34 @@ body {
 }
 .global-record-number {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.7em;
+  font-size: 1.6em;
   font-weight: 900;
   color: #78350f;
 }
 .global-record-unit {
-  font-size: 0.9em;
+  font-size: 0.85em;
   font-weight: 700;
   color: #b45309;
+}
+.star-icon {
+  font-size: 2em;
+  line-height: 1;
+  filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6));
+  animation: starPulse 2.5s infinite ease-in-out;
+}
+@keyframes starPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15) rotate(8deg); }
+}
+.crown-icon {
+  font-size: 2em;
+  line-height: 1;
+  filter: drop-shadow(0 2px 5px rgba(217, 119, 6, 0.6));
+  animation: crownPulse 2.5s infinite ease-in-out;
+}
+@keyframes crownPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15) rotate(-6deg); }
 }
 
 .weekly-banner {
@@ -710,13 +765,73 @@ input:focus { outline: none; border-color: #00b894; }
 .tombola-call { font-size: 2.2em; font-weight: bold; margin: 12px 0; min-height: 50px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .tombola-numbers { font-size: 0.9em; color: #e0e7ff; font-weight: 600; }
 
-.tombola-controls-btns {
+.tombola-mode-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+}
+.tombola-mode-toggle {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px;
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  gap: 6px;
+  border: 2px solid #c7d2fe;
+}
+.tb-mode-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.92em;
+  font-weight: 800;
+  color: #4338ca;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+.tb-mode-btn.active {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.35);
+}
+.tombola-top-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.tombola-bottom-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.tb-timer-wrap {
+  margin: 10px auto 14px auto;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 14px;
+  border-radius: 14px;
+}
+.tb-timer-header {
+  font-size: 0.9em;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fef08a;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.tb-timer-bar-bg {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.tb-timer-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+  border-radius: 999px;
+  transition: width 0.1s linear;
 }
 
 #tb-draw-btn {
@@ -2015,6 +2130,55 @@ input:focus { outline: none; border-color: #00b894; }
   0% { transform: translateX(-10px) translateY(0); }
   100% { transform: translateX(20px) translateY(-12px); }
 }
+.painting-animated .anim-rocket {
+  animation: rocketSway 1.2s ease-in-out infinite alternate;
+}
+.painting-animated .anim-thrust {
+  animation: thrustPulse 0.3s ease-in-out infinite alternate;
+}
+.painting-animated .anim-ufo {
+  animation: ufoFloat 2.2s ease-in-out infinite alternate;
+}
+.painting-animated .anim-windmill {
+  animation: windmillSpin 6s linear infinite;
+}
+.painting-animated .anim-tractor {
+  animation: tractorBob 0.8s ease-in-out infinite alternate;
+}
+.painting-animated .anim-lollipop {
+  animation: lollipopSway 2s ease-in-out infinite alternate;
+}
+.painting-animated .anim-sweet-bounce {
+  animation: sweetBounce 1s ease-in-out infinite alternate;
+}
+@keyframes rocketSway {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-8px) rotate(2deg); }
+}
+@keyframes thrustPulse {
+  0% { transform: scaleY(0.9); opacity: 0.85; }
+  100% { transform: scaleY(1.2); opacity: 1; }
+}
+@keyframes ufoFloat {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-10px) translateX(8px); }
+}
+@keyframes windmillSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes tractorBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+@keyframes lollipopSway {
+  0% { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
+}
+@keyframes sweetBounce {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-6px) scale(1.05); }
+}
 
 /* ===== GIOCO 13: MACCHINA DELLE CARAMELLE ===== */
 .game-card.g13 { border-top: 5px solid #f59e0b; }
@@ -2567,7 +2731,7 @@ input:focus { outline: none; border-color: #00b894; }
   animation: goldenGlowPulse 2s infinite ease-in-out;
 }
 .table-btn.is-challenge::before {
-  content: '2x⭐';
+  content: attr(data-bonus);
   position: absolute;
   top: -10px;
   right: -8px;
@@ -2754,18 +2918,38 @@ input:focus { outline: none; border-color: #00b894; }
     <span class="decor decor-5">🎈</span>
   </div>
 
-  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.7.0</span> 🎮</h1>
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.10.0</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
 
-  <!-- PUNTEGGIO GLOBALE RECORD STELLE -->
+  <!-- PUNTEGGIO GLOBALE (Punti Stella e Corone Vinte) -->
   <div class="global-record-container">
-    <div class="global-record-pill">
-      <span class="star-icon">⭐</span>
-      <div class="global-record-details">
-        <span class="global-record-label">Punteggio Record Globale</span>
-        <div class="global-record-number-row">
-          <span class="global-record-number" id="global-star-record">0</span>
-          <span class="global-record-unit">punti stella</span>
+    <div class="global-record-box">
+      <div class="global-record-title-row">
+        <span class="global-record-title">🏆 PUNTEGGIO GLOBALE</span>
+      </div>
+      <div class="global-record-items">
+        <div class="global-stat-subpill star-subpill">
+          <span class="star-icon">⭐</span>
+          <div class="global-record-details">
+            <span class="global-record-label">Punti Stella</span>
+            <div class="global-record-number-row">
+              <span class="global-record-number" id="global-star-record">0</span>
+              <span class="global-record-unit">punti</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="global-stat-divider" aria-hidden="true"></div>
+
+        <div class="global-stat-subpill crown-subpill">
+          <span class="crown-icon">👑</span>
+          <div class="global-record-details">
+            <span class="global-record-label">Corone Vinte</span>
+            <div class="global-record-number-row">
+              <span class="global-record-number" id="global-crowns-count">0</span>
+              <span class="global-record-unit">corone</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2802,7 +2986,7 @@ input:focus { outline: none; border-color: #00b894; }
         <span class="mission-badge-icon">🎯</span>
         <div>
           <div class="mission-title">Missione del Giorno: Sfida le Tabelline!</div>
-          <div class="mission-subtitle" id="mission-subtitle-text">Completa tutte le 12 tabelline per vincere la Super Corona!</div>
+          <div class="mission-subtitle" id="mission-subtitle-text">Hai 0 di 12 Corone 👑. Conquista la Corona su tutte tabelline per vincere una Corona Globale!</div>
         </div>
       </div>
       <div id="mission-challenge-badge" class="challenge-banner-pill">
@@ -2995,13 +3179,37 @@ input:focus { outline: none; border-color: #00b894; }
     </div>
   </div>
   <p style="text-align:center; margin-bottom:15px;">Ascolta l'operazione e segna il risultato sulla tua cartella!</p>
+  <!-- Modalità di Gioco Tombola -->
+  <div class="tombola-mode-container">
+    <div class="tombola-mode-toggle">
+      <button class="tb-mode-btn active" id="tb-mode-classic" onclick="setTombolaMode('classic')">🟢 Modalità Normale (Manuale)</button>
+      <button class="tb-mode-btn" id="tb-mode-realistic" onclick="setTombolaMode('realistic')">⚡ Modalità Realistica (Tempo 7s!)</button>
+    </div>
+  </div>
+
   <div class="tombola-caller">
-    <div class="tombola-controls-btns">
-      <button class="btn" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 ESTRAI! ▶</button>
+    <!-- Tasto Nuova Partita in alto -->
+    <div class="tombola-top-controls">
       <button class="btn" onclick="sndClick();initTombola()" id="tb-restart-btn">🔄 Nuova Partita</button>
     </div>
+
+    <!-- Barra Timer per Modalità Realistica -->
+    <div class="tb-timer-wrap" id="tb-timer-wrap" style="display:none;">
+      <div class="tb-timer-header">
+        <span>⏱️ Prossima estrazione tra: <b id="tb-timer-sec">7</b>s</span>
+      </div>
+      <div class="tb-timer-bar-bg">
+        <div class="tb-timer-bar-fill" id="tb-timer-bar-fill"></div>
+      </div>
+    </div>
+
     <div class="tombola-call" id="tb-call">Premi "Estrai" per iniziare!</div>
     <div class="tombola-numbers" id="tb-history"></div>
+
+    <!-- Tasto ESTRAI in basso (visibile in modalità normale) -->
+    <div class="tombola-bottom-controls" id="tb-bottom-controls">
+      <button class="btn" onclick="sndClick();drawNumber()" id="tb-draw-btn">🎯 ESTRAI! ▶</button>
+    </div>
   </div>
   <div class="tombola-board" id="tb-board"></div>
   <div class="feedback" id="tb-feedback"></div>
@@ -3355,6 +3563,9 @@ input:focus { outline: none; border-color: #00b894; }
     <button class="dipingi-btn selected" onclick="dpSelectPainting('castello')">🏰 Castello Magico</button>
     <button class="dipingi-btn" onclick="dpSelectPainting('dinosauro')">🦕 Dinosauro</button>
     <button class="dipingi-btn" onclick="dpSelectPainting('mare')">🌊 Mare Incantato</button>
+    <button class="dipingi-btn" onclick="dpSelectPainting('spazio')">🚀 Spazio Cosmico</button>
+    <button class="dipingi-btn" onclick="dpSelectPainting('fattoria')">🚜 Fattoria Felice</button>
+    <button class="dipingi-btn" onclick="dpSelectPainting('dolci')">🍭 Regno dei Dolci</button>
   </div>
 
   <div class="table-selector" id="dp-selector"></div>
@@ -3527,7 +3738,7 @@ input:focus { outline: none; border-color: #00b894; }
 <!-- FOOTER FIRMA E VERSIONE -->
 <footer class="app-footer">
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.7.0</span>. Tutti i diritti riservati.</p>
+    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.10.0</span>. Tutti i diritti riservati.</p>
   </div>
 </footer>
 
@@ -3541,6 +3752,24 @@ input:focus { outline: none; border-color: #00b894; }
     <div class="popup-tier-name" id="popup-tier-name">Oro</div>
     <p id="popup-message">Sei passato al livello successivo! Continua così!</p>
     <button class="btn btn-primary" onclick="closeTierPopup()">🎉 Continua!</button>
+  </div>
+</div>
+
+<!-- CROWN WON CELEBRATION MODAL -->
+<div class="tier-popup-overlay" id="crown-win-overlay" style="z-index: 10002;">
+  <div class="tier-popup crown-win-popup" style="border: 4px solid #f59e0b; box-shadow: 0 25px 60px rgba(245, 158, 11, 0.45); max-width: 440px; width: 92%;">
+    <div class="big-trophy" style="font-size: 4.8em; animation: crownPulse 2s infinite ease-in-out;">👑</div>
+    <h2 style="color: #b45309; font-size: 1.8em; margin-bottom: 6px;">CORONA CONQUISTATA!</h2>
+    <div class="popup-tier-name" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 1.2em; padding: 6px 22px; border-radius: 999px; margin-bottom: 12px; display: inline-block;">
+      👑 Campione delle 12 Tabelline! 👑
+    </div>
+    <p id="crown-win-message" style="font-size: 1.05em; color: #475569; line-height: 1.5; margin-bottom: 20px;">
+      Incredibile! Hai completato tutte le 12 tabelline con la Corona (almeno 24 risposte corrette per ciascuna dal tabellina 1 al 12)!
+      <br><span style="display:inline-block; margin-top:10px; font-weight:800; color:#b45309; font-size:1.25em;">Corone Totali Vinte: <span id="crown-win-total">1</span> 👑</span>
+    </p>
+    <button class="btn btn-primary" style="background: linear-gradient(135deg, #f59e0b, #d97706); font-size: 1.1em; padding: 12px 28px; border-radius: 999px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); border:none; cursor:pointer;" onclick="closeCrownWinPopup()">
+      ✨ Inizia una Nuova Scalata! ✨
+    </button>
   </div>
 </div>
 
@@ -3840,9 +4069,14 @@ const TIERS = [
   { name: 'Netherite', icon: '🟣', color: '#9333ea', min: 5000, max: 99999, trophy: '🏆', glow: 'rgba(147,51,234,0.5)' },
 ];
 
-const EASY_TABLES = [1, 2, 5, 10, 11];
+const EASY_TABLES = [2, 5, 10, 11];
 function getPointsMultiplier(tableNum) {
-  return EASY_TABLES.includes(tableNum) ? 0.5 : 1;
+  if (typeof isChallengeTable === 'function' && isChallengeTable(tableNum)) {
+    return getChallengeBonusMultiplier(tableNum);
+  }
+  if (tableNum === 1) return 0.5;
+  if ([2, 5, 10, 11].includes(tableNum)) return 0.7;
+  return 1;
 }
 
 const STORAGE_KEY = 'tabelline_data_v2';
@@ -3893,6 +4127,8 @@ if (!gameData) {
   gameData = {
     days: {},
     trophies: [],
+    crowns: 0,
+    crownCycleCorrect: {},
     gameScores: { pizzeria: 0, memory: 0, tombola: 0, campanello: 0, gatto: 0, razzo: 0, palloncini: 0, rana: 0, tartarughe: 0, albero: 0, albCultivated: 0 }
   };
   saveData(gameData);
@@ -3917,6 +4153,22 @@ if (!gameData) {
       gameData.gameScores[g] = 0;
       modified = true;
     }
+  }
+  if (gameData.crowns === undefined) {
+    gameData.crowns = 0;
+    modified = true;
+  }
+  if (!gameData.crownCycleCorrect) {
+    gameData.crownCycleCorrect = {};
+    const dk = getCurrentDay();
+    if (gameData.days && gameData.days[dk] && gameData.days[dk].tableCorrect) {
+      for (let i = 1; i <= 12; i++) {
+        if (gameData.days[dk].tableCorrect[i]) {
+          gameData.crownCycleCorrect[i] = gameData.days[dk].tableCorrect[i];
+        }
+      }
+    }
+    modified = true;
   }
   if (modified) {
     saveData(gameData);
@@ -4172,6 +4424,10 @@ function updateAllGameScoresUI() {
   if (globalPillEl) globalPillEl.textContent = formattedTotal;
   const globalTierEl = document.getElementById('global-record-points');
   if (globalTierEl) globalTierEl.textContent = formattedTotal;
+
+  // Aggiorna il contatore delle Corone Vinte
+  const globalCrownsEl = document.getElementById('global-crowns-count');
+  if (globalCrownsEl) globalCrownsEl.textContent = (gameData.crowns || 0).toLocaleString('it-IT');
 }
 
 function updateDailyMiniScores(points) {
@@ -4336,8 +4592,9 @@ function showNetheriteMilestonePopup(milestoneNum) {
 
 let tierPopupActiveGame = null;
 function pauseActiveGameForTierPopup() {
+  stopTombolaTimer();
   const activePage = document.querySelector('.game-page.active');
-  tierPopupActiveGame = activePage ? activePage.id.replace('game-', '') : null;
+  tierPopupActiveGame = (activePage && activePage.id) ? activePage.id.replace('game-', '') : null;
   
   // Stoppa tutti i timer attivi
   if (campanelloTimer) { clearInterval(campanelloTimer); campanelloTimer = null; }
@@ -4360,11 +4617,8 @@ function pauseActiveGameForTierPopup() {
   if (typeof memLock !== 'undefined') memLock = true;
 }
 
-function closeTierPopup() {
-  document.getElementById('tier-popup-overlay').classList.remove('active');
-  const gId = tierPopupActiveGame;
-  tierPopupActiveGame = null;
-
+function resumeActiveGameFromPopup(gId) {
+  if (!gId) return;
   if (gId === 'campanello') {
     const isCamActive = document.getElementById('game-campanello') && document.getElementById('game-campanello').classList.contains('active');
     if (isCamActive) {
@@ -4419,7 +4673,7 @@ function closeTierPopup() {
         }
       }, 500);
     }
-  } else if (gId) {
+  } else {
     // Sblocca e prosegui negli altri giochi
     setTimeout(() => {
       if (gId === 'gatto') { gtLock = false; nextGattoQuestion(); }
@@ -4432,8 +4686,43 @@ function closeTierPopup() {
       else if (gId === 'castello') { cdLock = false; nextCastelloQuestion(); }
       else if (gId === 'memory') { memLock = false; }
       else if (gId === 'pizzeria') { pzRolled = false; const rb = document.getElementById('pz-roll-btn'); if (rb) rb.disabled = false; }
+      else if (gId === 'tombola' && tbMode === 'realistic' && tbCurrentOp) { startTombolaTimer(); }
     }, 400);
   }
+}
+
+function closeTierPopup() {
+  document.getElementById('tier-popup-overlay').classList.remove('active');
+  const gId = tierPopupActiveGame;
+  tierPopupActiveGame = null;
+  resumeActiveGameFromPopup(gId);
+}
+
+function showCrownWinPopup() {
+  pauseActiveGameForTierPopup();
+  const modal = document.getElementById('crown-win-overlay');
+  const countEl = document.getElementById('crown-win-total');
+  if (countEl) countEl.textContent = gameData.crowns || 0;
+  if (modal) modal.classList.add('active');
+  sndFanfare();
+  confetti();
+  setTimeout(() => confetti(), 350);
+  setTimeout(() => confetti(), 700);
+}
+
+function closeCrownWinPopup() {
+  const modal = document.getElementById('crown-win-overlay');
+  if (modal) modal.classList.remove('active');
+
+  // Resetta il ciclo delle tabelline per iniziare una nuova scalata da 1 a 12!
+  gameData.crownCycleCorrect = {};
+  saveData(gameData);
+  updateAllTableSelectorsUI();
+  updateDailyMissionBanner();
+
+  const gId = tierPopupActiveGame;
+  tierPopupActiveGame = null;
+  resumeActiveGameFromPopup(gId);
 }
 
 function confetti() {
@@ -4458,6 +4747,7 @@ let fulmineTimerInterval = null;
 
 // ===== UTILITY NAVIGAZIONE =====
 function stopActiveGameProcesses() {
+  stopTombolaTimer();
   if (campanelloTimer) {
     clearInterval(campanelloTimer);
     campanelloTimer = null;
@@ -4661,7 +4951,17 @@ function backToMenu() {
 // SISTEMA GAMIFICATION TABELLINE (OPZIONI 1, 2, 3)
 // ============================================================
 
-// Ottieni la Tabellina Sfida del Giorno (varia ogni giorno, prediligendo le tabelline più impegnative 3, 4, 6, 7, 8, 9, 12)
+// Moltiplicatore bonus per la tabellina sfida del giorno:
+// 1.5x per le tabelline facili (2, 5, 10, 11), 2x per tutte le altre (3, 4, 6, 7, 8, 9, 12)
+function getChallengeBonusMultiplier(tableNum) {
+  if ([2, 5, 10, 11].includes(tableNum)) {
+    return 1.5;
+  }
+  return 2;
+}
+
+// Ottieni la Tabellina Sfida del Giorno:
+// Esclude sempre la tabellina dell'1 (troppo facile). Include dal 2 al 12.
 function getDailyChallengeTable() {
   const dk = getCurrentDay();
   let hash = 0;
@@ -4669,22 +4969,18 @@ function getDailyChallengeTable() {
     hash = (hash << 5) - hash + dk.charCodeAt(i);
     hash |= 0;
   }
-  // Cicla fra le tabelline sfidanti: [3, 4, 6, 7, 8, 9, 12, 6, 7, 8]
-  const challengePool = [6, 7, 8, 9, 12, 3, 4, 7, 8, 6, 9];
+  // Pool bilanciato (dal 2 al 12, mai 1)
+  const challengePool = [3, 7, 2, 8, 5, 9, 12, 4, 10, 6, 11, 7, 8, 3, 6, 9];
   const idx = Math.abs(hash) % challengePool.length;
   return challengePool[idx];
 }
 
-// Inizializza o recupera lo storico di risposte corrette per tabellina oggi
+// Inizializza o recupera lo storico di risposte corrette per tabellina nel ciclo attuale
 function getTableMastery(tableNum) {
-  const dk = getCurrentDay();
-  if (!gameData.days[dk]) {
-    gameData.days[dk] = { points: 0, highestTier: 0, trophyAwarded: false };
+  if (!gameData.crownCycleCorrect) {
+    gameData.crownCycleCorrect = {};
   }
-  if (!gameData.days[dk].tableCorrect) {
-    gameData.days[dk].tableCorrect = {};
-  }
-  return gameData.days[dk].tableCorrect[tableNum] || 0;
+  return gameData.crownCycleCorrect[tableNum] || 0;
 }
 
 // Incrementa risposte corrette per la tabellina e restituisce se è scattato un nuovo badge
@@ -4709,8 +5005,11 @@ function updateAllTableSelectorsUI() {
       badgeIcon = '✓';
     }
     
-    if (num === challengeTable) {
+    if (num === challengeTable && num !== 1) {
       btn.classList.add('is-challenge');
+      btn.setAttribute('data-bonus', getChallengeBonusMultiplier(num) + 'x⭐');
+    } else {
+      btn.removeAttribute('data-bonus');
     }
     
     let bSpan = btn.querySelector('.table-badge');
@@ -4738,35 +5037,70 @@ function recordTableAnswer(tableNum) {
   if (!gameData.days[dk].tableCorrect) {
     gameData.days[dk].tableCorrect = {};
   }
-  const oldVal = gameData.days[dk].tableCorrect[tableNum] || 0;
+  gameData.days[dk].tableCorrect[tableNum] = (gameData.days[dk].tableCorrect[tableNum] || 0) + 1;
+
+  if (!gameData.crownCycleCorrect) {
+    gameData.crownCycleCorrect = {};
+  }
+  const oldVal = gameData.crownCycleCorrect[tableNum] || 0;
   const newVal = oldVal + 1;
-  gameData.days[dk].tableCorrect[tableNum] = newVal;
+  gameData.crownCycleCorrect[tableNum] = newVal;
   saveData(gameData);
   
   updateDailyMissionBanner();
   
+  // Controlla se tutte le 12 tabelline hanno raggiunto la corona (>= 24 risposte corrette)
+  let allCrowned = true;
+  for (let i = 1; i <= 12; i++) {
+    if ((gameData.crownCycleCorrect[i] || 0) < 24) {
+      allCrowned = false;
+      break;
+    }
+  }
+
+  if (allCrowned) {
+    gameData.crowns = (gameData.crowns || 0) + 1;
+    saveData(gameData);
+    updateAllGameScoresUI();
+    showCrownWinPopup();
+    return 'crown_all';
+  }
+
   if (oldVal < 10 && newVal >= 10) {
     // Sblocco stella
     return 'star';
   } else if (oldVal < 24 && newVal >= 24) {
-    // Sblocco corona
+    // Sblocco corona per questa tabellina
     return 'crown';
   }
   return null;
 }
 
-// Verifica se la tabellina specificata gode del bonus 2x
+// Verifica se la tabellina specificata gode del bonus sfida (la tabellina dell'1 non è mai sfida)
 function isChallengeTable(tableNum) {
+  if (tableNum === 1) return false;
   return tableNum === getDailyChallengeTable();
 }
 
-// Calcolo moltiplicatore punti unificato
+// Calcolo moltiplicatore punti unificato:
+// - Se è Tabellina Sfida del Giorno:
+//     * 1.5x per tabelline facili (2, 5, 10, 11)
+//     * 2.0x per tutte le altre (3, 4, 6, 7, 8, 9, 12)
+// - Normalmente (non sfida):
+//     * 0.5x SOLO per la tabellina dell'1
+//     * 0.7x per le tabelline del 2, 5, 10 e 11
+//     * 1.0x per tutte le altre (3, 4, 6, 7, 8, 9, 12)
 function getPointsMultiplier(tableNum) {
-  let mult = EASY_TABLES.includes(tableNum) ? 0.5 : 1;
   if (isChallengeTable(tableNum)) {
-    mult *= 2; // Raddoppio punti per la tabellina sfida illuminata!
+    return getChallengeBonusMultiplier(tableNum);
   }
-  return mult;
+  if (tableNum === 1) {
+    return 0.5;
+  }
+  if ([2, 5, 10, 11].includes(tableNum)) {
+    return 0.7;
+  }
+  return 1;
 }
 
 // Funzione generica unificata per renderizzare il selettore delle tabelline
@@ -4776,6 +5110,7 @@ function renderUnifiedTableSelector(containerId, currentVal, onSelectFn, gameKey
   sel.innerHTML = '';
   
   const challengeTable = getDailyChallengeTable();
+  const challengeBonus = getChallengeBonusMultiplier(challengeTable);
   
   // Wrapper principale
   const wrap = document.createElement('div');
@@ -4787,7 +5122,7 @@ function renderUnifiedTableSelector(containerId, currentVal, onSelectFn, gameKey
   
   const challengeBadge = document.createElement('div');
   challengeBadge.className = 'challenge-banner-pill';
-  challengeBadge.innerHTML = '🔥 Sfida del Giorno: <b>Tabellina del ' + challengeTable + '</b> (2x Punti ⭐)';
+  challengeBadge.innerHTML = '🔥 Sfida del Giorno: <b>Tabellina del ' + challengeTable + '</b> (' + challengeBonus + 'x Punti ⭐)';
   
   const rndBtn = document.createElement('button');
   rndBtn.className = 'random-table-btn';
@@ -4824,8 +5159,9 @@ function renderUnifiedTableSelector(containerId, currentVal, onSelectFn, gameKey
         badgeIcon = '✓';
       }
       
-      if (i === challengeTable) {
+      if (i === challengeTable && i !== 1) {
         btnClasses += ' is-challenge';
+        btn.setAttribute('data-bonus', challengeBonus + 'x⭐');
       }
     }
     
@@ -4897,8 +5233,9 @@ function openWheelModal(callback, gameKey) {
       sndWin();
       confetti();
       
-      if (chosen === challenge) {
-        msg.innerHTML = '🎉 SUPER FORTUNA! È la <b>Tabellina Sfida del ' + chosen + '</b>! (2x Punti ⭐)';
+      if (chosen === challenge && chosen !== 1) {
+        const bMult = getChallengeBonusMultiplier(chosen);
+        msg.innerHTML = '🎉 SUPER FORTUNA! È la <b>Tabellina Sfida del ' + chosen + '</b>! (' + bMult + 'x Punti ⭐)';
       } else {
         msg.innerHTML = '🎯 Ottima scelta: <b>Tabellina del ' + chosen + '</b>! Pronto a giocare?';
       }
@@ -4928,6 +5265,11 @@ function updateDailyMissionBanner() {
   const challenge = getDailyChallengeTable();
   const challengeEl = document.getElementById('mission-challenge-num');
   if (challengeEl) challengeEl.textContent = challenge;
+  const challengeBadge = document.getElementById('mission-challenge-badge');
+  if (challengeBadge) {
+    const bMult = getChallengeBonusMultiplier(challenge);
+    challengeBadge.innerHTML = '🔥 Tabellina Sfida: <b id="mission-challenge-num">' + challenge + '</b> (' + bMult + 'x Punti Stella ⭐)';
+  }
   
   let conqueredCount = 0;
   const pillsContainer = document.getElementById('mission-tables-pills');
@@ -4955,19 +5297,24 @@ function updateDailyMissionBanner() {
     }
   }
   
-  const pct = Math.round((conqueredCount / 12) * 100);
+  let crownedCount = 0;
+  for (let i = 1; i <= 12; i++) {
+    if (getTableMastery(i) >= 24) crownedCount++;
+  }
+  
+  const pct = Math.round((crownedCount / 12) * 100);
   const fill = document.getElementById('mission-progress-fill');
   if (fill) {
     fill.style.width = Math.max(8, pct) + '%';
-    fill.textContent = conqueredCount + ' / 12 Conquistate (' + pct + '%)';
+    fill.textContent = crownedCount + ' / 12 Corone (' + pct + '%)';
   }
-  
+
   const sub = document.getElementById('mission-subtitle-text');
   if (sub) {
-    if (conqueredCount === 12) {
-      sub.innerHTML = '👑 <b style="color:#059669;">FANTASTICO! HAI CONQUISTATO TUTTE LE 12 TABELLINE OGGI!</b> 🏆';
+    if (crownedCount === 12) {
+      sub.innerHTML = '👑 <b style="color:#b45309;">FANTASTICO! TUTTE LE 12 TABELLINE HANNO LA CORONA!</b> 🏆';
     } else {
-      sub.textContent = 'Hai completato ' + conqueredCount + ' tabelline su 12. Conquistale tutte con almeno 10 risposte corrette!';
+      sub.textContent = 'Hai ' + crownedCount + ' di 12 Corone 👑. Conquista la Corona su tutte tabelline per vincere una Corona Globale!';
     }
   }
 }
@@ -5236,11 +5583,68 @@ function flipMemoryCard(card) {
 
 // ===== GIOCO 3: TOMBOLA =====
 let tbCards = [], tbCalled = [], tbCurrentOp = null;
+let tbMode = 'classic'; // 'classic' o 'realistic'
+let tbAutoInterval = null;
+let tbTimeLeft = 7.0;
+
+function setTombolaMode(mode) {
+  tbMode = mode;
+  document.getElementById('tb-mode-classic').classList.toggle('active', mode === 'classic');
+  document.getElementById('tb-mode-realistic').classList.toggle('active', mode === 'realistic');
+  initTombola();
+}
+
+function stopTombolaTimer() {
+  if (tbAutoInterval) {
+    clearInterval(tbAutoInterval);
+    tbAutoInterval = null;
+  }
+}
+
+function startTombolaTimer() {
+  stopTombolaTimer();
+  if (tbMode !== 'realistic') return;
+
+  tbTimeLeft = 7.0;
+  const timerSec = document.getElementById('tb-timer-sec');
+  const timerBar = document.getElementById('tb-timer-bar-fill');
+  if (timerSec) timerSec.textContent = '7';
+  if (timerBar) timerBar.style.width = '100%';
+
+  const step = 0.1;
+  tbAutoInterval = setInterval(() => {
+    tbTimeLeft = Math.max(0, tbTimeLeft - step);
+    if (timerSec) timerSec.textContent = Math.ceil(tbTimeLeft);
+    if (timerBar) timerBar.style.width = ((tbTimeLeft / 7.0) * 100) + '%';
+
+    if (tbTimeLeft <= 0) {
+      stopTombolaTimer();
+      // Estrai automaticamente la prossima operazione
+      drawNumber();
+    }
+  }, step * 1000);
+}
+
 function initTombola() {
+  stopTombolaTimer();
   const board = document.getElementById('tb-board');
   board.innerHTML = '';
   tbCards = []; tbCalled = []; tbCurrentOp = null;
-  document.getElementById('tb-call').textContent = 'Premi "Estrai" per iniziare!';
+  
+  const timerWrap = document.getElementById('tb-timer-wrap');
+  const bottomControls = document.getElementById('tb-bottom-controls');
+  const callEl = document.getElementById('tb-call');
+
+  if (tbMode === 'realistic') {
+    if (timerWrap) timerWrap.style.display = 'block';
+    if (bottomControls) bottomControls.style.display = 'none';
+    if (callEl) callEl.textContent = '⏱️ Partita Realistica: le estrazioni partono ogni 7 secondi!';
+  } else {
+    if (timerWrap) timerWrap.style.display = 'none';
+    if (bottomControls) bottomControls.style.display = 'flex';
+    if (callEl) callEl.textContent = 'Premi "Estrai" per iniziare!';
+  }
+
   document.getElementById('tb-history').textContent = '';
   document.getElementById('tb-feedback').textContent = '';
   document.getElementById('tb-feedback').className = 'feedback';
@@ -5272,12 +5676,21 @@ function initTombola() {
     });
     tbCards.push({ table: cfg.table, numbers: selected, won: false });
   });
+
+  if (tbMode === 'realistic') {
+    setTimeout(() => {
+      if (tbMode === 'realistic' && !tbCurrentOp) {
+        drawNumber();
+      }
+    }, 1500);
+  }
 }
 function drawNumber() {
   const ops = [];
   tbCards.forEach(c => { for (let i = 1; i <= 12; i++) ops.push({ table: c.table, multiplier: i, result: c.table*i }); });
   const available = ops.filter(o => !tbCalled.some(c => c.table === o.table && c.multiplier === o.multiplier));
   if (available.length === 0) {
+    stopTombolaTimer();
     document.getElementById('tb-call').textContent = '🎉 Tutte le operazioni estratte!';
     document.getElementById('tb-feedback').textContent = 'Premi "Nuova Partita" per rimescolare le cartelle e giocare ancora!';
     document.getElementById('tb-feedback').className = 'feedback correct';
@@ -5292,6 +5705,10 @@ function drawNumber() {
   document.getElementById('tb-feedback').textContent = 'Trova il risultato sulla tua cartella!';
   document.getElementById('tb-feedback').className = 'feedback';
   document.getElementById('tb-feedback').style.color = '#6c5ce7';
+
+  if (tbMode === 'realistic') {
+    startTombolaTimer();
+  }
 }
 function markTombola(cell, num) {
   if (cell.classList.contains('marked') || !tbCurrentOp) return;
@@ -5344,6 +5761,7 @@ function checkTombolaWin() {
   });
 
   if (tbCards.length > 0 && tbCards.every(c => c.won)) {
+    stopTombolaTimer();
     setTimeout(() => {
       document.getElementById('tb-call').textContent = '🎉 SUPER TOMBOLA! Cartelle completate! 🏆';
       document.getElementById('tb-feedback').textContent = '👑 Fantastico! Hai completato tutte le cartelle! Clicca su "Nuova Partita" per giocare ancora!';
@@ -6977,6 +7395,36 @@ const DP_ZONE_NAMES = {
     '⛵ Barca a Vela',
     '🐬 Delfini e Pesci',
     '🏖️ Spiaggia e Conchiglie!'
+  ],
+  spazio: [
+    '🌌 Spazio Cosmico e Nebulose',
+    '🪐 Pianeta Saturno con Anelli',
+    '🚀 Razzo Spaziale da Esplorazione',
+    '🔥 Fiamme del Propulsore a Reazione',
+    '🌕 Luna con Crateri Luminosi',
+    '☄️ Stelle Brillanti e Comete',
+    '🛸 Disco Volante Spaziale',
+    '👽 Piccolo Alieno Amico!'
+  ],
+  fattoria: [
+    '☀️ Cielo Azzurro e Sole Dorato',
+    '🌾 Colline e Campi Coltivati',
+    '🏡 Grande Fienile Rosso Rustico',
+    '💨 Mulino a Vento Tradizionale',
+    '🚜 Trattore Agricolo Veloce',
+    '🪵 Recinto in Legno con Erbetta',
+    '🐮 Mucca Pezzata e Cavallino',
+    '🐔 Gallinelle e Pulcini Felici!'
+  ],
+  dolci: [
+    '🌸 Cielo di Zucchero Filato Rosa',
+    '🏠 Casetta di Pan di Zenzero',
+    '🧁 Tetto di Biscotti e Panna Montata',
+    '🍫 Fiume Dolce di Cioccolata Fusa',
+    '🍭 Alberi Giganti di Lecca-Lecca',
+    '🍬 Caramelle Gommose e Confetti',
+    '🍦 Cono Gelato Arcobaleno',
+    '🍓 Ciliegine e Decorazioni Magiche!'
   ]
 };
 
@@ -7135,6 +7583,203 @@ function renderPaintingSVG() {
       <!-- Part 7: Sandy Shore & Shells -->
       <path d="M 0 250 Q 180 230 300 260 Q 420 290 500 270 V 320 H 0 Z" fill="${p[7] ? '#fde047' : '#cbd5e1'}" stroke="#ca8a04" stroke-width="2"/>
       <text x="40" y="295" font-size="24" opacity="${p[7] ? '1' : '0.3'}">🐚</text>
+    `;
+  } else if (dpPainting === 'spazio') {
+    svg += `
+      <!-- Part 0: Deep Space Background & Stars -->
+      <rect x="0" y="0" width="500" height="320" fill="${p[0] ? '#0b0f19' : '#f8fafc'}" stroke="#334155" stroke-width="2"/>
+      <g opacity="${p[0] ? '0.8' : '0.2'}">
+        <circle cx="45" cy="40" r="2" fill="#ffffff"/>
+        <circle cx="120" cy="85" r="1.5" fill="#38bdf8"/>
+        <circle cx="280" cy="35" r="2" fill="#ffffff"/>
+        <circle cx="460" cy="110" r="1.8" fill="#fbcfe8"/>
+        <circle cx="80" cy="260" r="2.5" fill="#fef08a"/>
+        <circle cx="470" cy="270" r="1.5" fill="#ffffff"/>
+      </g>
+
+      <!-- Part 1: Saturn & Planetary Ring -->
+      <g>
+        <ellipse cx="100" cy="110" rx="42" ry="14" fill="${p[1] ? '#f59e0b' : '#cbd5e1'}" transform="rotate(-20 100 110)"/>
+        <circle cx="100" cy="110" r="28" fill="${p[1] ? '#fbbf24' : '#e2e8f0'}" stroke="#d97706" stroke-width="2"/>
+        <path d="M 68 119 C 80 126 120 126 132 101" fill="none" stroke="${p[1] ? '#f59e0b' : '#94a3b8'}" stroke-width="5" transform="rotate(-20 100 110)"/>
+      </g>
+
+      <!-- Part 2: Space Rocket Body -->
+      <g class="${p[2] ? 'anim-rocket' : ''}">
+        <!-- Fins -->
+        <path d="M 230 190 L 195 230 L 225 220 Z" fill="${p[2] ? '#ef4444' : '#94a3b8'}"/>
+        <path d="M 270 190 L 305 230 L 275 220 Z" fill="${p[2] ? '#ef4444' : '#94a3b8'}"/>
+        <!-- Rocket Fuselage -->
+        <path d="M 250 80 Q 285 140 270 215 L 230 215 Q 215 140 250 80 Z" fill="${p[2] ? '#ffffff' : '#f1f5f9'}" stroke="#334155" stroke-width="3"/>
+        <!-- Nosecone -->
+        <path d="M 250 80 Q 268 115 270 130 L 230 130 Q 232 115 250 80 Z" fill="${p[2] ? '#3b82f6' : '#cbd5e1'}"/>
+        <!-- Window -->
+        <circle cx="250" cy="155" r="16" fill="${p[2] ? '#38bdf8' : '#cbd5e1'}" stroke="#1e293b" stroke-width="2.5"/>
+        <circle cx="254" cy="151" r="5" fill="#ffffff"/>
+      </g>
+
+      <!-- Part 3: Rocket Thruster Fire -->
+      <g class="${p[3] ? 'anim-thrust' : ''}">
+        <polygon points="238,215 250,270 262,215" fill="${p[3] ? '#f59e0b' : '#cbd5e1'}"/>
+        <polygon points="243,215 250,250 257,215" fill="${p[3] ? '#ef4444' : '#94a3b8'}"/>
+        <polygon points="246,215 250,235 254,215" fill="${p[3] ? '#fef08a' : '#ffffff'}"/>
+      </g>
+
+      <!-- Part 4: Moon with Craters -->
+      <g>
+        <circle cx="410" cy="70" r="45" fill="${p[4] ? '#fef08a' : '#e2e8f0'}" stroke="#ca8a04" stroke-width="2.5"/>
+        <circle cx="390" cy="55" r="8" fill="${p[4] ? '#fde047' : '#cbd5e1'}" opacity="0.6"/>
+        <circle cx="425" cy="80" r="11" fill="${p[4] ? '#fde047' : '#cbd5e1'}" opacity="0.6"/>
+        <circle cx="400" cy="90" r="6" fill="${p[4] ? '#fde047' : '#cbd5e1'}" opacity="0.6"/>
+      </g>
+
+      <!-- Part 5: Shooting Star & Nebula Clouds -->
+      <g class="${p[5] ? 'anim-twinkle' : ''}">
+        <path d="M 330 20 L 380 40 M 340 15 L 390 35" stroke="${p[5] ? '#f43f5e' : '#94a3b8'}" stroke-width="3" stroke-linecap="round"/>
+        <text x="385" y="48" font-size="22" opacity="${p[5] ? '1' : '0.3'}">⭐</text>
+        <text x="60" y="240" font-size="24" opacity="${p[5] ? '1' : '0.3'}">✨</text>
+        <text x="320" y="260" font-size="20" opacity="${p[5] ? '1' : '0.3'}">🌟</text>
+      </g>
+
+      <!-- Part 6: Flying UFO Saucer -->
+      <g class="${p[6] ? 'anim-ufo' : ''}">
+        <ellipse cx="370" cy="180" rx="32" ry="10" fill="${p[6] ? '#10b981' : '#cbd5e1'}" stroke="#065f46" stroke-width="2"/>
+        <ellipse cx="370" cy="173" rx="16" ry="12" fill="${p[6] ? '#6ee7b7' : '#e2e8f0'}"/>
+        <circle cx="355" cy="180" r="2.5" fill="#fef08a"/>
+        <circle cx="370" cy="181" r="2.5" fill="#fef08a"/>
+        <circle cx="385" cy="180" r="2.5" fill="#fef08a"/>
+      </g>
+
+      <!-- Part 7: Friendly Alien Companion -->
+      <g>
+        <text x="145" y="275" font-size="44" opacity="${p[7] ? '1' : '0.3'}">👽</text>
+        <text x="200" y="285" font-size="28" opacity="${p[7] ? '1' : '0.3'}">🛰️</text>
+      </g>
+    `;
+  } else if (dpPainting === 'fattoria') {
+    svg += `
+      <!-- Part 0: Sky & Country Sun -->
+      <rect x="0" y="0" width="500" height="200" fill="${p[0] ? '#bae6fd' : '#f8fafc'}" stroke="#334155" stroke-width="2"/>
+      <circle cx="80" cy="65" r="36" fill="${p[0] ? '#fbbf24' : '#e2e8f0'}" stroke="#d97706" stroke-width="2"/>
+      <path d="M 170 50 Q 190 35 220 45 Q 250 35 270 55 Q 260 75 220 70 Z" fill="${p[0] ? '#ffffff' : '#e2e8f0'}" opacity="0.9"/>
+
+      <!-- Part 1: Rolling Green Hills -->
+      <path d="M 0 170 Q 160 130 300 170 Q 420 200 500 160 V 320 H 0 Z" fill="${p[1] ? '#86efac' : '#e2e8f0'}" stroke="#16a34a" stroke-width="2"/>
+
+      <!-- Part 2: Traditional Red Barn -->
+      <g>
+        <polygon points="120,110 180,60 240,110" fill="${p[2] ? '#dc2626' : '#cbd5e1'}" stroke="#334155" stroke-width="2.5"/>
+        <rect x="130" y="110" width="100" height="85" fill="${p[2] ? '#b91c1c' : '#94a3b8'}" stroke="#334155" stroke-width="2.5"/>
+        <rect x="160" y="145" width="40" height="50" fill="${p[2] ? '#ffffff' : '#e2e8f0'}" stroke="#334155" stroke-width="2"/>
+        <line x1="160" y1="145" x2="200" y2="195" stroke="${p[2] ? '#dc2626' : '#94a3b8'}" stroke-width="2"/>
+        <line x1="200" y1="145" x2="160" y2="195" stroke="${p[2] ? '#dc2626' : '#94a3b8'}" stroke-width="2"/>
+      </g>
+
+      <!-- Part 3: Windmill & Spinning Blades -->
+      <g>
+        <polygon points="370,180 380,85 400,85 410,180" fill="${p[3] ? '#78716c' : '#cbd5e1'}" stroke="#334155" stroke-width="2"/>
+        <circle cx="390" cy="85" r="7" fill="${p[3] ? '#44403c' : '#94a3b8'}"/>
+        <g class="${p[3] ? 'anim-windmill' : ''}" style="transform-origin: 390px 85px;">
+          <line x1="390" y1="85" x2="355" y2="50" stroke="${p[3] ? '#d97706' : '#64748b'}" stroke-width="4"/>
+          <line x1="390" y1="85" x2="425" y2="120" stroke="${p[3] ? '#d97706' : '#64748b'}" stroke-width="4"/>
+          <line x1="390" y1="85" x2="355" y2="120" stroke="${p[3] ? '#d97706' : '#64748b'}" stroke-width="4"/>
+          <line x1="390" y1="85" x2="425" y2="50" stroke="${p[3] ? '#d97706' : '#64748b'}" stroke-width="4"/>
+        </g>
+      </g>
+
+      <!-- Part 4: Green Field Tractor -->
+      <g class="${p[4] ? 'anim-tractor' : ''}">
+        <rect x="250" y="165" width="55" height="35" rx="5" fill="${p[4] ? '#16a34a' : '#94a3b8'}" stroke="#14532d" stroke-width="2"/>
+        <rect x="252" y="150" width="30" height="20" fill="${p[4] ? '#7dd3fc' : '#cbd5e1'}" stroke="#334155" stroke-width="2"/>
+        <!-- Big rear wheel -->
+        <circle cx="260" cy="205" r="20" fill="${p[4] ? '#1e293b' : '#64748b'}" stroke="#fef08a" stroke-width="4"/>
+        <!-- Small front wheel -->
+        <circle cx="310" cy="212" r="13" fill="${p[4] ? '#1e293b' : '#64748b'}" stroke="#fef08a" stroke-width="3"/>
+        <line x1="310" y1="165" x2="310" y2="148" stroke="#1e293b" stroke-width="3"/>
+      </g>
+
+      <!-- Part 5: Wooden Fence and Pasture -->
+      <g>
+        <path d="M 0 215 H 125 M 0 230 H 125" stroke="${p[5] ? '#b45309' : '#94a3b8'}" stroke-width="3.5"/>
+        <line x1="20" y1="205" x2="20" y2="245" stroke="${p[5] ? '#854d0e' : '#cbd5e1'}" stroke-width="4"/>
+        <line x1="60" y1="205" x2="60" y2="245" stroke="${p[5] ? '#854d0e' : '#cbd5e1'}" stroke-width="4"/>
+        <line x1="100" y1="205" x2="100" y2="245" stroke="${p[5] ? '#854d0e' : '#cbd5e1'}" stroke-width="4"/>
+      </g>
+
+      <!-- Part 6: Spotted Cow & Horse -->
+      <g>
+        <text x="35" y="295" font-size="44" opacity="${p[6] ? '1' : '0.3'}">🐮</text>
+        <text x="105" y="295" font-size="44" opacity="${p[6] ? '1' : '0.3'}">🐴</text>
+      </g>
+
+      <!-- Part 7: Hens & Baby Chicks -->
+      <g>
+        <text x="360" y="290" font-size="36" opacity="${p[7] ? '1' : '0.3'}">🐔</text>
+        <text x="410" y="290" font-size="28" opacity="${p[7] ? '1' : '0.3'}">🐥</text>
+        <text x="445" y="295" font-size="24" opacity="${p[7] ? '1' : '0.3'}">🌻</text>
+      </g>
+    `;
+  } else if (dpPainting === 'dolci') {
+    svg += `
+      <!-- Part 0: Cotton Candy Pink Sky -->
+      <rect x="0" y="0" width="500" height="210" fill="${p[0] ? '#fce7f3' : '#f8fafc'}" stroke="#334155" stroke-width="2"/>
+      <circle cx="420" cy="55" r="32" fill="${p[0] ? '#f43f5e' : '#e2e8f0'}" opacity="0.8"/>
+      <path d="M 40 50 Q 70 30 100 45 Q 130 30 160 55 Q 140 75 100 70 Z" fill="${p[0] ? '#ffffff' : '#e2e8f0'}" opacity="0.9"/>
+
+      <!-- Part 1: Gingerbread House Walls -->
+      <g>
+        <rect x="170" y="115" width="150" height="95" rx="8" fill="${p[1] ? '#b45309' : '#cbd5e1'}" stroke="#78350f" stroke-width="3"/>
+        <rect x="225" y="150" width="40" height="60" rx="4" fill="${p[1] ? '#ffffff' : '#e2e8f0'}" stroke="#78350f" stroke-width="2.5"/>
+        <circle cx="233" cy="180" r="3.5" fill="#ec4899"/>
+      </g>
+
+      <!-- Part 2: Frosted Cookie Roof -->
+      <g>
+        <polygon points="150,115 245,45 340,115" fill="${p[2] ? '#f59e0b' : '#94a3b8'}" stroke="#78350f" stroke-width="3"/>
+        <!-- White Icing Drippings -->
+        <path d="M 150 115 Q 165 128 180 115 Q 195 128 210 115 Q 225 128 240 115 Q 255 128 270 115 Q 285 128 300 115 Q 315 128 330 115 L 340 115" fill="none" stroke="${p[2] ? '#ffffff' : '#cbd5e1'}" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="245" cy="40" r="10" fill="${p[2] ? '#ef4444' : '#94a3b8'}"/>
+      </g>
+
+      <!-- Part 3: Chocolate River Flow -->
+      <path class="${p[3] ? 'anim-wave' : ''}" d="M 0 200 Q 150 175 270 215 Q 390 250 500 205 V 320 H 0 Z" fill="${p[3] ? '#78350f' : '#cbd5e1'}" stroke="#451a03" stroke-width="3"/>
+
+      <!-- Part 4: Giant Swirl Lollipops -->
+      <g class="${p[4] ? 'anim-lollipop' : ''}">
+        <!-- Left Lollipop -->
+        <line x1="75" y1="210" x2="75" y2="120" stroke="${p[4] ? '#ffffff' : '#94a3b8'}" stroke-width="7"/>
+        <circle cx="75" cy="115" r="26" fill="${p[4] ? '#ec4899' : '#e2e8f0'}" stroke="#db2777" stroke-width="4"/>
+        <circle cx="75" cy="115" r="16" fill="${p[4] ? '#f472b6' : '#cbd5e1'}"/>
+        <circle cx="75" cy="115" r="7" fill="${p[4] ? '#ffffff' : '#94a3b8'}"/>
+
+        <!-- Right Lollipop -->
+        <line x1="425" y1="220" x2="425" y2="135" stroke="${p[4] ? '#ffffff' : '#94a3b8'}" stroke-width="7"/>
+        <circle cx="425" cy="130" r="24" fill="${p[4] ? '#3b82f6' : '#e2e8f0'}" stroke="#1d4ed8" stroke-width="4"/>
+        <circle cx="425" cy="130" r="14" fill="${p[4] ? '#60a5fa' : '#cbd5e1'}"/>
+        <circle cx="425" cy="130" r="6" fill="${p[4] ? '#ffffff' : '#94a3b8'}"/>
+      </g>
+
+      <!-- Part 5: Candy Canes & Gummy Drops -->
+      <g>
+        <text x="120" y="195" font-size="34" opacity="${p[5] ? '1' : '0.3'}">🍬</text>
+        <text x="325" y="200" font-size="34" opacity="${p[5] ? '1' : '0.3'}">🍭</text>
+        <circle cx="190" cy="270" r="8" fill="${p[5] ? '#10b981' : '#cbd5e1'}"/>
+        <circle cx="215" cy="285" r="8" fill="${p[5] ? '#f59e0b' : '#cbd5e1'}"/>
+        <circle cx="240" cy="275" r="8" fill="${p[5] ? '#ec4899' : '#cbd5e1'}"/>
+      </g>
+
+      <!-- Part 6: Cupcakes & Ice Cream -->
+      <g class="${p[6] ? 'anim-sweet-bounce' : ''}">
+        <text x="30" y="295" font-size="44" opacity="${p[6] ? '1' : '0.3'}">🧁</text>
+        <text x="410" y="295" font-size="44" opacity="${p[6] ? '1' : '0.3'}">🍦</text>
+      </g>
+
+      <!-- Part 7: Magic Sparkling Cherries -->
+      <g>
+        <text x="280" y="300" font-size="38" opacity="${p[7] ? '1' : '0.3'}">🍩</text>
+        <text x="350" y="280" font-size="30" opacity="${p[7] ? '1' : '0.3'}">✨</text>
+        <text x="130" y="290" font-size="28" opacity="${p[7] ? '1' : '0.3'}">🍓</text>
+      </g>
     `;
   }
 
