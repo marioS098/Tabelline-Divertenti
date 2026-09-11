@@ -79,6 +79,69 @@ body {
 }
 
 /* ===== BANNER SETTIMANALE / GIORNALIERO ===== */
+
+/* ===== GLOBAL STAR RECORD BANNER ===== */
+.global-record-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  max-width: 520px;
+}
+.global-record-pill {
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.96) 0%, rgba(253, 230, 138, 0.96) 100%);
+  border: 2.5px solid #f59e0b;
+  border-radius: 35px;
+  padding: 8px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.global-record-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(245, 158, 11, 0.35);
+}
+.global-record-pill .star-icon {
+  font-size: 2em;
+  line-height: 1;
+  filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6));
+  animation: starPulse 2.5s infinite ease-in-out;
+}
+@keyframes starPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15) rotate(8deg); }
+}
+.global-record-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+.global-record-label {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 800;
+  color: #92400e;
+}
+.global-record-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.global-record-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.7em;
+  font-weight: 900;
+  color: #78350f;
+}
+.global-record-unit {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: #b45309;
+}
+
 .weekly-banner {
   background: #ffffff;
   border-radius: 28px;
@@ -2397,8 +2460,22 @@ input:focus { outline: none; border-color: #00b894; }
     <span class="decor decor-5">🎈</span>
   </div>
 
-  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.6.0</span> 🎮</h1>
+  <h1>🎮 <span class="gradient-text">Tabelline Divertenti!</span> <span class="app-version-badge">v2.6.1</span> 🎮</h1>
   <p>Scegli un gioco e divertiti a imparare le tabelline!</p>
+
+  <!-- PUNTEGGIO GLOBALE RECORD STELLE -->
+  <div class="global-record-container">
+    <div class="global-record-pill">
+      <span class="star-icon">⭐</span>
+      <div class="global-record-details">
+        <span class="global-record-label">Punteggio Record Globale</span>
+        <div class="global-record-number-row">
+          <span class="global-record-number" id="global-star-record">0</span>
+          <span class="global-record-unit">punti stella</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- BANNER SETTIMANALE / GIORNALIERO -->
   <div class="weekly-banner">
@@ -3135,7 +3212,7 @@ input:focus { outline: none; border-color: #00b894; }
 <!-- FOOTER FIRMA E VERSIONE -->
 <footer class="app-footer">
   <div class="footer-content">
-    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.6.0</span>. Tutti i diritti riservati.</p>
+    <p class="footer-copyright">© 2026 <b>Mario Torres</b> • <span class="footer-version-tag">v2.6.1</span>. Tutti i diritti riservati.</p>
   </div>
 </footer>
 
@@ -3744,13 +3821,22 @@ function updateAllGameScoresUI() {
     { id: 'cd', key: 'castello' }
   ];
 
+  let totalStarRecord = 0;
   games.forEach(g => {
     const val = gameData.gameScores[g.key] || 0;
+    totalStarRecord += val;
     const headerEl = document.getElementById(g.id + '-score');
     if (headerEl) headerEl.textContent = val;
     const cardEl = document.getElementById('card-score-' + g.key);
     if (cardEl) cardEl.textContent = val;
   });
+
+  // Aggiorna il punteggio globale in alto (somma di tutti i record dei punti stella)
+  const formattedTotal = totalStarRecord.toLocaleString('it-IT');
+  const globalPillEl = document.getElementById('global-star-record');
+  if (globalPillEl) globalPillEl.textContent = formattedTotal;
+  const globalTierEl = document.getElementById('global-record-points');
+  if (globalTierEl) globalTierEl.textContent = formattedTotal;
 }
 
 function updateDailyMiniScores(points) {
